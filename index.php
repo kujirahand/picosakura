@@ -93,7 +93,10 @@ EOS;
       <div style="text-align:right"><a href="https://sakuramml.com/" target="_new">sakuramml.com</a></div>
     </div><!-- /player-outer -->
   </div>
-
+  <br><br><br><br>
+  <div id="picosakura-footer">
+    <a href="https://github.com/kujirahand/picosakura" target="_new">picosakura</a>
+  </div>
 
 </body>
 

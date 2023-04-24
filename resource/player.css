@@ -41,3 +41,12 @@
     font-size: 1em;
     margin: 0.2em;
 }
+
+#picosakura-footer {
+    border-top: solid 1px silver;
+    text-align: center;
+    font-size: 0.8em;
+    color: gray;
+    margin: 0.2em;
+    padding-top: 1em;
+}
