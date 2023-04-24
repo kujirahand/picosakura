@@ -64,30 +64,34 @@ EOS;
   </script>
   <div id="picosakura-player">
     <h1>♪ Pico Sakura</h1>
-    <div id="player" style="display:none;">
+    <div id="player-outer">
+      <div id="player" style="display:none;">
+        <div>
+          <button id="btnPlay" class="pure-button play-button pure-button-primary">▶ PLAY(F9)</button>
+          <button id="btnStop" class="pure-button stop-button">■ STOP</button> &nbsp;
+        </div>
+        <div class="player-synth-selector">
+          <span id="sakura_version">v.?.?</span>
+          <span>
+            (Synth:
+            <label for="pico"><input type="radio" id="pico" class="pure-checkbox" name="player_type" value="pico" checked="1" onclick="show_pico()"> picoaudio</label>
+            <label for="jzz"><input type="radio" id="jzz" class="pure-checkbox" name="player_type" value="jzz" onclick="show_jzz()"> jzz-synth-tiny</label>)
+          </span>
+        </div>
+      </div>
+      <div id="txt-outer">
+        <div>
+          <textarea id="txt" cols="60" rows="15" class="editorConf"><?php echo $defaultData ?></textarea>
+        </div>
+        <div id="txt_info">line: ?</div>
+      </div>
       <div>
-        <button id="btnPlay" class="pure-button play-button pure-button-primary">▶ PLAY </button>
-        <button id="btnStop" class="pure-button stop-button">■ STOP</button> &nbsp;
+        <div id="player_gui"></div>
       </div>
-      <div class="player-synth-selector">
-        <span id="sakura_version">v.?.?</span>
-        <span>
-          (Synth:
-          <label for="pico"><input type="radio" id="pico" class="pure-checkbox" name="player_type" value="pico" checked="1" onclick="show_pico()"> picoaudio</label>
-          <label for="jzz"><input type="radio" id="jzz" class="pure-checkbox" name="player_type" value="jzz" onclick="show_jzz()"> jzz-synth-tiny</label>)
-        </span>
-      </div>
-    </div>
-    <div id="txt-outer">
-      <div>
-        <textarea id="txt" cols="60" rows="15" class="editorConf"><?php echo $defaultData ?></textarea>
-      </div>
-      <div id="txt_info">line: ?</div>
-    </div>
-    <div>
-      <div id="player_gui"></div>
-    </div>
-    <div id="msg" style="padding:0.5em; color: red;"></div>
+      <div id="msg" style="padding:0.5em; color: red;"></div>
+      <div style="text-align:right"><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></div>
+      <div style="text-align:right"><a href="https://sakuramml.com/" target="_new">sakuramml.com</a></div>
+    </div><!-- /player-outer -->
   </div>
 
 

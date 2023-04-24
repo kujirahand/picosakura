@@ -86,16 +86,20 @@ $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakur
         }
     }
 
-    document.getElementById('btnPlay').onclick = () => {
-        playMML()
-    }
-    document.getElementById('btnStop').onclick = () => {
+    function stopMML() {
         if (window.player_jzz) {
             window.player_pico.stop();
         }
         if (window.player_pico) {
             window.player_pico.stop();
         }
+    }
+
+    document.getElementById('btnPlay').onclick = () => {
+        playMML()
+    }
+    document.getElementById('btnStop').onclick = () => {
+        stopMML()
     }
 
     // set event
@@ -119,11 +123,21 @@ $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakur
             return
         }
         const keyCode = e.keyCode
-        if (keyCode == 13) {
+        if (keyCode == 13) { // enter
             showCursorInfo()
+            return
         }
-        if (e.keyCode == 38 || e.keyCode == 40) {
+        if (e.keyCode == 38 || e.keyCode == 40) { // left or right
             showCursorInfo()
+            return
+        }
+        if (e.keyCode == 120) { // [F9]
+            playMML()
+            return
+        }
+        if (e.keyCode == 121) { // [F10]
+            stopMML()
+            return
         }
     }
     txt.onmouseup = (e) => {
