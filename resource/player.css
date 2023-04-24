@@ -1,0 +1,33 @@
+#picosakura-player h1 {
+    color: white;
+    background-color: orange;
+    padding: 0.2em;
+    font-size: 1.2em;
+}
+#picosakura-player #txt {
+    background-color: #fffff0;
+    tab-size: 4;
+    background-color: #fffff0;
+    width: 99%;
+}
+#picosakura-player #txt_info {
+    text-align: right;
+    font-size: 0.9em;
+    color: gray;
+}
+#picosakura-player .player-synth-selector {
+    text-align: right;
+    font-size: 0.7em;
+    color: gray;
+    margin: 0.2em;
+}
+#picosakura-player .play-button {
+    width: 9em;
+    font-size: 1em;
+    margin: 0.2em;
+}
+#picosakura-player .stop-button {
+    width: 6em;
+    font-size: 1em;
+    margin: 0.2em;
+}
