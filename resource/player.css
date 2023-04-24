@@ -4,16 +4,22 @@
     padding: 0.2em;
     font-size: 1.2em;
 }
+#picosakura-player #txt-outer {
+    text-align: center;
+}
 #picosakura-player #txt {
     background-color: #fffff0;
     tab-size: 4;
     background-color: #fffff0;
-    width: 99%;
+    width: 95%;
+    padding: 8px;
+    margin: 4px;
 }
 #picosakura-player #txt_info {
     text-align: right;
     font-size: 0.9em;
     color: gray;
+    padding-right: 1em;
 }
 #picosakura-player .player-synth-selector {
     text-align: right;

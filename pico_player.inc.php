@@ -101,7 +101,7 @@ $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakur
     // set event
     const info = document.getElementById('txt_info')
     const txt = document.getElementById('txt')
-    txt.onkeyup = (e) => {
+    txt.onkeydown = (e) => {
         if (e.isComposing) {
             return
         }
@@ -113,10 +113,15 @@ $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakur
             txt.value = txt.value.substring(0, start) + "\t" + txt.value.substring(end);
             txt.selectionEnd = start + 1;
         }
+    }
+    txt.onkeyup = (e) => {
+        if (e.isComposing) {
+            return
+        }
+        const keyCode = e.keyCode
         if (keyCode == 13) {
             showCursorInfo()
         }
-        console.log(keyCode)
         if (e.keyCode == 38 || e.keyCode == 40) {
             showCursorInfo()
         }

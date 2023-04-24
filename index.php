@@ -78,10 +78,12 @@ EOS;
         </span>
       </div>
     </div>
-    <div>
-      <textarea id="txt" cols="60" rows="15" class="editorConf"><?php echo $defaultData ?></textarea>
+    <div id="txt-outer">
+      <div>
+        <textarea id="txt" cols="60" rows="15" class="editorConf"><?php echo $defaultData ?></textarea>
+      </div>
+      <div id="txt_info">line: ?</div>
     </div>
-    <div id="txt_info"></div>
     <div>
       <div id="player_gui"></div>
     </div>
