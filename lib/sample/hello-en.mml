@@ -1,0 +1,8 @@
+//
+// Write your music text here.
+//
+TRACK(1) @1 v120 o5 l4 [3 cege ] c^^^
+TRACK(2) @1 v100 o5 l4 [3 egbg ] e^^^
+TRACK(3) @1 v100 o4 l4 [3 cege ] c^^^
+TRACK(10) @1 v100 o5 l8 RHYTHM{ [3 bhsh bhsh ] c^^^ } 
+

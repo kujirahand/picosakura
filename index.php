@@ -1,28 +1,5 @@
 <?php
-// check language
-$lang = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'ja' : strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-$isJa = (strpos($lang, 'ja') === 0);
-// default data
-$defaultData = <<<EOS
-//
-// Write your music text here.
-//
-TRACK(1) @1 v120 O5 l4 [3 cege ] c^^^
-TRACK(2) @1 v100 O5 l4 [3 egbg ] e^^^
-TRACK(3) @1 v100 O4 l4 [3 cege ] c^^^
-TRACK(10) @1 v100 O5 l8 RHYTHM{ [3 bhsh bhsh ] c^^^ } 
-EOS;
-if ($isJa) {
-  $defaultData = <<<EOS
-//
-// ここに、ドレミのテキストを書いてください。
-//
-トラック1 @1 音量120 音階5 音符4 [3 ドミソミ ] ドーーー
-トラック2 @1 音量100 音階5 音符4 [3 ソラ`レラ ] ソーーー
-トラック3 @1 音量100 音階3 音符8 [3 ドドドド ドドドド] ドーーー
-トラック10 音量100 音符8 [3 どつたつ どつたた ] ぱーーー
-EOS;
-}
+include_once __DIR__ . '/lib/mml_sample.inc.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +27,8 @@ EOS;
 
 <body>
   <!-- for sakuramml -->
-  <?php require_once __DIR__ . '/pico_player.inc.php'; ?>
+  <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
+  <script type="module" src="resource/picosakura_player.js"></script>
   <script>
     function show_jzz() {
       const gui = document.getElementById('player_gui')
@@ -81,7 +59,7 @@ EOS;
       </div>
       <div id="txt-outer">
         <div>
-          <textarea id="txt" cols="60" rows="15" class="editorConf"><?php echo $defaultData ?></textarea>
+          <textarea id="txt" cols="60" rows="15"><?php echo $sampleMML ?></textarea>
         </div>
         <div id="txt_info">line: ?</div>
       </div>
