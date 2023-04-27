@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . '/lib/mml_sample.inc.php';
+$player_css_mtime = filemtime(__DIR__.'/resource/player.css');
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@ include_once __DIR__ . '/lib/mml_sample.inc.php';
 
   <!-- for picosakura -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-  <link rel="stylesheet" href="resource/player.css">
+  <link rel="stylesheet" href="resource/player.css?m=<?php echo $player_css_mtime ?>">
 
   <!-- for music player -->
   <!-- jzz player -->
@@ -45,8 +46,8 @@ include_once __DIR__ . '/lib/mml_sample.inc.php';
     <div id="player-outer">
       <div id="player" style="display:none;">
         <div>
-          <button id="btnPlay" class="pure-button play-button pure-button-primary">▶ PLAY(F9)</button>
-          <button id="btnStop" class="pure-button stop-button">■ STOP</button> &nbsp;
+          <button id="btnPlay" class="pure-button play-button pure-button-primary">▶PLAY(F9)</button>
+          <button id="btnStop" class="pure-button stop-button">■STOP(F10)</button> &nbsp;
         </div>
         <div class="player-synth-selector">
           <span id="sakura_version">v.?.?</span>

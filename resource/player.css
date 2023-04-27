@@ -21,9 +21,13 @@
     padding: 8px;
 }
 #picosakura-player #txt_info {
-    text-align: right;
+    text-align: left;
     font-size: 0.9em;
     color: gray;
+    background-color: white;
+    padding: 4px;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
 }
 #picosakura-player .player-synth-selector {
     text-align: right;
@@ -32,13 +36,13 @@
     margin: 0.2em;
 }
 #picosakura-player .play-button {
-    width: 9em;
-    font-size: 1em;
+    width: 11em;
+    font-size: 0.9em;
     margin: 0.2em;
 }
 #picosakura-player .stop-button {
-    width: 6em;
-    font-size: 1em;
+    width: 8em;
+    font-size: 0.9em;
     margin: 0.2em;
 }
 
