@@ -45,17 +45,16 @@ function playMML() {
         com.set_language(window._picosakura.lang)
         const a = com.compile(txt.value)
         const smfData = new Uint8Array(a);
+
+        // 既に再生中なら停止する
+        stopMML()
         if (pico.checked) {
-            if (window.player_jzz) {
-                window.player_jzz.stop(); //
-            }
+            // play pico player
             const parsedData = player_pico.parseSMF(smfData);
             window.player_pico.setData(parsedData);
             window.player_pico.play();
         } else {
-            if (window.player_jzz) {
-                window.player_pico.stop(); //
-            }
+            // play jzz player
             window.player_jzz.load(new JZZ.MIDI.SMF(smfData));
             window.player_jzz.play();
         }
@@ -67,9 +66,10 @@ function playMML() {
 
 function stopMML() {
     if (window.player_jzz) {
-        window.player_pico.stop();
+        window.player_jzz.stop();
+        console.log('stop jzz')
     }
-    if (window.player_pico) {
+    else if (window.player_pico) {
         window.player_pico.stop();
     }
 }

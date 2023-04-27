@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/lib/mml_sample.inc.php';
 $player_css_mtime = filemtime(__DIR__.'/resource/player.css');
+$picosakuraPlayerJSTime = filemtime(__DIR__.'/resource/picosakura_player.js');
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@ $player_css_mtime = filemtime(__DIR__.'/resource/player.css');
 <body>
   <!-- for sakuramml -->
   <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
-  <script type="module" src="resource/picosakura_player.js"></script>
+  <script type="module" src="resource/picosakura_player.js?m=<?php echo $picosakuraPlayerJSTime?>"></script>
   <script>
     function show_jzz() {
       const gui = document.getElementById('player_gui')
