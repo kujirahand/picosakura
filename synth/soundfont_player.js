@@ -56,10 +56,12 @@ async function SF_play(midi) {
         return synth.waitForVoicesStopped();
     }).then(function () {
         // Releases the synthesizer
-        synth.close();
-        if (context.state === 'running') {
-            context.close()
-        }
+        setTimeout(() => { // 余韻を残すために1秒待つ
+            synth.close();
+            if (context.state === 'running') {
+                context.close()
+            }
+        }, 1000);
     }, function (err) {
         console.log('Failed:', err);
         // Releases the synthesizer
