@@ -1,0 +1,5 @@
+file: TimGM6mb.sf2
+license: GNU General Public License
+(ref) Tim Brechbill - http://www.timbrechbill.com
+(ref) https://musescore.org/en/node/1463#comment-9161
+

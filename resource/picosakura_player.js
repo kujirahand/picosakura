@@ -1,7 +1,7 @@
 // ----------------------------------------------------
 // Player & Editor for Sakura MML
 // ----------------------------------------------------
-window.player_jzz = null
+window.player_sf = null
 window.player_pico = null
 // set log
 window.sakura_log = function (s) {
@@ -20,6 +20,9 @@ function tohtml(s) {
 
 // play MML
 function playMML() {
+    // 既に再生中なら停止する
+    stopMML()
+    //
     const txt = document.getElementById('txt')
     const pico = document.getElementById('pico')
     saveToStorage()
@@ -31,11 +34,9 @@ function playMML() {
             window.player_pico.init();
         }
     } else {
-        if (!window.player_jzz) {
-            // load JZZ
-            document.getElementById('player_gui').style.display = 'none'
-            window.player_jzz = new JZZ.gui.Player('player_gui');
-            JZZ.synth.Tiny.register('Web Audio');
+        if (!window.player_sf) {
+            // load SoundFont
+            window.player_sf = {info:SF_info};
         }
     }
     try {
@@ -46,17 +47,18 @@ function playMML() {
         const a = com.compile(txt.value)
         const smfData = new Uint8Array(a);
 
-        // 既に再生中なら停止する
-        stopMML()
         if (pico.checked) {
             // play pico player
             const parsedData = player_pico.parseSMF(smfData);
             window.player_pico.setData(parsedData);
             window.player_pico.play();
         } else {
-            // play jzz player
-            window.player_jzz.load(new JZZ.MIDI.SMF(smfData));
-            window.player_jzz.play();
+            // play soundfont player
+            if (!SF_isReady()) {
+                alert('Sorry, SoundFont is not ready. Please try again later.')
+                return
+            }
+            SF_play(smfData)
         }
     } catch (err) {
         console.error(err);
@@ -65,9 +67,9 @@ function playMML() {
 }
 
 function stopMML() {
-    if (window.player_jzz) {
-        window.player_jzz.stop();
-        console.log('stop jzz')
+    if (window.player_sf) {
+        SF_stop()
+        window.player_sf = null
     }
     else if (window.player_pico) {
         window.player_pico.stop();
