@@ -2,22 +2,24 @@
 // ------------------------------------------------------------
 // Pico Sakura Player
 // ------------------------------------------------------------
+include_once __DIR__ . '/lib/mml_sample.inc.php';
+$player_css_mtime = filemtime(__DIR__ . '/resource/player.css');
+$picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
 // CHECK mode
 if (!isset($utf8_mml)) {
   // default mode
-  $utf8_mml = '';
+  $utf8_mml = $sampleMML;
   $appTitle = '<h1>Pico Sakura</h1>';
   $baseUrl = '.';
-  $initScript = 'loadLastMMLFromLS()';
+  $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
+  $textareaRows = 15;
 } else {
   // include from mmlbbs6
   $appTitle = '';
   $baseUrl = './picosakura';
-  $initScript = '';
+  $initScript = 'window.checkSynthType();';
+  $textareaRows = 8;
 }
-include_once __DIR__ . '/lib/mml_sample.inc.php';
-$player_css_mtime = filemtime(__DIR__ . '/resource/player.css');
-$picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
 // ------------------------------------------------------------
 ?>
 <!DOCTYPE html>
@@ -47,15 +49,6 @@ $picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
   <!-- for sakuramml -->
   <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
   <script type="module" src="<?php echo $baseUrl; ?>/resource/picosakura_player.js?m=<?php echo $picosakuraPlayerJSTime ?>"></script>
-  <script>
-    function show_sf() {
-      console.log('soundfont')
-    }
-
-    function show_pico() {
-      console.log('pico')
-    }
-  </script>
   <div id="picosakura-player">
     <?php echo $appTitle ?>
     <div id="player-outer">
@@ -68,14 +61,14 @@ $picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
           <span id="sakura_version">v.?.?</span>
           <span>
             (Synth:
-            <label for="pico"><input type="radio" id="pico" class="pure-checkbox" name="player_type" value="pico" onclick="show_pico()"> picoaudio</label>
-            <label for="sf"><input type="radio" id="sf" class="pure-checkbox" name="player_type" value="sf" checked="1" onclick="show_sf()"> soundfont</label>)
+            <label for="pico"><input type="radio" id="pico" class="pure-checkbox" name="player_type" value="pico"> picoaudio</label>
+            <label for="soundfont"><input type="radio" id="soundfont" class="pure-checkbox" name="player_type" value="sf" checked="1"> soundfont</label>)
           </span>
         </div>
       </div>
       <div id="txt-outer">
         <div>
-          <textarea id="txt" cols="60" rows="15"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
+          <textarea id="txt" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
         </div>
         <div id="txt_info">line: ?</div>
       </div>
@@ -84,18 +77,21 @@ $picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
       </div>
       <div id="msg" style="padding:0.5em; color: red;"></div>
       <div style="text-align:right"><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></div>
-      <div style="text-align:right"><a href="https://sakuramml.com/" target="_new">sakuramml.com</a></div>
     </div><!-- /player-outer -->
   </div>
   <br><br><br><br>
   <div id="picosakura-footer">
-    <a href="https://github.com/kujirahand/picosakura" target="_new">picosakura</a>
+    <div><a href="https://github.com/kujirahand/picosakura" target="_new">picosakura</a></div>
+    <div style="text-align:right"><a href="https://sakuramml.com/" target="_new">sakuramml.com</a></div>
   </div>
 
   <script>
-    // load SoundFont
-    SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
-    <?php echo $initScript; ?>
+    window.addEventListener('load', () => {
+      // load SoundFont
+      SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
+      // initScript
+      <?php echo $initScript; ?>
+    });
   </script>
 </body>
 

@@ -25,6 +25,7 @@ function playMML() {
     //
     const txt = document.getElementById('txt')
     const pico = document.getElementById('pico')
+    checkSynthType()
     saveToStorage()
     // init player
     if (pico.checked) {
@@ -144,21 +145,62 @@ function showCursorInfo() {
 // ----------------------------------------------------
 // storage loader
 // ----------------------------------------------------
-function loadLastMMLFromLS() {
-    loadFromStorage()
-}
-// ----------------------------------------------------
 // storage functions
 function saveToStorage() {
     const txt = document.getElementById("txt")
     localStorage["picosakura_txt"] = txt.value
 }
+
 function loadFromStorage() {
     const txt = localStorage["picosakura_txt"]
     if (txt) {
         document.getElementById("txt").value = txt
     }
 }
+// load last mml file from localStorage
+function loadLastMMLFromLS() {
+    loadFromStorage()
+}
 // ----------------------------------------------------
-
-
+// SoundType events
+// ----------------------------------------------------
+const SOUND_TYPE_PICO = 'SoundType={pico}'
+const SOUND_TYPE_SOUNDFONT = 'SoundType={soundfont}'
+//
+const pico = document.getElementById('pico')
+const soundfont = document.getElementById('soundfont')
+// check synth type
+function checkSynthType() {
+    const txt = document.getElementById("txt")
+    const txtValue = txt.value
+    if (txtValue.indexOf(SOUND_TYPE_PICO) >= 0) {
+        pico.checked = true
+    } else if (txtValue.indexOf(SOUND_TYPE_SOUNDFONT) >= 0) {
+        document.getElementById('soundfont').checked = true
+    } else {
+        soundfont.checked = true
+        txt.vaule = SOUND_TYPE_SOUNDFONT + '\n' + txtValue
+    }
+}
+//
+pico.onclick = () => {
+    replaceSoundType(SOUND_TYPE_SOUNDFONT, SOUND_TYPE_PICO)
+    checkSynthType()
+}
+soundfont.onclick = () => {
+    replaceSoundType(SOUND_TYPE_PICO, SOUND_TYPE_SOUNDFONT)
+    checkSynthType()
+}
+//
+function replaceSoundType(a, b) {
+    const txt = document.getElementById("txt")
+    const txtValue = txt.value
+    if (txtValue.indexOf(a) < 0 && txtValue.indexOf(b) < 0) {
+        txt.value = b + '\n' + txtValue
+        return
+    }
+    txt.value = txtValue.replace(a, b)
+}
+// export window
+window.loadLastMMLFromLS = loadLastMMLFromLS
+window.checkSynthType = checkSynthType
