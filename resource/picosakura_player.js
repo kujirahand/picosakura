@@ -144,9 +144,9 @@ function showCursorInfo() {
 // ----------------------------------------------------
 // storage loader
 // ----------------------------------------------------
-window.addEventListener("load", (e) => {
+function loadLastMMLFromLS() {
     loadFromStorage()
-})
+}
 // ----------------------------------------------------
 // storage functions
 function saveToStorage() {

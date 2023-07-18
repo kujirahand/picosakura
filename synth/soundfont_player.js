@@ -5,26 +5,19 @@
 <script src="resource/soundfont_player.js"></script>
 */
 
-const DEFAULT_SOUNDFONT = './synth/TimGM6mb.sf2'
-
 const SF_info = {
     font: null,
     synth: null,
     context: null,
     node: null,
 }
-async function SF_init() {
-    if (SF_info.font === null) {
-        await SF_loadDefaultSoundFont()
-    }
-}
 async function loadBinary(url) {
     const resp = await fetch(url);
     return await resp.arrayBuffer();
 }
-async function SF_loadDefaultSoundFont() {
+async function SF_loadSoundFont(urlSoundFont) {
     SF_info.font = null
-    SF_info.font = await loadBinary(DEFAULT_SOUNDFONT)
+    SF_info.font = await loadBinary(urlSoundFont)
 }
 function SF_isReady() {
     return SF_info.font !== null
