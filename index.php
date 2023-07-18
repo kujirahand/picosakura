@@ -81,8 +81,10 @@ if (!isset($utf8_mml)) {
   </div>
   <br><br><br><br>
   <div id="picosakura-footer">
-    <div><a href="https://github.com/kujirahand/picosakura" target="_new">picosakura</a></div>
-    <div style="text-align:right"><a href="https://sakuramml.com/" target="_new">sakuramml.com</a></div>
+    <div>
+      <a href="https://github.com/kujirahand/picosakura" target="_new">picosakura</a>
+      - <a href="https://sakuramml.com/" target="_new">sakuramml.com</a>
+    </div>
   </div>
 
   <script>
