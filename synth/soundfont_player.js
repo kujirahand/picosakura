@@ -57,6 +57,9 @@ async function SF_play(midi) {
     }).then(function () {
         // Releases the synthesizer
         synth.close();
+        if (context.state === 'running') {
+            context.close()
+        }
     }, function (err) {
         console.log('Failed:', err);
         // Releases the synthesizer

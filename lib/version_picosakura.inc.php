@@ -1,2 +1,2 @@
 <?php
-define('VERSION_PICO', '0.1.21');
+define('VERSION_PICO', '0.1.20');
