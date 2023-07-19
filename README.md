@@ -1,8 +1,26 @@
 # Picosakura
 
-Picosakura is music player for browser with  MML Compiler Sakura.
-This is Picosakura for PHP.
+Picosakura is an MML player for Sakuramml.
+MML stands for Music Macro Language.
+Picosakura use SoundFont to play MML files.
 
 - [WEB Site](https://sakuramml.com/picosakura/index.php)
-- [MML compiler sakuramml-rust](https://github.com/kujirahand/sakuramml-rust)
-- [Picosakura-rust](https://github.com/kujirahand/picosakura-rust)
+- MML Compiler
+  - [MML compiler sakuramml-rust](https://github.com/kujirahand/sakuramml-rust)
+- Command line version
+  - [Picosakura-rust](https://github.com/kujirahand/picosakura-rust)
+
+## How to use
+
+```
+# download picosakura
+git clone https://github.com/kujirahand/picosakura.git
+cd picosakura
+
+# start server
+php -S localhost:8888
+
+# visit with browser
+# http://localhost:8888
+```
+
