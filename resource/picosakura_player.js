@@ -46,7 +46,11 @@ function playMML() {
         const com = SakuraCompiler.new()
         com.set_language(window._picosakura.lang)
         const a = com.compile(txt.value)
+        const log = com.get_log()
         const smfData = new Uint8Array(a);
+        // show log
+        document.getElementById('msg').innerHTML = tohtml(log)
+        console.log(log)
 
         if (pico.checked) {
             // play pico player

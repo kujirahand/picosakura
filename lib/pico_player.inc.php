@@ -7,7 +7,6 @@ $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakur
 <script type="module">
     // Load WebAssembly
     import init, {
-        compile,
         get_version,
         SakuraCompiler
     } from '<?php echo $uriPicoLib ?>';
@@ -20,7 +19,6 @@ $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakur
         document.getElementById('player').style.display = 'block'
         document.getElementById('sakura_version').innerHTML = 'ver.' + sakuraVession
         window._picosakura = {
-            compile,
             get_version,
             SakuraCompiler,
             lang: '<?php echo $picosakuraLang; ?>',
