@@ -16,7 +16,7 @@ if (!isset($utf8_mml)) {
   // include from mmlbbs6
   $baseUrl = './picosakura';
   $initScript = 'window.checkSynthType(); closeDescript();';
-  $textareaRows = 8;
+  $textareaRows = 9;
 }
 // ------------------------------------------------------------
 ?>
@@ -48,7 +48,7 @@ if (!isset($utf8_mml)) {
   <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
   <script type="module" src="<?php echo $baseUrl; ?>/resource/picosakura_player.js?m=<?php echo $picosakuraPlayerJSTime ?>"></script>
   <div id="picosakura-player">
-    <h1>Pico Sakura</h1>
+    <h1 id="app-title">Pico Sakura</h1>
     <div id="player-outer" class="front-panel">
       <div id="player" style="display:none;">
         <div>
@@ -113,6 +113,7 @@ if (!isset($utf8_mml)) {
     });
 
     function closeDescript() {
+      document.getElementById('app-title').style.display = 'none';
       document.getElementById('descript').style.display = 'none';
     }
 
