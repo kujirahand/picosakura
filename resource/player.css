@@ -37,16 +37,6 @@
 }
 
 .front-panel {
-    position: fixed;
-    /* スクロールしても画面上部に固定 */
-    top: 0;
-    left: 0;
-    width: 100%; /* 画面幅に広がる */
-    height: 43px; /* 画面高さに広がる */
-    background-color: rgba(255, 255, 255, 0.1);
-    /* パネルの背景色と透明度を設定 */
-    z-index: 9999;
-    /* 他の要素よりも前面に表示するための z-index */
 }
 
 #picosakura-player .play-button {

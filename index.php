@@ -55,7 +55,7 @@ if (!isset($utf8_mml)) {
           <button id="btnPlay" class="play-button">▶</button>
           <button id="btnStop" class="stop-button">□</button>
         </div>
-      </div>
+      </div><!-- /#player -->
       <div id="txt-outer">
         <div class="line-number-wrapper">
           <div class="line-numbers" id="line-numbers"></div>
