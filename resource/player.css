@@ -1,7 +1,7 @@
 #picosakura-player h1 {
     color: gray;
     background-color: #fff0f0;
-    padding: 0.3em;
+    padding: 0em;
     font-size: 1.1em;
     text-align: center;
 }
@@ -13,7 +13,12 @@
     padding: 0;
 }
 #player {
-    text-align: center;
+    text-align: right;
+    margin: 4px;
+}
+#player button {
+    border-radius: 0px;
+    border: 1px solid silver;
 }
 #picosakura-player #txt-outer {
     text-align: center;
@@ -31,15 +36,26 @@
     background-color: #f0f0f0;
 }
 
+.front-panel {
+    position: fixed;
+    /* スクロールしても画面上部に固定 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 画面幅に広がる */
+    height: 43px; /* 画面高さに広がる */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* パネルの背景色と透明度を設定 */
+    z-index: 9999;
+    /* 他の要素よりも前面に表示するための z-index */
+}
+
 #picosakura-player .play-button {
-    width: 9em;
-    font-size: 0.9em;
-    margin: 0.2em;
+    width: 4em;
+    font-size: 1em;
 }
 #picosakura-player .stop-button {
-    width: 6em;
-    font-size: 0.9em;
-    margin: 0.2em;
+    width: 2em;
+    font-size: 1em;
 }
 
 #picosakura-footer {
@@ -109,7 +125,7 @@
     font-family: monospace;
     font-size: 1em;
     line-height: 1.3em;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #status_bar {

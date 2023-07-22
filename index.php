@@ -9,13 +9,11 @@ $picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
 if (!isset($utf8_mml)) {
   // default mode
   $utf8_mml = $sampleMML;
-  $appTitle = '<h1>Pico Sakura</h1>';
   $baseUrl = '.';
   $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
   $textareaRows = 15;
 } else {
   // include from mmlbbs6
-  $appTitle = '';
   $baseUrl = './picosakura';
   $initScript = 'window.checkSynthType(); closeDescript();';
   $textareaRows = 8;
@@ -50,12 +48,12 @@ if (!isset($utf8_mml)) {
   <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
   <script type="module" src="<?php echo $baseUrl; ?>/resource/picosakura_player.js?m=<?php echo $picosakuraPlayerJSTime ?>"></script>
   <div id="picosakura-player">
-    <?php echo $appTitle ?>
-    <div id="player-outer">
+    <h1>Pico Sakura</h1>
+    <div id="player-outer" class="front-panel">
       <div id="player" style="display:none;">
         <div>
-          <button id="btnPlay" class="pure-button play-button pure-button-primary">▶ PLAY</button>
-          <button id="btnStop" class="pure-button stop-button">stop</button> &nbsp;
+          <button id="btnPlay" class="play-button">▶</button>
+          <button id="btnStop" class="stop-button">□</button>
         </div>
       </div>
       <div id="txt-outer">
