@@ -186,6 +186,10 @@ function updateLineNumbers() {
         lines.scrollTop = textArea.scrollTop;
     };
 }
+document.addEventListener('DOMContentLoaded', function () {
+    updateLineNumbers()
+})
+
 // ----------------------------------------------------
 // storage loader
 // ----------------------------------------------------

@@ -13,13 +13,6 @@
 #picosakura-player #txt-outer {
     text-align: center;
 }
-#picosakura-player #txt {
-    background-color: #fffff0;
-    tab-size: 4;
-    background-color: #fffff0;
-    width: 98%;
-    padding: 8px;
-}
 #picosakura-player #txt_info {
     text-align: left;
     font-size: 0.9em;
@@ -36,12 +29,12 @@
     margin: 0.2em;
 }
 #picosakura-player .play-button {
-    width: 11em;
+    width: 9em;
     font-size: 0.9em;
     margin: 0.2em;
 }
 #picosakura-player .stop-button {
-    width: 8em;
+    width: 6em;
     font-size: 0.9em;
     margin: 0.2em;
 }
@@ -96,7 +89,11 @@
 }
 
 /* textarea */
-#txt {
+#picosakura-player #txt {
+    background-color: #fffff0;
+    tab-size: 4;
+    padding: 8px;
+    /* --- for lineno --- */
     position: absolute;
     left: 32px;
     /* Make room for the line numbers */
@@ -109,9 +106,21 @@
     font-family: monospace;
     font-size: 1em;
     line-height: 1.3em;
+    overflow: hidden;
 }
 
 #status_bar {
     width: 100%;
     text-align: left;
+}
+
+#descript {
+    margin: 0.2em;
+}
+#descript h3 {
+    font-size: 1.0em;
+    border-bottom: 1px solid silver;
+}
+#descript p {
+    padding-left: 2em;
 }

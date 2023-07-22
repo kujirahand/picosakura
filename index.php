@@ -54,8 +54,8 @@ if (!isset($utf8_mml)) {
     <div id="player-outer">
       <div id="player" style="display:none;">
         <div>
-          <button id="btnPlay" class="pure-button play-button pure-button-primary">▶PLAY(F9)</button>
-          <button id="btnStop" class="pure-button stop-button">■STOP(F10)</button> &nbsp;
+          <button id="btnPlay" class="pure-button play-button pure-button-primary">▶ PLAY</button>
+          <button id="btnStop" class="pure-button stop-button">stop</button> &nbsp;
         </div>
         <div class="player-synth-selector">
           <span id="sakura_version">v.?.?</span>
@@ -80,6 +80,15 @@ if (!isset($utf8_mml)) {
         <div id="player_gui"></div>
       </div>
       <div id="msg" style="padding:0.5em"></div>
+      <div id="descript">
+        <h3>About Picosakura</h3>
+        <p>This is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.</p>
+        <h3>Shortcut key</h3>
+        <ul>
+          <li>Play : F9</li>
+          <li>Stop : F10</li>
+        </ul>
+      </div>
       <div style="text-align:right"><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></div>
     </div><!-- /player-outer -->
   </div>
