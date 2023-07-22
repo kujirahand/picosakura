@@ -11,12 +11,12 @@ if (!isset($utf8_mml)) {
   $utf8_mml = $sampleMML;
   $baseUrl = '.';
   $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
-  $textareaRows = 13;
+  $textareaRows = 15;
 } else {
   // include from mmlbbs6
   $baseUrl = './picosakura';
   $initScript = 'window.checkSynthType(); closeDescript();';
-  $textareaRows = 7;
+  $textareaRows = 8;
 }
 // ------------------------------------------------------------
 ?>
@@ -57,10 +57,7 @@ if (!isset($utf8_mml)) {
         </div>
       </div><!-- /#player -->
       <div id="txt-outer">
-        <div class="line-number-wrapper">
-          <div class="line-numbers" id="line-numbers"></div>
-          <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
-        </div>
+        <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
       </div>
       <div style="clear:both"></div>
       <div id="status_bar">
@@ -85,9 +82,11 @@ if (!isset($utf8_mml)) {
         <h3>About Picosakura</h3>
         <p>This is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.</p>
         <h3>使い方(Japanese):</h3>
-        <p>ドレミファソラシと書くとその通り音が鳴ります。</p>
-        <p>四分音符は「ド４」、八分音符は「レ８」、付点四分音符は「ミ４．」のように記述します。また「音符４」と書くと四分音符がデフォルトになり、「音符８」と書くと八分音符がデフォルトになります。</p>
+        <p>「ドレミファソラシ」と書くとその通り音が鳴ります。</p>
+        <p>四分音符は「ド４」、八分音符は「レ８」、付点四分音符は「ミ４．」のように記述します。また「音符８」と書くと八分音符がデフォルト音長になります。</p>
         <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。</p>
+        <p>音色を変えるには「音色(GrandPiano)」とか「@80」と書きます。</p>
+        <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。トラック10が打楽器です。</p>
         <p><a target="_new" href="https://sakuramml.com/go.php?16">より詳しく</a></p>
         <h3>Shortcut key</h3>
         <ul>

@@ -174,17 +174,6 @@ function zero(no, len) {
 
 function updateLineNumbers() {
     const textArea = document.getElementById('txt');
-    const lines = document.getElementById('line-numbers');
-    const lineCount = textArea.value.split('\n').length;
-
-    let lineNumbers = '';
-    for (let i = 0; i <= lineCount; i++) {
-        lineNumbers += zero(i, 3) + ':\n';
-    }
-    lines.textContent = lineNumbers;
-    textArea.onscroll = function () {
-        lines.scrollTop = textArea.scrollTop;
-    };
 }
 document.addEventListener('DOMContentLoaded', function () {
     if (isMobileDevice()) {
@@ -194,10 +183,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     updateLineNumbers()
 })
-const desctipt = document.getElementById('descript')
+const desctript = document.getElementById('descript')
 const descriptClose = document.getElementById('descript-close')
 descriptClose.onclick = () => {
-    descript.style.display = 'none'
+    desctript.style.display = 'none'
 }
 
 // ----------------------------------------------------
