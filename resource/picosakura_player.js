@@ -177,11 +177,8 @@ function updateLineNumbers() {
 }
 document.addEventListener('DOMContentLoaded', function () {
     if (isMobileDevice()) {
-        document.getElementById('line-numbers').style.display = 'none'
-        txt.style.left = '0px'
-        txt.style.width = '100%'
+        // mobile
     }
-    updateLineNumbers()
 })
 const desctript = document.getElementById('descript')
 const descriptClose = document.getElementById('descript-close')

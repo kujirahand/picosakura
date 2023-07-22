@@ -11,7 +11,7 @@ if (!isset($utf8_mml)) {
   $utf8_mml = $sampleMML;
   $baseUrl = '.';
   $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
-  $textareaRows = 15;
+  $textareaRows = 25;
 } else {
   // include from mmlbbs6
   $baseUrl = './picosakura';
