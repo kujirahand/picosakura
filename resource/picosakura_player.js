@@ -18,6 +18,22 @@ function tohtml(s) {
     return s
 }
 
+function tohtmlError(s) {
+    const lines = s.split('\n')
+    let html = ''
+    for (const line of lines) {
+        const m = line.match(/^\[ERROR\]\((\d+)\)(.+$)/)
+        if (m) {
+            const lineNo = m[1]
+            const info = tohtml(m[2])
+            html += `<span class="error" onclick="gotoLine(${lineNo})">[ERROR](${lineNo})</span>${info}<br>\n`
+        } else {
+            html += tohtml(line) + '<br>\n'
+        }
+    }
+    return html
+}
+
 // play MML
 function playMML() {
     // 既に再生中なら停止する
@@ -49,7 +65,7 @@ function playMML() {
         const log = com.get_log()
         const smfData = new Uint8Array(a);
         // show log
-        document.getElementById('msg').innerHTML = tohtml(log)
+        document.getElementById('msg').innerHTML = tohtmlError(log)
         console.log(log)
 
         if (pico.checked) {
@@ -92,7 +108,7 @@ document.getElementById('btnStop').onclick = () => {
 // text editor events
 // ----------------------------------------------------
 // set event
-const info = document.getElementById('txt_info')
+const lineNoInfo = document.getElementById('lineno-info')
 const txt = document.getElementById('txt')
 txt.onkeydown = (e) => {
     if (e.isComposing) {
@@ -112,8 +128,9 @@ txt.onkeyup = (e) => {
         return
     }
     const keyCode = e.keyCode
-    if (keyCode == 13) { // enter
+    if (keyCode == 13 || keyCode == 8) { // enter
         showCursorInfo()
+        updateLineNumbers()
         return
     }
     if (e.keyCode == 38 || e.keyCode == 40) { // left or right
@@ -143,9 +160,32 @@ function showCursorInfo() {
             lineno++
         }
     }
-    info.innerHTML = `line: ${lineno} `
+    lineNoInfo.innerHTML = `line: ${lineno} `
+}
+txt.onfocus = () => {
+    updateLineNumbers()
+    showCursorInfo();
 }
 
+function zero(no, len) {
+    no = '0000000000' + no.toString()
+    return no.substring(no.length - len)
+}
+
+function updateLineNumbers() {
+    const textArea = document.getElementById('txt');
+    const lines = document.getElementById('line-numbers');
+    const lineCount = textArea.value.split('\n').length;
+
+    let lineNumbers = '';
+    for (let i = 0; i <= lineCount; i++) {
+        lineNumbers += zero(i, 3) + ':\n';
+    }
+    lines.textContent = lineNumbers;
+    textArea.onscroll = function () {
+        lines.scrollTop = textArea.scrollTop;
+    };
+}
 // ----------------------------------------------------
 // storage loader
 // ----------------------------------------------------

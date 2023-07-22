@@ -54,3 +54,64 @@
     margin: 0.2em;
     padding-top: 1em;
 }
+
+#msg {
+    color: gray;
+    font-size: 0.8em;
+    margin: 0.2em;
+}
+.error {
+    color: red;
+    text-decoration: none;
+}
+.error:hover {
+    text-decoration: underline;
+}
+
+/* textarea line number */
+/* textareaを覆うラッパー要素 */
+.line-number-wrapper {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 行番号を表示する要素 */
+.line-numbers {
+    position: absolute;
+    padding-top: 8px;
+    /* Match the padding of the textarea */
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.3em;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    border-right: 1px solid silver;
+    box-sizing: border-box;
+    width: 32px;
+    color: silver;
+    background-color: #f0f0f0;
+}
+
+/* textarea */
+#txt {
+    position: absolute;
+    left: 32px;
+    /* Make room for the line numbers */
+    width: calc(100% - 32px);
+    /* Subtract the width of the line numbers */
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.3em;
+}
+
+#status_bar {
+    width: 100%;
+    text-align: left;
+}

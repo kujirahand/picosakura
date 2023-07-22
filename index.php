@@ -67,15 +67,19 @@ if (!isset($utf8_mml)) {
         </div>
       </div>
       <div id="txt-outer">
-        <div>
-          <textarea id="txt" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
+        <div class="line-number-wrapper">
+          <div class="line-numbers" id="line-numbers"></div>
+          <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
         </div>
-        <div id="txt_info">line: ?</div>
+        <div id="status_bar">
+          <span id="lineno-info">line: ?</span>
+        </div>
       </div>
+      <div style="clear:both"></div>
       <div>
         <div id="player_gui"></div>
       </div>
-      <div id="msg" style="padding:0.5em; color: red;"></div>
+      <div id="msg" style="padding:0.5em"></div>
       <div style="text-align:right"><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></div>
     </div><!-- /player-outer -->
   </div>
@@ -94,6 +98,27 @@ if (!isset($utf8_mml)) {
       // initScript
       <?php echo $initScript; ?>
     });
+
+    function gotoLine(lineNumber) {
+      const textarea = document.getElementById('txt')
+      const lines = textarea.value.split('\n')
+      // 行番号が範囲内にあることを確認します
+      if (lineNumber < 0) {
+        lineNumber = 0;
+      } else if (lineNumber > lines.length) {
+        lineNumber = lines.length;
+      }
+      // カーソルを移動させる位置を計算します
+      var position = 0;
+      for (var i = 0; i < lineNumber; i++) {
+        position += lines[i].length + 1; // 行の長さに改行文字('\n')を足します
+      }
+      // カーソルを移動させるために、テキストエリアをフォーカスします
+      textarea.focus();
+      // カーソルの位置をセットします
+      textarea.selectionStart = position;
+      textarea.selectionEnd = position;
+    }
   </script>
 </body>
 
