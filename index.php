@@ -11,12 +11,12 @@ if (!isset($utf8_mml)) {
   $utf8_mml = $sampleMML;
   $baseUrl = '.';
   $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
-  $textareaRows = 15;
+  $textareaRows = 13;
 } else {
   // include from mmlbbs6
   $baseUrl = './picosakura';
   $initScript = 'window.checkSynthType(); closeDescript();';
-  $textareaRows = 8;
+  $textareaRows = 7;
 }
 // ------------------------------------------------------------
 ?>
@@ -52,7 +52,7 @@ if (!isset($utf8_mml)) {
     <div id="player-outer" class="front-panel">
       <div id="player" style="display:none;">
         <div>
-          <button id="btnPlay" class="play-button">▶</button>
+          <button id="btnPlay" class="play-button">▶ PLAY</button>
           <button id="btnStop" class="stop-button">□</button>
         </div>
       </div><!-- /#player -->

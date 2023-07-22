@@ -187,6 +187,11 @@ function updateLineNumbers() {
     };
 }
 document.addEventListener('DOMContentLoaded', function () {
+    if (isMobileDevice()) {
+        document.getElementById('line-numbers').style.display = 'none'
+        txt.style.left = '0px'
+        txt.style.width = '100%'
+    }
     updateLineNumbers()
 })
 const desctipt = document.getElementById('descript')
@@ -255,6 +260,12 @@ function replaceSoundType(a, b) {
     }
     txt.value = txtValue.replace(a, b)
 }
+
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 // export window
 window.loadLastMMLFromLS = loadLastMMLFromLS
 window.checkSynthType = checkSynthType
