@@ -160,7 +160,7 @@ function showCursorInfo() {
             lineno++
         }
     }
-    lineNoInfo.innerHTML = `line: ${lineno} `
+    lineNoInfo.innerHTML = `line: ${zero(lineno, 3)} `
 }
 txt.onfocus = () => {
     updateLineNumbers()
@@ -189,6 +189,11 @@ function updateLineNumbers() {
 document.addEventListener('DOMContentLoaded', function () {
     updateLineNumbers()
 })
+const desctipt = document.getElementById('descript')
+const descriptClose = document.getElementById('descript-close')
+descriptClose.onclick = () => {
+    descript.style.display = 'none'
+}
 
 // ----------------------------------------------------
 // storage loader
@@ -203,6 +208,7 @@ function loadFromStorage() {
     const txt = localStorage["picosakura_txt"]
     if (txt) {
         document.getElementById("txt").value = txt
+        updateLineNumbers()
     }
 }
 // load last mml file from localStorage

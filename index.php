@@ -17,7 +17,7 @@ if (!isset($utf8_mml)) {
   // include from mmlbbs6
   $appTitle = '';
   $baseUrl = './picosakura';
-  $initScript = 'window.checkSynthType();';
+  $initScript = 'window.checkSynthType(); closeDescript();';
   $textareaRows = 8;
 }
 // ------------------------------------------------------------
@@ -57,39 +57,46 @@ if (!isset($utf8_mml)) {
           <button id="btnPlay" class="pure-button play-button pure-button-primary">▶ PLAY</button>
           <button id="btnStop" class="pure-button stop-button">stop</button> &nbsp;
         </div>
-        <div class="player-synth-selector">
-          <span id="sakura_version">v.?.?</span>
-          <span>
-            (Synth:
-            <label for="pico"><input type="radio" id="pico" class="pure-checkbox" name="player_type" value="pico"> picoaudio</label>
-            <label for="soundfont"><input type="radio" id="soundfont" class="pure-checkbox" name="player_type" value="sf" checked="1"> soundfont</label>)
-          </span>
-        </div>
       </div>
       <div id="txt-outer">
         <div class="line-number-wrapper">
           <div class="line-numbers" id="line-numbers"></div>
           <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
         </div>
-        <div id="status_bar">
-          <span id="lineno-info">line: ?</span>
-        </div>
       </div>
       <div style="clear:both"></div>
-      <div>
-        <div id="player_gui"></div>
-      </div>
+      <div id="status_bar">
+        <span class="box" id="lineno-info">line: 000</span>
+
+        <span class="box">
+          <span id="sakura_version">v.?.?</span>
+        </span>
+
+        <span class="player-synth-selector box">
+          <label for="pico"><input type="radio" id="pico" class="pure-checkbox" name="player_type" value="pico"> picoaudio</label>
+          <label for="soundfont"><input type="radio" id="soundfont" class="pure-checkbox" name="player_type" value="sf" checked="1"> soundfont</label>
+        </span>
+      </div><!-- /status_bar -->
       <div id="msg" style="padding:0.5em"></div>
+
       <div id="descript">
+        <div id="descript-title">
+          <h2><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></h2>
+          <button id="descript-close">x</button>
+        </div>
         <h3>About Picosakura</h3>
         <p>This is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.</p>
+        <h3>使い方(Japanese):</h3>
+        <p>ドレミファソラシと書くとその通り音が鳴ります。</p>
+        <p>四分音符は「ド４」、八分音符は「レ８」、付点四分音符は「ミ４．」のように記述します。また「音符４」と書くと四分音符がデフォルトになり、「音符８」と書くと八分音符がデフォルトになります。</p>
+        <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。</p>
+        <p><a target="_new" href="https://sakuramml.com/go.php?16">より詳しく</a></p>
         <h3>Shortcut key</h3>
         <ul>
           <li>Play : F9</li>
           <li>Stop : F10</li>
         </ul>
       </div>
-      <div style="text-align:right"><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></div>
     </div><!-- /player-outer -->
   </div>
   <br><br><br><br>
@@ -107,6 +114,10 @@ if (!isset($utf8_mml)) {
       // initScript
       <?php echo $initScript; ?>
     });
+
+    function closeDescript() {
+      document.getElementById('descript').style.display = 'none';
+    }
 
     function gotoLine(lineNumber) {
       const textarea = document.getElementById('txt')
