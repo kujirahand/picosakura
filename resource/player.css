@@ -70,18 +70,19 @@ body {
 }
 .error {
     color: red;
-    text-decoration: none;
+    text-decoration: underline;
+    font-weight: normal;
 }
 .error:hover {
-    text-decoration: underline;
+    font-weight: bold;;
 }
 
 /* textarea */
 #picosakura-player #txt {
+    font-size: 16px; /* iOS zoom */
     background-color: white;
     tab-size: 4;
     padding: 4px;
-    /* --- for lineno --- */
     width: calc(100% - 4px);
     box-sizing: border-box;
     padding: 8px;

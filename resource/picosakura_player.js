@@ -178,6 +178,7 @@ function updateLineNumbers() {
 document.addEventListener('DOMContentLoaded', function () {
     if (isMobileDevice()) {
         // mobile
+        txt.setAttribute('rows', '10')
     }
 })
 const desctript = document.getElementById('descript')
