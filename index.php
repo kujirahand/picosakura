@@ -103,16 +103,16 @@ if (!isset($utf8_mml)) {
             <li>Play : F9</li>
             <li>Stop : F10</li>
           </ul>
+          <h3>Command List</h3>
+          <p>
+            <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗Command list...</a>
+          </p>
         </div>
         <h3>Voice List</h3>
         <p>
           <span id="voice-list"></span>
           <button onclick="insertVoice()">Insert</button>
           <button onclick="testVoice()">Test</button>
-        </p>
-        <h3>Command List</h3>
-        <p>
-          <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗Command list...</a>
         </p>
       </div>
     </div><!-- /player-outer -->
