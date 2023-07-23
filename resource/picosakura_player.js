@@ -34,16 +34,11 @@ function tohtmlError(s) {
     return html
 }
 
-// play MML
-function playMML() {
+function playMMLDirect(mml) {
     // 既に再生中なら停止する
     stopMML()
-    //
-    const txt = document.getElementById('txt')
-    const pico = document.getElementById('pico')
-    checkSynthType()
-    saveToStorage()
     // init player
+    const pico = document.getElementById('pico')
     if (pico.checked) {
         if (!window.player_pico) {
             // load Pico
@@ -53,7 +48,7 @@ function playMML() {
     } else {
         if (!window.player_sf) {
             // load SoundFont
-            window.player_sf = {info:SF_info};
+            window.player_sf = { info: SF_info };
         }
     }
     try {
@@ -61,7 +56,7 @@ function playMML() {
         const SakuraCompiler = window._picosakura.SakuraCompiler
         const com = SakuraCompiler.new()
         com.set_language(window._picosakura.lang)
-        const a = com.compile(txt.value)
+        const a = com.compile(mml)
         const log = com.get_log()
         const smfData = new Uint8Array(a);
         // show log
@@ -85,6 +80,17 @@ function playMML() {
         console.error(err);
         document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString())
     }
+}
+
+
+// play MML
+function playMML() {
+    // get data
+    const txt = document.getElementById('txt')
+    checkSynthType()
+    saveToStorage()
+    //
+    playMMLDirect(txt.value)
 }
 
 function stopMML() {
@@ -180,12 +186,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // mobile
         txt.setAttribute('rows', '10')
     }
+    const voiceList = document.getElementById('voice-list')
+    fetchJson('resource/voicelist.json').then((data) => {
+        voiceList.innerHTML = ''
+        let html = '<select id="voice-select">'
+        for (const voice of data.inst) {
+            const name = voice['voice']
+            const no = voice['no']
+            html += `<option value="${no}">${no}:${name}</option>`
+        }
+        html += '</select>'
+        voiceList.innerHTML = html
+    })
 })
-const desctript = document.getElementById('descript')
-const descriptClose = document.getElementById('descript-close')
-descriptClose.onclick = () => {
-    desctript.style.display = 'none'
-}
+
+
 
 // ----------------------------------------------------
 // storage loader
@@ -253,6 +268,17 @@ function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
+async function fetchJson(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('JSONデータの取得に失敗しました:', error);
+    }
+}
+
 // export window
 window.loadLastMMLFromLS = loadLastMMLFromLS
 window.checkSynthType = checkSynthType
+window.playMMLDirect = playMMLDirect
