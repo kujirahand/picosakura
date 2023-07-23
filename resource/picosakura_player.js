@@ -207,8 +207,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let html = '<select id="command-select">'
         for (const cmd of tsv_list) {
             if (cmd == '') { continue }
-            const [tpl, desc] = cmd.split('\t')
-            html += `<option value="${tpl}">${tpl} …… ${desc}</option>`
+            let [tpl, desc] = cmd.split('\t')
+            tpl = tpl.replace('"', '\"')
+            html += `<option value="${tpl}">${tpl} … ${desc}</option>`
         }
         html += '</select>'
         commandList.innerHTML = html

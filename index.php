@@ -78,22 +78,30 @@ if (!isset($utf8_mml)) {
         <span class="open-button">?</span>
       </div>
       <div id="descript">
+
         <div id="descript-title">
           <h2>🔧 Tools</h2>
           <button id="descript-close">×</button>
         </div>
-        <h3>Voice List</h3>
-        <p>
-          <span id="voice-list"></span>
-          <button onclick="insertVoice()">Insert</button>
-          <button onclick="testVoice()">Test</button>
-          <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1">
-        </p>
-        <h3>Command List</h3>
-        <p>
-          <span id="command-list"></span>
-          <button onclick="insertCommand()">Insert</button>
-        </p>
+
+        <div>
+          <h3>Voice List</h3>
+          <div class="insertButtons">
+            <div id="voice-list" style="flex:5"></div>
+            <button onclick="insertVoice()" style="flex:1">Insert</button>
+          </div>
+          <div class="insertButtons">
+            <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1" style="flex:5">&nbsp;
+            <button onclick="testVoice()" style="flex:1">Test</button>
+          </div>
+        </div>
+        <div>
+          <h3>Command List</h3>
+          <div class="insertButtons">
+            <div id="command-list" style="flex:5"></div>
+            <button onclick="insertCommand()" style="flex:1">Insert</button>
+          </div>
+        </div>
         <div id="descript-ja">
           <h3>サクラの使い方:</h3>
           <p>テキストボックスに「ドレミファソラシ」と書いて[Play]ボタンを押すと音が鳴ります。休符は「ッ」か「ン」です。「ソーミソラーソー」と「ー」を書くと二倍の長さになります。</p>

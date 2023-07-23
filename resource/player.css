@@ -140,13 +140,30 @@ body {
 }
 
 #voice-list {
-    margin: 0px 4px 4px 4px;
-    padding: 0px 8px 8px 8px;
 }
 #voice-list h3 {
     font-size: 1.0em;
     border-bottom: 1px solid silver;
 }
+#voice-select {
+    width:99%;
+}
+#command-list {
+}
 #command-select {
-    width: 90%;
+    width: 99%;
+}
+.insertButtons {
+    display: flex;
+    padding-bottom: 4px;
+    margin-left: 1.5em;
+    align-items: center;
+}
+.insertButtons button {
+    line-height: 1.5em;
+    height: 1.8em;
+}
+.insertButtons select {
+    line-height: 1.5em;
+    height: 1.8em;
 }
