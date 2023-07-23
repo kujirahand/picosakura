@@ -199,6 +199,20 @@ document.addEventListener('DOMContentLoaded', function () {
         html += '</select>'
         voiceList.innerHTML = html
     })
+    // command list
+    const commandList = document.getElementById('command-list')
+    fetchText('resource/commandlist.txt').then((data) => {
+        commandList.innerHTML = ''
+        let tsv_list = data.split('\n')
+        let html = '<select id="command-select">'
+        for (const cmd of tsv_list) {
+            if (cmd == '') { continue }
+            const [tpl, desc] = cmd.split('\t')
+            html += `<option value="${tpl}">${tpl} …… ${desc}</option>`
+        }
+        html += '</select>'
+        commandList.innerHTML = html
+    })
     updateSaveList()
 })
 
@@ -289,6 +303,15 @@ async function fetchJson(url) {
     try {
         const response = await fetch(url);
         const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('JSONデータの取得に失敗しました:', error);
+    }
+}
+async function fetchText(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
         return data;
     } catch (error) {
         console.error('JSONデータの取得に失敗しました:', error);

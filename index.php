@@ -114,6 +114,12 @@ if (!isset($utf8_mml)) {
           <span id="voice-list"></span>
           <button onclick="insertVoice()">Insert</button>
           <button onclick="testVoice()">Test</button>
+          <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1">
+        </p>
+        <h3>Command List</h3>
+        <p>
+          <span id="command-list"></span>
+          <button onclick="insertCommand()">Insert</button>
         </p>
         <h3>Save List</h3>
         <p>Save: <span id="save-list"></span></p>
@@ -182,7 +188,7 @@ if (!isset($utf8_mml)) {
       const voiceIndex = voiceSelect.selectedIndex;
       const voiceLabel = voiceSelect.options[voiceIndex].innerHTML;
       const [voiceNo, voiceName] = voiceLabel.split(':');
-      const voice = `@${voiceName}`;
+      const voice = `音色(${voiceName})`;
       const textarea = document.getElementById('txt');
       const pos = textarea.selectionStart;
       const text = textarea.value;
@@ -200,10 +206,28 @@ if (!isset($utf8_mml)) {
       const voiceLabel = voiceSelect.options[voiceIndex].innerHTML;
       const [voiceNo, voiceName] = voiceLabel.split(':');
       const voice = `@${voiceName}`;
-      const mml = `@${voiceNo} o5v100 l8 cege>c^<g^「ceg」1`;
+      const sample = document.getElementById('voice-list-mml').value;
+      const mml = `@${voiceNo} ${sample}`;
       console.log('test:', mml)
       window.playMMLDirect(mml)
     }
+
+    // insert Command
+    function insertCommand() {
+      const cSelect = document.getElementById('command-select');
+      const cIndex = cSelect.selectedIndex;
+      const val = cSelect.options[cIndex].value;
+      const textarea = document.getElementById('txt');
+      const pos = textarea.selectionStart;
+      const text = textarea.value;
+      const text1 = text.substr(0, pos);
+      const text2 = text.substr(pos);
+      textarea.value = text1 + val + text2;
+      textarea.focus();
+      textarea.selectionStart = pos + val.length;
+      textarea.selectionEnd = pos + val.length;
+    }
+
     // save/load
     function saveToStorage(no) {
       const txt = document.getElementById('txt')
