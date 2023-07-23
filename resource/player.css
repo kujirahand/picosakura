@@ -103,7 +103,7 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
 }
 #descript h2 {
-    font-size: 1.0em;
+    font-size: 0.8em;
 }
 #descript h3 {
     font-size: 1.0em;
@@ -122,7 +122,7 @@ body {
     grid-template-columns: 1fr auto;
     /* 左側に1フラクションの幅を割り当て、右側に自動の幅を割り当てる */
     align-items: center;
-    background-color: #fff0f0;
+    /* background-color: rgba(255, 230, 230, 0.8); */
 }
 #descript-title h2 {
     padding-left: 0.3em;
@@ -146,4 +146,7 @@ body {
 #voice-list h3 {
     font-size: 1.0em;
     border-bottom: 1px solid silver;
+}
+#command-select {
+    width: 90%;
 }

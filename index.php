@@ -73,24 +73,36 @@ if (!isset($utf8_mml)) {
       </div><!-- /status_bar -->
       <div id="msg" style="padding:0.5em"></div>
 
-      <!-- manual -->
+      <!-- tools -->
       <div id="descript-open" style="display:none;">
         <span class="open-button">?</span>
       </div>
       <div id="descript">
         <div id="descript-title">
-          <h2><a href="https://sakuramml.com/go.php?16" target="_new">Manual</a></h2>
+          <h2>🔧 Tools</h2>
           <button id="descript-close">×</button>
         </div>
+        <h3>Voice List</h3>
+        <p>
+          <span id="voice-list"></span>
+          <button onclick="insertVoice()">Insert</button>
+          <button onclick="testVoice()">Test</button>
+          <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1">
+        </p>
+        <h3>Command List</h3>
+        <p>
+          <span id="command-list"></span>
+          <button onclick="insertCommand()">Insert</button>
+        </p>
         <div id="descript-ja">
-          <h3>使い方:</h3>
-          <p>「ドレミファソラシ」または「cdefgab」と書くと音が鳴ります。休符は「ッ」か「ン」で、「ソーミソラーソー」と「ー」を書くと二倍の長さになります。</p>
+          <h3>サクラの使い方:</h3>
+          <p>テキストボックスに「ドレミファソラシ」と書いて[Play]ボタンを押すと音が鳴ります。休符は「ッ」か「ン」です。「ソーミソラーソー」と「ー」を書くと二倍の長さになります。</p>
           <p>四分音符は「ド4」、八分音符は「レ8」、付点四分音符は「ミ4.」のように記述します。また「音符8」と書くと八分音符がデフォルト音長になります。</p>
           <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。『「ドミソ」』と書くと和音が鳴ります。</p>
-          <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。トラック10が打楽器です。</p>
-          <p>音色を変えるには「音色(GrandPiano)」とか「@80」と書きます。この下のVoice Listから挿入すると楽です。</p>
+          <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。トラック10が打楽器専用です。</p>
+          <p>音色を変えるには「音色(GrandPiano)」と書きます。Voice Listから挿入できます。</p>
+          <p>Save Listはブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
           <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
-          <p>以下のSave Listはブラウザに保存するだけなので、保存後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
           <p>
             <a target="_new" href="https://sakuramml.com/go.php?16">🔗利用例...</a> /
             <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a>
@@ -109,18 +121,6 @@ if (!isset($utf8_mml)) {
             <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗Command list...</a>
           </p>
         </div>
-        <h3>Voice List</h3>
-        <p>
-          <span id="voice-list"></span>
-          <button onclick="insertVoice()">Insert</button>
-          <button onclick="testVoice()">Test</button>
-          <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1">
-        </p>
-        <h3>Command List</h3>
-        <p>
-          <span id="command-list"></span>
-          <button onclick="insertCommand()">Insert</button>
-        </p>
         <h3>Save List</h3>
         <p>Save: <span id="save-list"></span></p>
         <p>Load: <span id="load-list"></span></p>
