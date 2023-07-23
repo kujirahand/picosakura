@@ -112,8 +112,9 @@ if (!isset($utf8_mml)) {
           <p>Save Listはブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
           <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
           <p>
-            <a target="_new" href="https://sakuramml.com/go.php?16">🔗利用例...</a> /
-            <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a>
+            <a target="_new" href="https://sakuramml.com/go.php?16">🔗文法例...</a> /
+            <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a> /
+            <a target="_new" href="https://sakuramml.com/index.php?FAQ">🔗FAQ...</a>
           </p>
         </div>
         <div id="descript-en">
@@ -138,8 +139,15 @@ if (!isset($utf8_mml)) {
   <br><br><br><br>
   <div id="picosakura-footer">
     <div>
-      <a href="https://github.com/kujirahand/picosakura" target="_new">picosakura</a>
-      - <a href="https://sakuramml.com/" target="_new">sakuramml.com</a>
+      <span class="footer-link">
+        <a href="https://sakuramml.com/" target="_new">sakuramml.com</a>
+      </span> &gt;
+      <span class="footer-link">
+        <a href="https://sakuramml.com/picosakura/" target="_new">picosakura</a>
+      </span> -
+      <span class="footer-link">
+        <a href="https://github.com/kujirahand/picosakura" target="_new">(repo.)</a>
+      </span>
     </div>
   </div>
 
