@@ -196,7 +196,8 @@ if (!isset($utf8_mml)) {
       const voiceLabel = voiceSelect.options[voiceIndex].innerHTML;
       const [voiceNo, voiceName] = voiceLabel.split(':');
       const voice = `@${voiceName}`;
-      const mml = `@${voiceNo} o4v100 l8 cege>c^<g^「ceg」1`;
+      const mml = `@${voiceNo} o5v100 l8 cege>c^<g^「ceg」1`;
+      console.log('test:', mml)
       window.playMMLDirect(mml)
     }
   </script>
