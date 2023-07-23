@@ -90,6 +90,7 @@ if (!isset($utf8_mml)) {
           <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。トラック10が打楽器です。</p>
           <p>音色を変えるには「音色(GrandPiano)」とか「@80」と書きます。この下のVoice Listから挿入すると楽です。</p>
           <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
+          <p>以下のSave Listはブラウザに保存するだけなので、保存後<a href="https://sakuramml.com/mmlbbs6/" target="_new">曲掲示板6</a>に投稿してください。</p>
           <p>
             <a target="_new" href="https://sakuramml.com/go.php?16">🔗利用例...</a> /
             <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a>
@@ -114,6 +115,9 @@ if (!isset($utf8_mml)) {
           <button onclick="insertVoice()">Insert</button>
           <button onclick="testVoice()">Test</button>
         </p>
+        <h3>Save List</h3>
+        <p>Save: <span id="save-list"></span></p>
+        <p>Load: <span id="load-list"></span></p>
       </div>
     </div><!-- /player-outer -->
   </div>
@@ -199,6 +203,32 @@ if (!isset($utf8_mml)) {
       const mml = `@${voiceNo} o5v100 l8 cege>c^<g^「ceg」1`;
       console.log('test:', mml)
       window.playMMLDirect(mml)
+    }
+    // save/load
+    function saveToStorage(no) {
+      const txt = document.getElementById('txt')
+      localStorage.setItem(`picosakura-${no}`, txt.value)
+      alert(`Saved : ${no}`)
+      window.updateSaveList()
+    }
+
+    function loadFromStorage(no) {
+      const txt = document.getElementById('txt')
+      const mml = localStorage.getItem(`picosakura-${no}`)
+      const mmlSub = mml ? mml.substr(0, 20) + '...' : ''
+      if (txt.value != '') {
+        const c = confirm(`Can I load [${no}]?\n>>> ${mmlSub}`)
+        if (!c) {
+          return
+        }
+      }
+      if (mml) {
+        txt.value = mml
+        alert('loaded.')
+        txt.focus()
+      } else {
+        alert('no mml')
+      }
     }
   </script>
 </body>

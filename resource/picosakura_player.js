@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // mobile
         txt.setAttribute('rows', '10')
     }
+    // voice list
     const voiceList = document.getElementById('voice-list')
     fetchJson('resource/voicelist.json').then((data) => {
         voiceList.innerHTML = ''
@@ -198,9 +199,25 @@ document.addEventListener('DOMContentLoaded', function () {
         html += '</select>'
         voiceList.innerHTML = html
     })
+    updateSaveList()
 })
 
-
+function updateSaveList() {
+    // save & load
+    let htmlSave = ''
+    let htmlLoad = ''
+    for (let no = 0; no < 10; no++) {
+        htmlSave += `<button onclick="saveToStorage(${no})">${no}</button>`
+        if (localStorage.getItem(`picosakura-${no}`)) {
+            htmlLoad += `<button onclick="loadFromStorage(${no})">${no}</button>`
+        }
+    }
+    if (htmlLoad == '') {
+        htmlLoad = '---'
+    }
+    document.getElementById('save-list').innerHTML = htmlSave
+    document.getElementById('load-list').innerHTML = htmlLoad
+}
 
 // ----------------------------------------------------
 // storage loader
@@ -282,3 +299,4 @@ async function fetchJson(url) {
 window.loadLastMMLFromLS = loadLastMMLFromLS
 window.checkSynthType = checkSynthType
 window.playMMLDirect = playMMLDirect
+window.updateSaveList = updateSaveList
