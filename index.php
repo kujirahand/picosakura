@@ -90,7 +90,7 @@ if (!isset($utf8_mml)) {
           <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。トラック10が打楽器です。</p>
           <p>音色を変えるには「音色(GrandPiano)」とか「@80」と書きます。この下のVoice Listから挿入すると楽です。</p>
           <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
-          <p>以下のSave Listはブラウザに保存するだけなので、保存後<a href="https://sakuramml.com/mmlbbs6/" target="_new">曲掲示板6</a>に投稿してください。</p>
+          <p>以下のSave Listはブラウザに保存するだけなので、保存後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
           <p>
             <a target="_new" href="https://sakuramml.com/go.php?16">🔗利用例...</a> /
             <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a>
