@@ -324,3 +324,4 @@ window.loadLastMMLFromLS = loadLastMMLFromLS
 window.checkSynthType = checkSynthType
 window.playMMLDirect = playMMLDirect
 window.updateSaveList = updateSaveList
+window.isMobileDevice = isMobileDevice

@@ -70,8 +70,10 @@ async function SF_stop() {
         }
         SF_info.synth = null
         try {
-            if (SF_info.context.state === 'running') {
-                await SF_info.context.close()
+            if (SF_info && SF_info.context) {
+                if (SF_info.context.state === 'running') {
+                    await SF_info.context.close()
+                }
             }
         } catch (err) {
             console.log('[audiocontext.close]', err)

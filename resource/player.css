@@ -34,13 +34,25 @@ body {
     background-color: #4090f0;
     color: white;
 }
-
 #picosakura-player .stop-button {
     width: 3em;
     font-size: 1em;
 }
+#picosakura-player .piano-button {
+    width: 3em;
+    font-size: 1em;
+}
+#piano-canvas {
+    margin: 0px;
+    padding: 0px;
+    height: 100px;
+}
+#piano-outer .piano-parts {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4px;
+}
 #picosakura-player #txt-outer {
-    text-align: center;
+    text-align: left;
 }
 #picosakura-player .player-synth-selector {
     background-color: #fcfcfc;
@@ -137,11 +149,14 @@ body {
 #descript-open .open-button {
     border: 1px solid silver;
     background-color: #fff0f0;
-    padding: 4px;
+    border-radius: 0px;
+    padding: 8px;
 }
 
-#voice-list {
+#voice-list-mml {
+    background-color: #f0f0f0;
 }
+
 #voice-list h3 {
     font-size: 1.0em;
     border-bottom: 1px solid silver;
@@ -149,8 +164,7 @@ body {
 #voice-select {
     width:99%;
 }
-#command-list {
-}
+
 #command-select {
     width: 99%;
 }
@@ -159,14 +173,16 @@ body {
     padding-bottom: 4px;
     margin-left: 1.5em;
     align-items: center;
+    padding: 4px;
 }
 .insertButtons button {
-    line-height: 1.5em;
-    height: 1.8em;
+    line-height: 1.8em;
+    height: 2.2em;
+    font-size: 0.9em;
 }
 .insertButtons select {
-    line-height: 1.5em;
-    height: 1.8em;
+    line-height: 1.8em;
+    height: 2.2em;
 }
 
 .footer-link {

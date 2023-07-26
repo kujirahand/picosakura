@@ -5,6 +5,8 @@
 include_once __DIR__ . '/lib/mml_sample.inc.php';
 $player_css_mtime = filemtime(__DIR__ . '/resource/player.css');
 $picosakuraPlayerJSTime = filemtime(__DIR__ . '/resource/picosakura_player.js');
+$soundfont_player_mtime = filemtime(__DIR__ . '/synth/soundfont_player.js');
+$lang_mtime = filemtime(__DIR__ . '/resource/lang.js');
 // CHECK mode
 if (!isset($utf8_mml)) {
   // default mode
@@ -31,13 +33,13 @@ if (!isset($utf8_mml)) {
   <!-- for picosakura -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
   <link rel="stylesheet" href="<?php echo $baseUrl; ?>/resource/player.css?m=<?php echo $player_css_mtime ?>">
-  <script src="<?php echo $baseUrl; ?>/resource/lang.js"></script>
+  <script src="<?php echo $baseUrl; ?>/resource/lang.js?m=<?php echo $lang_mtime ?>"></script>
 
   <!-- + music player -->
   <!-- | js-synthesizer -->
   <script src="<?php echo $baseUrl; ?>/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
   <script src="<?php echo $baseUrl; ?>/synth/js-synthesizer.js"></script>
-  <script src="<?php echo $baseUrl; ?>/synth/soundfont_player.js"></script>
+  <script src="<?php echo $baseUrl; ?>/synth/soundfont_player.js?m=<?php echo $soundfont_player_mtime ?>"></script>
   <!-- | picoaudio player -->
   <script src="https://unpkg.com/picoaudio/dist/browser/PicoAudio.js"></script>
 
@@ -54,9 +56,25 @@ if (!isset($utf8_mml)) {
         <div>
           <button id="btnPlay" class="play-button">▶ PLAY</button>
           <button id="btnStop" class="stop-button">□</button>
+          <button id="btnPiano" class="piano-button">🎹</button>
         </div>
       </div><!-- /#player -->
       <div id="txt-outer">
+        <div id="piano-outer" style="display:none;">
+          <div>
+            <canvas id="piano-canvas"></canvas>
+          </div>
+          <div class="piano-parts">
+            <label for="chkPiano">
+              &nbsp;<input type="checkbox" id="chkPiano" checked="checked">&nbsp;<span class="lang">Insert</span>
+            </label>
+            <label for="chkPianoPlay">
+              &nbsp;<input type="checkbox" id="chkPianoPlay" checked="checked">&nbsp;<span class="lang">Sound</span>
+            </label>&nbsp;
+            <button onclick="insertToText('ー')">ー</button>&nbsp;
+            <button onclick="insertToText('BS')">BS</button>
+          </div>
+        </div>
         <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
       </div>
 
@@ -75,7 +93,7 @@ if (!isset($utf8_mml)) {
 
       <!-- tools -->
       <div id="descript-open" style="display:none;">
-        <span class="open-button">?</span>
+        <button class="open-button">🔧</button>
       </div>
       <div id="descript">
 
@@ -161,9 +179,173 @@ if (!isset($utf8_mml)) {
       // event
       document.getElementById('descript-close').onclick = closeDescript;
       document.getElementById('descript-open').onclick = openDescript;
+      document.getElementById('btnPiano').onclick = btnPianoClick;
+      document.getElementById('txt').addEventListener('input', (e) => {
+        mmlChanged = true;
+      })
       updateLang();
+      btnPianoClick()
     });
     // </onload>
+    // <unload>
+    window.addEventListener('beforeunload', function(e) {
+      if (mmlChanged) {
+        // 現代のブラウザでは、メッセージを返すと確認ダイアログが表示されます
+        e.preventDefault(); // 確認ダイアログを表示するため
+        e.returnValue = ''; // この行の具体的な内容はブラウザによって異なります
+      }
+    });
+    // <unload>
+
+    const pianoRect = [];
+    const pianoCanvas = document.getElementById('piano-canvas');
+    let pianoOctave = 0;
+    const chkPiano = document.getElementById('chkPiano');
+    const chkPianoPlay = document.getElementById('chkPianoPlay');
+    var mmlChanged = false;
+
+    function btnPianoClick() {
+      const pianoOuter = document.getElementById('piano-outer');
+      if (pianoOuter.style.display == 'none') {
+        pianoOuter.style.display = 'block';
+        drawPiano();
+      } else {
+        pianoOuter.style.display = 'none';
+      }
+      console.log('isMobile=', window.isMobileDevice())
+      if (!window.isMobileDevice()) {
+        pianoCanvas.onmouseup = pianoCanvasUp;
+      } else {
+        pianoCanvas.addEventListener("touchstart", (e) => {
+          const touchAreaRect = e.target.getBoundingClientRect();
+          console.log('@', touchAreaRect)
+          const touch = e.touches[0];
+          pianoCanvasUp({
+            preventDefault: () => {
+              e.preventDefault()
+            },
+            offsetX: touch.clientX - touchAreaRect.left,
+            offsetY: touch.clientY - touchAreaRect.top
+          })
+        });
+      }
+    }
+
+    function pianoCanvasUp(e) {
+      console.log(e)
+      const x = e.offsetX;
+      const y = e.offsetY;
+      for (let i = pianoRect.length - 1; i >= 0; i--) {
+        const rect = pianoRect[i];
+        const [x1, y1, x2, y2, key, oct] = rect;
+        if (x1 <= x && x <= x2 && y1 <= y && y <= y2) {
+          e.preventDefault();
+          const octave = 4 + oct;
+          if (chkPiano.checked) {
+            let key2 = key
+            if (pianoOctave != octave) {
+              const v = octave - pianoOctave;
+              if (pianoOctave == 0) {
+                key2 = `o${octave}${key}`
+              } else {
+                if (v == 1) {
+                  key2 = `↑${key}`
+                } else if (v == -1) {
+                  key2 = `↓${key}`
+                }
+              }
+              pianoOctave = octave;
+            }
+            insertToText(key2);
+          }
+          if (chkPianoPlay.checked) {
+            const mml = `v120 o${octave}l4${key}`
+            window.playMMLDirect(mml);
+          }
+          break;
+        }
+      }
+    }
+
+    function drawPiano() {
+      // canvas
+      const outer = document.getElementById('piano-outer');
+      const canvas = document.getElementById("piano-canvas");
+      const ctx = canvas.getContext("2d");
+      // width
+      let pw = outer.clientWidth;
+      let ph = outer.clientHeight;
+      canvas.width = pw
+      canvas.style.width = pw + 'px';
+      canvas.height = 100
+      canvas.style.height = '100px';
+      if (pw > 400) {
+        pw = 400;
+      }
+      console.log('@@@', pw);
+
+      // 鍵盤の数と音階の配列
+      const numKeys = 14; // numKeys
+      // 鍵盤のサイズと色
+      const whiteKeyWidth = Math.floor(pw / numKeys);
+      const whiteKeyHeight = 100;
+      const blackKeyWidth = Math.floor(whiteKeyWidth * 0.8);
+      const blackKeyHeight = 60;
+      const whiteColor = "#ffffff";
+      const blackColor = "#000000";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const whiteNames = ['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ']
+      // 白鍵を描画
+      pianoRect.splice(0, pianoRect.length);
+      for (let i = 0; i < numKeys; i++) {
+        const x = i * whiteKeyWidth;
+        const y = 0;
+        ctx.fillStyle = 'white';
+        ctx.fillRect(x, y, whiteKeyWidth, whiteKeyHeight);
+        ctx.strokeRect(x, y, whiteKeyWidth, whiteKeyHeight);
+        const key = whiteNames[i % 7]
+        pianoRect.push([
+          x, y, (x + whiteKeyWidth), (y + whiteKeyHeight), key, Math.floor(i / 7)
+        ])
+      }
+      // 黒鍵を描画
+      const blackNames = ['ド#', 'レ#', 'ファ#', 'ソ#', 'ラ#']
+      const blackKeys = [1, 2, 4, 5, 6, 8, 9, 11, 12, 13];
+      for (const i in blackKeys) {
+        const index = blackKeys[i];
+        const x = index * whiteKeyWidth - blackKeyWidth / 2;
+        const y = 0;
+        ctx.fillStyle = 'black';
+        ctx.fillRect(x, y, blackKeyWidth, blackKeyHeight);
+        const key = blackNames[i % 5];
+        pianoRect.push([
+          x, y, x + blackKeyWidth, y + blackKeyHeight, key, Math.floor(i / 5)
+        ])
+      }
+    }
+
+    function insertToText(s) {
+      mmlChanged = true;
+      const textarea = document.getElementById('txt');
+      const pos = textarea.selectionStart;
+      const text = textarea.value;
+      const text1 = text.substr(0, pos);
+      const text2 = text.substr(pos);
+      if (s == 'BS') {
+        const text3 = text1.substr(0, text1.length - 1);
+        textarea.value = text3 + text2;
+        textarea.focus();
+        textarea.selectionStart = pos - 1;
+        textarea.selectionEnd = pos - 1;
+        return;
+      }
+      textarea.value = text1 + s + text2;
+      if (window.isMobileDevice()) {
+        textarea.focus();
+      }
+      textarea.selectionStart = pos + s.length;
+      textarea.selectionEnd = pos + s.length;
+    }
 
     function updateLang() {
       // language (ja-JP / en-US)
@@ -219,15 +401,7 @@ if (!isset($utf8_mml)) {
       const voiceLabel = voiceSelect.options[voiceIndex].innerHTML;
       const [voiceNo, voiceName] = voiceLabel.split(':');
       const voice = `音色(${voiceName})`;
-      const textarea = document.getElementById('txt');
-      const pos = textarea.selectionStart;
-      const text = textarea.value;
-      const text1 = text.substr(0, pos);
-      const text2 = text.substr(pos);
-      textarea.value = text1 + voice + text2;
-      textarea.focus();
-      textarea.selectionStart = pos + voice.length;
-      textarea.selectionEnd = pos + voice.length;
+      insertToText(voice);
     }
 
     function testVoice() {
@@ -247,15 +421,7 @@ if (!isset($utf8_mml)) {
       const cSelect = document.getElementById('command-select');
       const cIndex = cSelect.selectedIndex;
       const val = cSelect.options[cIndex].value;
-      const textarea = document.getElementById('txt');
-      const pos = textarea.selectionStart;
-      const text = textarea.value;
-      const text1 = text.substr(0, pos);
-      const text2 = text.substr(pos);
-      textarea.value = text1 + val + text2;
-      textarea.focus();
-      textarea.selectionStart = pos + val.length;
-      textarea.selectionEnd = pos + val.length;
+      insertToText(val);
     }
 
     // save/load
@@ -263,6 +429,7 @@ if (!isset($utf8_mml)) {
       const txt = document.getElementById('txt')
       localStorage.setItem(`picosakura-${no}`, txt.value)
       alert(`Saved : ${no}`)
+      mmlChanged = false
       window.updateSaveList()
     }
 
