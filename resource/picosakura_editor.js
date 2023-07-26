@@ -20,7 +20,8 @@ window.addEventListener('load', () => {
     document.getElementById('descript-open').onclick = openDescript;
     document.getElementById('btnPiano').onclick = btnPianoClick;
     document.getElementById('txt').addEventListener('input', (e) => {
-        mmlChanged = true;
+        window.saveToStorage();
+        mmlChanged = false;
     })
     updateLang();
 });
@@ -265,7 +266,7 @@ function insertCommand() {
 }
 
 // save/load
-function saveToStorage(no) {
+function saveToStorageNo(no) {
     const txt = document.getElementById('txt')
     localStorage.setItem(`picosakura-${no}`, txt.value)
     alert(`Saved : ${no}`)
@@ -273,7 +274,7 @@ function saveToStorage(no) {
     window.updateSaveList()
 }
 
-function loadFromStorage(no) {
+function loadFromStorageNo(no) {
     const txt = document.getElementById('txt')
     const mml = localStorage.getItem(`picosakura-${no}`)
     const mmlSub = mml ? mml.substr(0, 20) + '...' : ''

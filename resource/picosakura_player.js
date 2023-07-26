@@ -222,9 +222,9 @@ function updateSaveList() {
     let htmlSave = ''
     let htmlLoad = ''
     for (let no = 0; no < 10; no++) {
-        htmlSave += `<button onclick="saveToStorage(${no})">${no}</button>`
+        htmlSave += `<button onclick="saveToStorageNo(${no})">${no}</button>`
         if (localStorage.getItem(`picosakura-${no}`)) {
-            htmlLoad += `<button onclick="loadFromStorage(${no})">${no}</button>`
+            htmlLoad += `<button onclick="loadFromStorageNo(${no})">${no}</button>`
         }
     }
     if (htmlLoad == '') {
@@ -325,3 +325,4 @@ window.checkSynthType = checkSynthType
 window.playMMLDirect = playMMLDirect
 window.updateSaveList = updateSaveList
 window.isMobileDevice = isMobileDevice
+window.saveToStorage = saveToStorage
