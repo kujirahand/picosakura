@@ -184,7 +184,6 @@ if (!isset($utf8_mml)) {
         mmlChanged = true;
       })
       updateLang();
-      btnPianoClick()
     });
     // </onload>
     // <unload>
@@ -259,7 +258,7 @@ if (!isset($utf8_mml)) {
             insertToText(key2);
           }
           if (chkPianoPlay.checked) {
-            const mml = `v120 o${octave}l4${key}`
+            const mml = `v120 o${octave}l8${key}`
             window.playMMLDirect(mml);
           }
           break;
