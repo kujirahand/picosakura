@@ -3,14 +3,18 @@
 //---------------------------------------------------------
 // global variables
 const pianoRect = [];
-const pianoCanvas = document.getElementById('piano-canvas');
 let pianoOctave = 0;
-const chkPiano = document.getElementById('chkPiano');
-const chkPianoPlay = document.getElementById('chkPianoPlay');
 var mmlChanged = false;
+// global dom
+let pianoCanvas = null
+let chkPiano = null
+let chkPianoPlay = null
 
 // <onload>
 window.addEventListener('load', () => {
+    pianoCanvas = document.getElementById('piano-canvas');
+    chkPiano = document.getElementById('chkPiano');
+    chkPianoPlay = document.getElementById('chkPianoPlay');
     // event
     document.getElementById('descript-close').onclick = closeDescript;
     document.getElementById('descript-open').onclick = openDescript;

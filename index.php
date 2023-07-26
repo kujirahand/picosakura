@@ -74,7 +74,8 @@ if (!isset($utf8_mml)) {
               &nbsp;<input type="checkbox" id="chkPianoPlay" checked="checked">&nbsp;<span class="lang">Sound</span>
             </label>&nbsp;
             <button onclick="insertToText('ー')">ー</button>&nbsp;
-            <button onclick="insertToText('BS')">BS</button>
+            <button onclick="insertToText('BS')">BS</button>&nbsp;
+            <button onclick="insertToText(' | ')">|</button>&nbsp;
           </div>
         </div>
         <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
@@ -172,12 +173,12 @@ if (!isset($utf8_mml)) {
   </div>
 
   <script>
-  window.addEventListener('load', () => {
-    // load SoundFont
-    SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
-    // initScript
-    <?php echo $initScript; ?>
-  });
+    window.addEventListener('load', () => {
+      // load SoundFont
+      SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
+      // initScript
+      <?php echo $initScript; ?>
+    });
   </script>
 </body>
 
