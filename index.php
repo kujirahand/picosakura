@@ -31,9 +31,9 @@ if (!isset($utf8_mml)) {
   <!-- for picosakura -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
   <link rel="stylesheet" href="<?php echo $baseUrl; ?>/resource/player.css?m=<?php echo $player_css_mtime ?>">
+  <script src="<?php echo $baseUrl; ?>/resource/lang.js"></script>
 
-  <!-- for music player -->
-
+  <!-- + music player -->
   <!-- | js-synthesizer -->
   <script src="<?php echo $baseUrl; ?>/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
   <script src="<?php echo $baseUrl; ?>/synth/js-synthesizer.js"></script>
@@ -88,18 +88,18 @@ if (!isset($utf8_mml)) {
           <h3>Voice List</h3>
           <div class="insertButtons">
             <div id="voice-list" style="flex:5"></div>
-            <button onclick="insertVoice()" style="flex:1">Insert</button>
+            <button onclick="insertVoice()" style="flex:1" class="lang">Insert</button>
           </div>
           <div class="insertButtons">
             <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1" style="flex:5">&nbsp;
-            <button onclick="testVoice()" style="flex:1">Test</button>
+            <button onclick="testVoice()" style="flex:1" class="lang">Test</button>
           </div>
         </div>
         <div>
           <h3>Command List</h3>
           <div class="insertButtons">
             <div id="command-list" style="flex:5"></div>
-            <button onclick="insertCommand()" style="flex:1">Insert</button>
+            <button onclick="insertCommand()" style="flex:1" class="lang">Insert</button>
           </div>
         </div>
         <div id="descript-ja">
@@ -152,6 +152,7 @@ if (!isset($utf8_mml)) {
   </div>
 
   <script>
+    // <onload>
     window.addEventListener('load', () => {
       // load SoundFont
       SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
@@ -160,12 +161,25 @@ if (!isset($utf8_mml)) {
       // event
       document.getElementById('descript-close').onclick = closeDescript;
       document.getElementById('descript-open').onclick = openDescript;
+      updateLang();
+    });
+    // </onload>
+
+    function updateLang() {
       // language (ja-JP / en-US)
       const lang = navigator.language || navigator.userLanguage;
+      // descript panel
       const isJa = (lang.indexOf('ja') >= 0)
       document.getElementById('descript-ja').style.display = isJa ? 'block' : 'none';
       document.getElementById('descript-en').style.display = isJa ? 'none' : 'block';
-    });
+      // buttons
+      const buttons = document.getElementsByClassName('lang');
+      if (buttons) {
+        for (const btn of buttons) {
+          btn.innerHTML = getLang(btn.innerHTML, btn.innerHTML);
+        }
+      }
+    }
 
     function closeDescript() {
       document.getElementById('app-title').style.display = 'none';
@@ -257,7 +271,8 @@ if (!isset($utf8_mml)) {
       const mml = localStorage.getItem(`picosakura-${no}`)
       const mmlSub = mml ? mml.substr(0, 20) + '...' : ''
       if (txt.value != '') {
-        const c = confirm(`Can I load [${no}]?\n>>> ${mmlSub}`)
+        const msg = getLang('Can I read the following data?')
+        const c = confirm(`${msg} [${no}]\n>>> ${mmlSub}`)
         if (!c) {
           return
         }
