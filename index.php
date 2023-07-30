@@ -52,7 +52,13 @@ if (!isset($utf8_mml)) {
   <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
   <script type="module" src="<?php echo $baseUrl; ?>/resource/picosakura_player.js?m=<?php echo $picosakuraPlayerJSTime ?>"></script>
   <div id="picosakura-player">
-    <h1 id="app-title">Pico Sakura</h1>
+    <div id="app-title">
+      <h1>Pico Sakura</h1>
+      <div id="splash-window" style="display: none;">
+        <p id="splash-window-body">This is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.</p>
+        <p><button id="splash-window-ok">OK</button></p>
+      </div>
+    </div>
     <div id="player-outer" class="front-panel">
       <div id="player" style="display:none;">
         <div>
@@ -124,12 +130,12 @@ if (!isset($utf8_mml)) {
           </div>
         </div>
         <div id="descript-ja">
-          <h3>サクラの使い方:</h3>
+          <h3>サクラの簡単な使い方:</h3>
           <p>テキストボックスに「ドレミファソラシ」と書いて[Play]ボタンを押すと音が鳴ります。休符は「ッ」か「ン」です。「ソーミソラーソー」と「ー」を書くと二倍の長さになります。</p>
           <p>四分音符は「ド4」、八分音符は「レ8」、付点四分音符は「ミ4.」のように記述します。また「音符8」と書くと八分音符がデフォルト音長になります。</p>
           <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。『「ドミソ」』と書くと和音が鳴ります。</p>
-          <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。トラック10が打楽器専用です。</p>
-          <p>音色を変えるには「音色(GrandPiano)」と書きます。Voice Listから挿入できます。</p>
+          <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。「トラック10」が打楽器専用です。</p>
+          <p>音色を変えるには「音色(GrandPiano)」のように書きます。Voice Listから挿入できます。</p>
           <p>Save Listはブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
           <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
           <p>

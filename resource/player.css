@@ -2,7 +2,18 @@ body {
     background-color: #f9f9f9;
     background-image: url(back.jpg);
 }
-
+#app-title {
+    padding: 0;
+    margin: 0;
+}
+#splash-window {
+    padding: 0.5em;
+    background-color: rgb(255,255,255,0.9);
+}
+#splash-window-body {
+    font-size: 0.9em;
+    line-height: 1.2em;
+}
 #picosakura-player h1 {
     color: gray;
     background-color: #fff0f0;

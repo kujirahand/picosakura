@@ -15,6 +15,7 @@ window.addEventListener('load', () => {
     pianoCanvas = document.getElementById('piano-canvas');
     chkPiano = document.getElementById('chkPiano');
     chkPianoPlay = document.getElementById('chkPianoPlay');
+    checkSplash();
     // event
     document.getElementById('descript-close').onclick = closeDescript;
     document.getElementById('descript-open').onclick = openDescript;
@@ -36,6 +37,21 @@ window.addEventListener('beforeunload', function (e) {
     }
 });
 // <unload>
+
+function checkSplash() {
+    const LS_SPLASH_WINDOW = 'picosakura-splash-window';
+    const win = document.getElementById('splash-window');
+    const btn = document.getElementById('splash-window-ok');
+    const body = document.getElementById('splash-window-body');
+    body.innerHTML = getLang('splash-window:body');
+    const lsv = localStorage.getItem(LS_SPLASH_WINDOW);
+    console.log('lsv=', lsv)
+    win.style.display = (lsv === null) ? 'block' : 'none';
+    btn.onclick = () => {
+        win.style.display = 'none';
+        localStorage.setItem(LS_SPLASH_WINDOW, '1');
+    };
+}
 
 //---------------------------------------------------------
 // piano canvas
@@ -175,9 +191,9 @@ function insertToText(s) {
         return;
     }
     textarea.value = text1 + s + text2;
-    //if (!window.isMobileDevice()) {
+    if (!window.isMobileDevice()) {
         textarea.focus();
-    //}
+    }
     textarea.selectionStart = pos + s.length;
     textarea.selectionEnd = pos + s.length;
 }
