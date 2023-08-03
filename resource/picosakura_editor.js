@@ -25,6 +25,7 @@ window.addEventListener('load', () => {
         mmlChanged = false;
     })
     updateLang();
+    updateDesign();
 });
 // </onload>
 
@@ -51,6 +52,52 @@ function checkSplash() {
         win.style.display = 'none';
         localStorage.setItem(LS_SPLASH_WINDOW, '1');
     };
+}
+
+//---------------------------------------------------------
+// design
+//---------------------------------------------------------
+function updateDesign() {
+    let designType = localStorage.getItem('picosakura-design-type');
+    if (designType === null) { designType = 'design-sakura' }
+    changeDesignType(designType);
+    // checked
+    const typeCheckd = document.getElementById(designType);
+    typeCheckd.checked = true;
+    // dom
+    const designSakura = document.getElementById('design-sakura');
+    const designNone = document.getElementById('design-none');
+    const designKirin = document.getElementById('design-kirin');
+    designSakura.onclick = designTypeClick;
+    designNone.onclick = designTypeClick;
+    designKirin.onclick = designTypeClick;
+}
+function designTypeClick(e) {
+    e.target.checked = true;
+    const designType = e.target.id;
+    localStorage['picosakura-design-type'] = designType;
+    console.log('@set design=', designType);
+    changeDesignType(designType);
+}
+function changeDesignType(designType) {
+    const body = document.getElementById('picosakura-body');
+    switch (designType) {
+        case 'design-sakura':
+            console.log('@@@design')
+            body.classList.remove(...body.classList);
+            body.classList.add('back-sakura')
+            break;
+        case 'design-none':
+            body.classList.remove(...body.classList);
+            body.classList.add('back-none')
+            break;
+        case 'design-kirin':
+            body.classList.remove(...body.classList);
+            body.classList.add('back-kirin')
+            break;
+        default:
+            console.log('@@@design:unknown')
+    }
 }
 
 //---------------------------------------------------------

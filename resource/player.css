@@ -1,6 +1,19 @@
 body {
     background-color: #f9f9f9;
+}
+.back-none {
+    background-color: #f9f9f9;
+}
+.back-sakura {
     background-image: url(back.jpg);
+}
+.back-kirin {
+    background-image: url(kirin.jpg);
+}
+.tool {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted silver;
 }
 #app-title {
     padding: 0;

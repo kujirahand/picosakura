@@ -47,7 +47,7 @@ if (!isset($utf8_mml)) {
 
 </head>
 
-<body>
+<body id="picosakura-body">
   <!-- for sakuramml -->
   <?php require_once __DIR__ . '/lib/pico_player.inc.php'; ?>
   <script type="module" src="<?php echo $baseUrl; ?>/resource/picosakura_player.js?m=<?php echo $picosakuraPlayerJSTime ?>"></script>
@@ -111,7 +111,7 @@ if (!isset($utf8_mml)) {
           <button id="descript-close">×</button>
         </div>
 
-        <div>
+        <div class="tool">
           <h3>Voice List</h3>
           <div class="insertButtons">
             <div id="voice-list" style="flex:5"></div>
@@ -121,47 +121,64 @@ if (!isset($utf8_mml)) {
             <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1" style="flex:5">&nbsp;
             <button onclick="testVoice()" style="flex:1" class="lang">Test</button>
           </div>
-        </div>
-        <div>
+        </div><!-- /.tool -->
+
+        <div class="tool">
           <h3>Command List</h3>
           <div class="insertButtons">
             <div id="command-list" style="flex:5"></div>
             <button onclick="insertCommand()" style="flex:1" class="lang">Insert</button>
           </div>
-        </div>
-        <div id="descript-ja">
-          <h3>サクラの簡単な使い方:</h3>
-          <p>テキストボックスに「ドレミファソラシ」と書いて[Play]ボタンを押すと音が鳴ります。休符は「ッ」か「ン」です。「ソーミソラーソー」と「ー」を書くと二倍の長さになります。</p>
-          <p>四分音符は「ド4」、八分音符は「レ8」、付点四分音符は「ミ4.」のように記述します。また「音符8」と書くと八分音符がデフォルト音長になります。</p>
-          <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。『「ドミソ」』と書くと和音が鳴ります。</p>
-          <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。「トラック10」が打楽器専用です。</p>
-          <p>音色を変えるには「音色(GrandPiano)」のように書きます。Voice Listから挿入できます。</p>
-          <p>Save Listはブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
-          <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
-          <p>
-            <a target="_blank" href="https://sakuramml.com/go.php?16">🔗文法例...</a> /
-            <a target="_blank" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a> /
-            <a target="_blank" href="https://sakuramml.com/index.php?FAQ">🔗FAQ...</a> /
-            <a target="_blank" href="./download-to-wav.html">🔗WAV形式で書き出す...</a>
-          </p>
-        </div>
-        <div id="descript-en">
-          <h3>About Picosakura</h3>
-          <p>This is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.</p>
-          <h3>Shortcut key</h3>
-          <ul>
-            <li>Play : F9</li>
-            <li>Stop : F10</li>
-          </ul>
-          <h3>Command List</h3>
-          <p>
-            <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗Command list...</a>
-          </p>
-        </div>
-        <h3>Save List</h3>
-        <p>Save: <span id="save-list"></span></p>
-        <p>Load: <span id="load-list"></span></p>
-      </div>
+        </div><!-- /.tool -->
+
+        <div class="tool">
+          <div id="descript-ja">
+            <h3>サクラの簡単な使い方:</h3>
+            <p>テキストボックスに「ドレミファソラシ」と書いて[Play]ボタンを押すと音が鳴ります。休符は「ッ」か「ン」です。「ソーミソラーソー」と「ー」を書くと二倍の長さになります。</p>
+            <p>四分音符は「ド4」、八分音符は「レ8」、付点四分音符は「ミ4.」のように記述します。また「音符8」と書くと八分音符がデフォルト音長になります。</p>
+            <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。『「ドミソ」』と書くと和音が鳴ります。</p>
+            <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。「トラック10」が打楽器専用です。</p>
+            <p>音色を変えるには「音色(GrandPiano)」のように書きます。Voice Listから挿入できます。</p>
+            <p>Save Listはブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
+            <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
+            <p>
+              <a target="_blank" href="https://sakuramml.com/go.php?16">🔗文法例...</a> /
+              <a target="_blank" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a> /
+              <a target="_blank" href="https://sakuramml.com/index.php?FAQ">🔗FAQ...</a> /
+              <a target="_blank" href="./download-to-wav.html">🔗WAV形式で書き出す...</a>
+            </p>
+          </div>
+          <div id="descript-en">
+            <h3>About Picosakura</h3>
+            <p>This is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.</p>
+            <h3>Shortcut key</h3>
+            <ul>
+              <li>Play : F9</li>
+              <li>Stop : F10</li>
+            </ul>
+            <h3>Command List</h3>
+            <p>
+              <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗Command list...</a>
+            </p>
+          </div>
+        </div><!-- /.tool -->
+
+        <div class="tool">
+          <h3>Save List</h3>
+          <p>Save: <span id="save-list"></span></p>
+          <p>Load: <span id="load-list"></span></p>
+        </div><!-- /.tool -->
+
+        <div class="tool">
+          <h3>Design</h3>
+          <div class="insertButtons">
+            <label for="design-sakura"><input type="radio" name="desgin-type" id="design-sakura" value="sakura">Sakura</label> /
+            <label for="design-none"><input type="radio" name="desgin-type" id="design-none" value="none">None</label> /
+            <label for="design-kirin"><input type="radio" name="desgin-type" id="design-kirin" value="kirin">Kirin</label>
+          </div>
+        </div><!-- /.tool -->
+
+      </div><!-- /#descript -->
     </div><!-- /player-outer -->
   </div>
   <br><br><br><br>
