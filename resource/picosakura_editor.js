@@ -25,7 +25,7 @@ window.addEventListener('load', () => {
         mmlChanged = false;
     })
     updateLang();
-    updateDesign();
+    updateDesignSkin();
 });
 // </onload>
 
@@ -57,47 +57,33 @@ function checkSplash() {
 //---------------------------------------------------------
 // design
 //---------------------------------------------------------
-function updateDesign() {
-    let designType = localStorage.getItem('picosakura-design-type');
-    if (designType === null) { designType = 'design-sakura' }
-    changeDesignType(designType);
+function updateDesignSkin() {
+    let designType = localStorage.getItem('picosakura-skin-type');
+    if (designType === null) { designType = 'skin-sakura' }
     // checked
-    const typeCheckd = document.getElementById(designType);
+    let typeCheckd = document.getElementById(designType);
+    if (typeCheckd === null) {
+        typeCheckd = document.getElementById('skin-sakura');
+        designType = 'skin-sakura';
+    }
     typeCheckd.checked = true;
+    changeSkinType(designType);
     // dom
-    const designSakura = document.getElementById('design-sakura');
-    const designNone = document.getElementById('design-none');
-    const designKirin = document.getElementById('design-kirin');
-    designSakura.onclick = designTypeClick;
-    designNone.onclick = designTypeClick;
-    designKirin.onclick = designTypeClick;
+    for (let radio of document.querySelectorAll('#skin-type-selector .skin-type')) {
+        radio.onclick = designTypeClick;
+    }
 }
 function designTypeClick(e) {
     e.target.checked = true;
     const designType = e.target.id;
-    localStorage['picosakura-design-type'] = designType;
-    console.log('@set design=', designType);
-    changeDesignType(designType);
+    localStorage['picosakura-skin-type'] = designType;
+    console.log('skin=', designType);
+    changeSkinType(designType);
 }
-function changeDesignType(designType) {
+function changeSkinType(skinName) {
     const body = document.getElementById('picosakura-body');
-    switch (designType) {
-        case 'design-sakura':
-            console.log('@@@design')
-            body.classList.remove(...body.classList);
-            body.classList.add('back-sakura')
-            break;
-        case 'design-none':
-            body.classList.remove(...body.classList);
-            body.classList.add('back-none')
-            break;
-        case 'design-kirin':
-            body.classList.remove(...body.classList);
-            body.classList.add('back-kirin')
-            break;
-        default:
-            console.log('@@@design:unknown')
-    }
+    body.classList.remove(...body.classList);
+    body.classList.add(skinName)
 }
 
 //---------------------------------------------------------

@@ -1,15 +1,38 @@
 body {
     background-color: #f9f9f9;
 }
-.back-none {
+/* design-skin */
+#skin-type-selector label {
+    padding: 8px;
+}
+.skin-type {
+    border-bottom: 1px solid silver;
+    padding-left: 1em;
+}
+.skin-white{
     background-color: #f9f9f9;
 }
-.back-sakura {
+.skin-sakura {
     background-image: url(back.jpg);
+    background-size: cover;
 }
-.back-kirin {
+.skin-sakura2 {
+    background-image: url(sakura2.jpg);
+    background-size: cover;
+}
+.skin-kirin {
     background-image: url(kirin.jpg);
+    background-size: cover;
 }
+.skin-green {
+    background-image: url(green.jpg);
+    background-size: cover;
+}
+.skin-wood {
+    background-image: url(wood.jpg);
+    background-size: cover;
+}
+/* tool */
 .tool {
     padding-top: 10px;
     padding-bottom: 10px;
