@@ -173,11 +173,11 @@ if (!isset($utf8_mml)) {
           <h3>Skin</h3>
           <div id="skin-type-selector" class="insertButtons">
             <label for="skin-sakura"><input class="skin-type" type="radio" name="skin-type" id="skin-sakura">Sakura</label> /
-            <label for="skin-wood"><input class="skin-type" type="radio" name="skin-type" id="skin-wood">Wood</label>
+            <label for="skin-wood"><input class="skin-type" type="radio" name="skin-type" id="skin-wood">Wood</label> /
             <label for="skin-kirin"><input class="skin-type" type="radio" name="skin-type" id="skin-kirin">Kirin</label> /
             <label for="skin-sakura2"><input class="skin-type" type="radio" name="skin-type" id="skin-sakura2">Sakura2</label> /
             <label for="skin-white"><input class="skin-type" type="radio" name="skin-type" id="skin-white">White</label> /
-            <label for="skin-green"><input class="skin-type" type="radio" name="skin-type" id="skin-green">Green</label> /
+            <label for="skin-green"><input class="skin-type" type="radio" name="skin-type" id="skin-green">Green</label>
           </div>
         </div><!-- /.tool -->
 
