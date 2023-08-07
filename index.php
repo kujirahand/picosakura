@@ -145,7 +145,7 @@ if (!isset($utf8_mml)) {
               <a target="_blank" href="https://sakuramml.com/go.php?16">🔗文法例...</a> /
               <a target="_blank" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗コマンド一覧...</a> /
               <a target="_blank" href="https://sakuramml.com/index.php?FAQ">🔗FAQ...</a> /
-              <a target="_blank" href="./download-to-wav.html">🔗WAV形式で書き出す...</a>
+              <a target="_blank" href="<?php echo $baseUrl ?>/download-to-wav.html">🔗WAV形式で書き出す...</a>
             </p>
           </div>
           <div id="descript-en">
@@ -200,6 +200,7 @@ if (!isset($utf8_mml)) {
   </div>
 
   <script>
+    window.picosakura_base_url = '<?php echo $baseUrl; ?>';
     window.addEventListener('load', () => {
       // load SoundFont
       SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
