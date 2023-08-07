@@ -2,6 +2,11 @@
 // sakuramml version
 include_once __DIR__ . '/version_picosakura.inc.php';
 $picosakuraVersion = VERSION_PICO;
+if (isset($_GET['pico_ver']) && $_GET['pico_ver'] !== '') {
+    if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+$/', $_GET['pico_ver'])) {
+        $picosakuraVersion = $_GET['pico_ver'];
+    }
+}
 $uriPicoLib = "https://cdn.jsdelivr.net/npm/sakuramml@{$picosakuraVersion}/sakuramml.js";
 ?>
 <script type="module">
