@@ -238,11 +238,14 @@ body {
     height: 2.2em;
     padding: 0.1em;
     font-size: 0.8em;
+    border-radius: 0;
+    border: 1px solid silver;
 }
 .insertButtons select {
     line-height: 1.8em;
     height: 2.2em;
     font-size: 0.8em;
+    border-radius: 0;
 }
 
 .footer-link {

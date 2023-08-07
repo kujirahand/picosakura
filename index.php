@@ -114,11 +114,11 @@ if (!isset($utf8_mml)) {
         <div class="tool">
           <h3>Voice List</h3>
           <div class="insertButtons">
-            <div id="voice-list" style="flex:5"></div>
+            <div id="voice-list" style="flex:4"></div>
             <button onclick="insertVoice()" style="flex:1" class="lang">Insert</button>
           </div>
           <div class="insertButtons">
-            <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1" style="flex:5">&nbsp;
+            <input type="text" id="voice-list-mml" size="15" value="o5l8ドレミソ↑ドー↓「ドミソ」1" style="flex:4">&nbsp;
             <button onclick="testVoice()" style="flex:1" class="lang">Test</button>
           </div>
         </div><!-- /.tool -->
