@@ -2,8 +2,18 @@ body {
     background-color: #f9f9f9;
 }
 /* design-skin */
+#skin-type-selector {
+    font-size: 0.8em;
+    line-height: 2em;
+    padding-left: 1.8em;
+}
 #skin-type-selector label {
     padding: 8px;
+    margin: 8px;
+}
+#skin-type-selector input[type=radio] {
+    padding: 8px;
+    margin: 4px;
 }
 .skin-type {
     border-bottom: 1px solid silver;
@@ -171,6 +181,7 @@ body {
 }
 #descript p {
     padding-left: 2em;
+    font-size: 0.8em;
 }
 #descript-close {
     font-size: 1em;
@@ -225,11 +236,13 @@ body {
 .insertButtons button {
     line-height: 1.8em;
     height: 2.2em;
-    font-size: 0.9em;
+    padding: 0.1em;
+    font-size: 0.8em;
 }
 .insertButtons select {
     line-height: 1.8em;
     height: 2.2em;
+    font-size: 0.8em;
 }
 
 .footer-link {
