@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // voice list
     const voiceList = document.getElementById('voice-list')
-    fetchJson('resource/voicelist.json').then((data) => {
+    fetchJson(window.picosakura_base_url + '/resource/voicelist.json').then((data) => {
         voiceList.innerHTML = ''
         let html = '<select id="voice-select">'
         for (const voice of data.inst) {
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     // command list
     const commandList = document.getElementById('command-list')
-    fetchText('resource/commandlist.txt').then((data) => {
+    fetchText(window.picosakura_base_url + '/resource/commandlist.txt').then((data) => {
         commandList.innerHTML = ''
         let tsv_list = data.split('\n')
         let html = '<select id="command-select">'
