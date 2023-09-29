@@ -3,7 +3,7 @@
 //
 const URL_SOUNDFONT = './synth/TimGM6mb.sf2';
 
-import init, { PicoResult, make_wav } from 'https://unpkg.com/picosakura@0.1.23/picosakura.js';
+import init, { PicoResult, make_wav } from 'https://unpkg.com/picosakura@0.1.25/picosakura.js';
 init().then(() => {
     console.log('@loaded')
     self.postMessage({ type: 'loaded' });
