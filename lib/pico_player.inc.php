@@ -5,6 +5,7 @@ $picosakuraVersion = VERSION_PICO;
 $pico_ok = [
     '0.1.22' => TRUE,
     '0.1.23' => TRUE,
+    '0.1.25' => TRUE,
 ];
 
 // ピコサクラのバージョン変更を許可するか？
