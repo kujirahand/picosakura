@@ -10,3 +10,13 @@ function pico_get_resource_mtime($fname) {
   }
 }
 
+function pico_template_url($fname) {
+  global $DIR_TEMPLATE;
+  $fullpath = $DIR_TEMPLATE . '/' . $fname;
+  $mtime = 0;
+  if (file_exists($fullpath)) {
+    $mtime = filemtime($fullpath) % 1000;
+  }
+  return "index.php?f=$fname&a=tpl&m=$mtime";
+}
+

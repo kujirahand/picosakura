@@ -26,7 +26,6 @@ window.addEventListener('load', () => {
         window.saveToStorage();
         mmlChanged = false;
     })
-    document.getElementById('app-title-h1').onclick = appTitleOnClick;
     updateLang();
     updateDesignSkin();
 });
@@ -42,7 +41,7 @@ window.addEventListener('beforeunload', function (e) {
 });
 // <unload>
 
-function appTitleOnClick() {
+function toggleSplash() {
     const win = document.getElementById('splash-window');
     const visible = (win.style.display == 'block');
     showSplash(!visible);

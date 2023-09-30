@@ -1,0 +1,16 @@
+/* file:pico_common.css */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app-title-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #fff0f0;
+}
+
+#app-title-bar .app-title-bar-r {
+  text-align: right;
+  padding: 4px;
+}
