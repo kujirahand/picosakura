@@ -9,7 +9,7 @@ function action_index_default() {
     $utf8_mml = $sampleMML;
     $baseUrl = '.';
     $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
-    $textareaRows = 25;
+    $textareaRows = 23;
   } else {
     // include from mmlbbs6
     $baseUrl = './picosakura';
@@ -25,6 +25,7 @@ function action_index_default() {
     'initScript' => $initScript,
     'sampleMML' => $sampleMML,
     'm_player_css' => pico_get_resource_mtime('player.css'),
+    'picosakuraLang' => $picosakuraLang,
   ]);
 }
 

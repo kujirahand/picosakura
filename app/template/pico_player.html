@@ -39,7 +39,7 @@ if (isset($_GET['pico_ver']) && $_GET['pico_ver'] !== '') {
         window._picosakura = {
             get_version,
             SakuraCompiler,
-            lang: '<?php echo $picosakuraLang; ?>',
+            lang: '{{$picosakuraLang}}',
         }
     }).catch(err => {
         console.error(err);

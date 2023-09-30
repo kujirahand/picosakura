@@ -276,6 +276,7 @@ function closeDescript() {
 }
 
 function openDescript() {
+    document.getElementById('app-title').style.display = 'block';
     document.getElementById('descript').style.display = 'block';
     document.getElementById('descript-open').style.display = 'none';
 }

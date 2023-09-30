@@ -1,13 +1,19 @@
-  <!-- for picosakura -->
-  <link rel="stylesheet" href="{{$baseUrl}}/resource/player.css?m={{$m_player_css}}">
-  <script src="{{$baseUrl}}/resource/lang.js"></script>
-  <script src="{{$baseUrl}}/resource/picosakura_editor.js"></script>
 
-  <!-- + music player -->
+  <!-- parts_header_pico_player -->
+  <!-- for picosakura -->
+  <script src="{{e:echo pico_template_url('lang.js')}}"></script>
+  <script src="{{e:echo pico_template_url('picosakura_editor.js')}}"></script>
+
+  <!-- for player -->
   <!-- | js-synthesizer -->
   <script src="{{$baseUrl}}/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
   <script src="{{$baseUrl}}/synth/js-synthesizer.js"></script>
   <script src="{{$baseUrl}}/synth/soundfont_player.js"></script>
   <!-- | picoaudio player -->
-  <script src="https://unpkg.com/picoaudio/dist/browser/PicoAudio.js"></script>
+  <script src="{{$baseUrl}}/synth/picoaudio1.1.2_PicoAudio.min.js"></script>
+  <!-- /parts_header_pico_player -->
+
+  <!-- picosakura player -->
+  <script type="module" src="{{e:echo pico_template_url('picosakura_player.js')}}"></script>
+
 

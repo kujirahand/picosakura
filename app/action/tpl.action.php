@@ -15,8 +15,9 @@ function action_tpl_default() {
     return;
   }
   // check file type
-  $mime = mime_content_type($fullpath);
+  $mime = 'text/plain';
   if (preg_match('#\.css$#', $f)) { $mime = 'text/css'; }
+  elseif (preg_match('#\.js$#', $f)) { $mime = 'text/javascript'; }
   header('Content-Type: ' . $mime);
   echo file_get_contents($fullpath);
   echo "\n/* $mime */";

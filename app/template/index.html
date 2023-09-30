@@ -11,7 +11,6 @@
 <body id="picosakura-body">
   <!-- for sakuramml -->
   {{ include 'pico_player.html' }}
-  <script type="module" src="{{$baseUrl}}/resource/picosakura_player.js"></script>
   <div id="picosakura-player">
     <div id="app-title">
       <div id="app-title-bar">
@@ -63,7 +62,7 @@
           <label for="soundfont"><input type="radio" id="soundfont" class="pure-checkbox" name="player_type" value="sf" checked="1"> soundfont</label>
         </span>
       </div><!-- /status_bar -->
-      <div id="msg" style="padding:0.5em"></div>
+      <div id="msg" style="padding:0.5em; display:none;"></div>
 
       <!-- tools -->
       <div id="descript-open" style="display:none;">
@@ -165,12 +164,12 @@
   </div>
 
   <script>
-    window.picosakura_base_url = '<?php echo $baseUrl; ?>';
+    window.picosakura_base_url = '{{$baseUrl}}';
     window.addEventListener('load', () => {
       // load SoundFont
-      SF_loadSoundFont('<?php echo $baseUrl; ?>/synth/TimGM6mb.sf2');
+      SF_loadSoundFont('{{$baseUrl}}/synth/TimGM6mb.sf2');
       // initScript
-      <?php echo $initScript; ?>
+      {{ $initScript }}
     });
   </script>
 </body>

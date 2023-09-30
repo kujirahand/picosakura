@@ -4,10 +4,13 @@
 window.player_sf = null
 window.player_pico = null
 // set log
-window.sakura_log = function (s) {
-    console.log(s)
-    document.getElementById('msg').innerHTML = tohtml(s)
+function sakura_log(s) {
+    console.log('[sakura_log]', s)
+    const msg = document.getElementById('msg');
+    msg.innerHTML = tohtmlError(s);
+    msg.style.display = 'block';
 }
+window.sakura_log = sakura_log;
 
 // tohtml
 function tohtml(s) {
@@ -60,8 +63,7 @@ function playMMLDirect(mml) {
         const log = com.get_log()
         const smfData = new Uint8Array(a);
         // show log
-        document.getElementById('msg').innerHTML = tohtmlError(log)
-        console.log(log)
+        sakura_log(log)
 
         if (pico.checked) {
             // play pico player
@@ -78,7 +80,8 @@ function playMMLDirect(mml) {
         }
     } catch (err) {
         console.error(err);
-        document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString())
+        document.getElementById('msg').style.display = 'block';
+        document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString());
     }
 }
 

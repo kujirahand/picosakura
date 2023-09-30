@@ -1,0 +1,30 @@
+
+/* define skin */
+.skin-white {
+    background-color: #f9f9f9;
+}
+
+.skin-sakura {
+    background-image: url(back.jpg?v=2);
+    background-repeat: repeat;
+}
+
+.skin-sakura2 {
+    background-image: url(sakura2.jpg);
+    background-size: cover;
+}
+
+.skin-kirin {
+    background-image: url(kirin.jpg);
+    background-size: cover;
+}
+
+.skin-green {
+    background-image: url(green.jpg);
+    background-size: cover;
+}
+
+.skin-wood {
+    background-image: url(wood.jpg);
+    background-size: cover;
+}
