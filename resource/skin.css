@@ -11,7 +11,12 @@
 
 .skin-sakura2 {
     background-image: url(sakura2.jpg);
-    background-size: cover;
+    background-repeat: repeat;
+}
+
+.skin-sakura3 {
+    background-image: url(sakura-cloud.jpg);
+    background-repeat: repeat;
 }
 
 .skin-kirin {
@@ -20,11 +25,15 @@
 }
 
 .skin-green {
-    background-image: url(green.jpg);
-    background-size: cover;
+    background-image: url(green2.jpg);
+    background-repeat: repeat;
 }
 
 .skin-wood {
     background-image: url(wood.jpg);
-    background-size: cover;
+    background-repeat: repeat;
+}
+.skin-wood-tile {
+    background-image: url(wood-tile.jpg);
+    background-repeat: repeat;
 }

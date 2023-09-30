@@ -74,20 +74,17 @@ function checkSplash() {
 // design
 //---------------------------------------------------------
 function updateDesignSkin() {
+    // get skin type
     let designType = localStorage.getItem('picosakura-skin-type');
     if (designType === null) { designType = 'skin-sakura' }
-    // checked
-    let typeCheckd = document.getElementById(designType);
-    if (typeCheckd === null) {
-        typeCheckd = document.getElementById('skin-sakura');
-        designType = 'skin-sakura';
-    }
-    typeCheckd.checked = true;
+    // selected
+    const skinSelect = document.getElementById('skin-select');
+    skinSelect.value = designType;
+    skinSelect.onchange = function () {
+        console.log(skinSelect.value);
+        changeSkinType(skinSelect.value);
+    };
     changeSkinType(designType);
-    // dom
-    for (let radio of document.querySelectorAll('#skin-type-selector .skin-type')) {
-        radio.onclick = designTypeClick;
-    }
 }
 function designTypeClick(e) {
     e.target.checked = true;
