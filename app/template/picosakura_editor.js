@@ -86,17 +86,11 @@ function updateDesignSkin() {
     };
     changeSkinType(designType);
 }
-function designTypeClick(e) {
-    e.target.checked = true;
-    const designType = e.target.id;
-    localStorage['picosakura-skin-type'] = designType;
-    console.log('skin=', designType);
-    changeSkinType(designType);
-}
 function changeSkinType(skinName) {
     const body = document.getElementById('picosakura-body');
     body.classList.remove(...body.classList);
     body.classList.add(skinName)
+    localStorage['picosakura-skin-type'] = skinName;
 }
 
 //---------------------------------------------------------
