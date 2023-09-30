@@ -1,0 +1,5 @@
+<?php
+define('VERSION_PICO', '0.1.25');
+global $VERSION_PICO;
+$VERSION_PICO = VERSION_PICO;
+

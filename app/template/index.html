@@ -4,21 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pico Sakura - ピコサクラ - テキスト音楽「サクラ」</title>
-
-  <!-- for picosakura -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{$baseUrl}}/resource/player.css">
-  <script src="{{$baseUrl}}/resource/lang.js"></script>
-  <script src="{{$baseUrl}}/resource/picosakura_editor.js"></script>
-
-  <!-- + music player -->
-  <!-- | js-synthesizer -->
-  <script src="{{$baseUrl}}/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
-  <script src="{{$baseUrl}}/synth/js-synthesizer.js"></script>
-  <script src="{{$baseUrl}}/synth/soundfont_player.js"></script>
-  <!-- | picoaudio player -->
-  <script src="https://unpkg.com/picoaudio/dist/browser/PicoAudio.js"></script>
-
+  {{include 'parts_header_common.html'}}
+  {{include 'parts_header_pico_player.html'}}
 </head>
 
 <body id="picosakura-body">
@@ -58,7 +45,7 @@
             <button onclick="insertToText(' | ')">|</button>&nbsp;
           </div>
         </div>
-        <textarea id="txt" wrap="off" cols="60" rows="<?php echo $textareaRows; ?>"><?php echo htmlspecialchars($utf8_mml, ENT_QUOTES); ?></textarea>
+        <textarea id="txt" wrap="off" cols="60" rows="{{$textareaRows}}">{{e echo htmlspecialchars($utf8_mml, ENT_QUOTES);}}</textarea>
       </div>
 
       <!-- status_bar -->
