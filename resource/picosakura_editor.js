@@ -9,6 +9,8 @@ var mmlChanged = false;
 let pianoCanvas = null
 let chkPiano = null
 let chkPianoPlay = null
+// const
+const LS_SPLASH_WINDOW = 'picosakura-splash-window'; // localStorage key
 
 // <onload>
 window.addEventListener('load', () => {
@@ -24,6 +26,7 @@ window.addEventListener('load', () => {
         window.saveToStorage();
         mmlChanged = false;
     })
+    document.getElementById('app-title-h1').onclick = appTitleOnClick;
     updateLang();
     updateDesignSkin();
 });
@@ -39,19 +42,33 @@ window.addEventListener('beforeunload', function (e) {
 });
 // <unload>
 
-function checkSplash() {
-    const LS_SPLASH_WINDOW = 'picosakura-splash-window';
+function appTitleOnClick() {
+    const win = document.getElementById('splash-window');
+    const visible = (win.style.display == 'block');
+    showSplash(!visible);
+}
+
+function showSplash(visible) {
     const win = document.getElementById('splash-window');
     const btn = document.getElementById('splash-window-ok');
     const body = document.getElementById('splash-window-body');
-    body.innerHTML = getLang('splash-window:body');
+    // set visible
+    win.style.display = visible ? 'block' : 'none';
+    if (visible) {
+        body.innerHTML = getLang('splash-window:body');
+        console.log('[pico-sakura] Hello!')
+        btn.onclick = () => {
+            win.style.display = 'none';
+            localStorage.setItem(LS_SPLASH_WINDOW, '1')
+        };
+    }
+}
+
+// check splash window
+function checkSplash() {
     const lsv = localStorage.getItem(LS_SPLASH_WINDOW);
-    console.log('lsv=', lsv)
-    win.style.display = (lsv === null) ? 'block' : 'none';
-    btn.onclick = () => {
-        win.style.display = 'none';
-        localStorage.setItem(LS_SPLASH_WINDOW, '1');
-    };
+    const isFirstTime = (lsv === null);
+    showSplash(isFirstTime);
 }
 
 //---------------------------------------------------------
