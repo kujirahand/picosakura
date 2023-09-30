@@ -17,6 +17,7 @@ require_once $DIR_ROOT.'/version_picosakura.inc.php';
 require_once $DIR_LIB.'/libpico.inc.php';
 // --------------------------------------------------
 // check language
+global $picosakuraLang;
 $langAccept = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'ja' : strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 $picosakuraLang = $lang = (strpos($langAccept, 'ja') >= 0) ? 'ja' : 'en';
 // action

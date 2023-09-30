@@ -1,8 +1,11 @@
 <?php
 function action_index_default() {
+  global $picosakuraLang;
   // CHECK mode
   if (!isset($utf8_mml)) {
     // default mode
+    $sampleFile = __DIR__ . "/sample/hello-{$picosakuraLang}.mml";
+    $sampleMML = @file_get_contents($sampleFile);
     $utf8_mml = $sampleMML;
     $baseUrl = '.';
     $initScript = 'window.loadLastMMLFromLS(); window.checkSynthType();';
@@ -14,13 +17,10 @@ function action_index_default() {
     $textareaRows = 9;
   }
 
-  // detect sample mml file
-  $sampleFile = __DIR__."/sample/hello-{$lang}.mml";
-  $sampleMML = @file_get_contents($sampleFile);
-
   // render
   template_render('index.html', [
     'baseUrl' => $baseUrl,
+    'utf8_mml' => $utf8_mml,
     'textareaRows' => $textareaRows,
     'initScript' => $initScript,
     'sampleMML' => $sampleMML,
