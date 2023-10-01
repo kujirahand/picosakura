@@ -52,9 +52,9 @@
             <label for="chkPianoPlay">
               &nbsp;<input type="checkbox" id="chkPianoPlay" checked="checked">&nbsp;<span class="lang">Sound</span>
             </label>&nbsp;
-            <button onclick="insertToText('ー')">ー</button>&nbsp;
-            <button onclick="insertToText('BS')">BS</button>&nbsp;
-            <button onclick="insertToText(' | ')">|</button>&nbsp;
+            <button id="btnPiano_h">ー</button>&nbsp;
+            <button id="btnPiano_bs">BS</button>&nbsp;
+            <button id="btnPiano_v">|</button>&nbsp;
           </div>
         </div>
         <textarea id="txt" wrap="off" cols="60" rows="{{$textareaRows}}">{{e echo htmlspecialchars($utf8_mml, ENT_QUOTES);}}</textarea>

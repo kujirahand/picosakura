@@ -75,6 +75,10 @@
         document.getElementById('txt').addEventListener('keyup', (e) => {
             window._picosakura.mmlChanged = true;
         })
+        // piano tool
+        document.getElementById('btnPiano_h').onclick = () => { insertToText('ー') }
+        document.getElementById('btnPiano_v').onclick = () => { insertToText(' | ') }
+        document.getElementById('btnPiano_bs').onclick = () => { insertToText('BS') }
     }
     //---------------------------------------------------------
     // splash
@@ -138,7 +142,7 @@
         } else {
             pianoCanvas.addEventListener("touchstart", (e) => {
                 const touchAreaRect = e.target.getBoundingClientRect();
-                console.log('@', touchAreaRect)
+                // console.log('@', touchAreaRect)
                 const touch = e.touches[0];
                 pianoCanvasUp({
                     preventDefault: () => {
@@ -152,7 +156,7 @@
     }
 
     function pianoCanvasUp(e) {
-        console.log(e)
+        // console.log(e)
         const x = e.offsetX;
         const y = e.offsetY;
         for (let i = pianoRect.length - 1; i >= 0; i--) {
