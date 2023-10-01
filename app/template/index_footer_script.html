@@ -366,7 +366,7 @@
         window._picosakura.mmlChanged = false
         window.updateSaveList()
     }
-
+    window._picosakura.saveToStorageNo = saveToStorageNo
     function loadFromStorageNo(no) {
         const txt = document.getElementById('txt')
         const mml = localStorage.getItem(`picosakura-${no}`)
@@ -386,4 +386,5 @@
             alert('no mml')
         }
     }
+    window._picosakura.loadFromStorageNo = loadFromStorageNo
 </script>

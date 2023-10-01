@@ -13,7 +13,7 @@ export function showWindow(windowId, options) {
     return win
 }
 export function closeWindow(windowId) {
-    console.log('closeWindow:try', windowId, window._picosakura.windowList);
+    // console.log('closeWindow:try', windowId, window._picosakura.windowList);
     if (!window._picosakura.windowList[windowId]) { return; }
     const winObj = window._picosakura.windowList[windowId];
     if (typeof(winObj._onClose) === 'function') {
@@ -22,7 +22,7 @@ export function closeWindow(windowId) {
     document.body.removeChild(winObj);
     document.body.removeChild(winObj._link);
     delete window._picosakura.windowList[windowId];
-    console.log('closeWindow:delete', windowId);
+    // console.log('closeWindow:delete', windowId);
 }
 
 function getBrowserWindowSize() {

@@ -156,19 +156,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function updateSaveList() {
     // save & load
-    let htmlSave = ''
-    let htmlLoad = ''
+    const saveList = document.getElementById('save-list');
+    const loadList = document.getElementById('load-list');
+    saveList.innerHTML = '';
+    loadList.innerHTML = '';
     for (let no = 0; no < 10; no++) {
-        htmlSave += `<button onclick="saveToStorageNo(${no})">${no}</button>`
+        const btn = document.createElement('button');
+        btn.textContent = ` ${no} `;
+        btn.addEventListener('click', () => { window._picosakura.saveToStorageNo(no); });
+        saveList.appendChild(btn);
         if (localStorage.getItem(`picosakura-${no}`)) {
-            htmlLoad += `<button onclick="loadFromStorageNo(${no})">${no}</button>`
+            const b = document.createElement('button');
+            b.textContent = ` ${no} `;
+            b.addEventListener('click', () => { window._picosakura.loadFromStorageNo(no); });
+            loadList.appendChild(b);
         }
     }
-    if (htmlLoad == '') {
-        htmlLoad = '---'
-    }
-    document.getElementById('save-list').innerHTML = htmlSave
-    document.getElementById('load-list').innerHTML = htmlLoad
 }
 
 // ----------------------------------------------------
