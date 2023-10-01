@@ -9,9 +9,14 @@
 </head>
 
 <body id="picosakura-body">
+
+  <!-- pico_player -->
+{{ include 'parts_body_player.html' }}
+  <!-- /pico_player -->
+
   <!-- for sakuramml -->
-  {{ include 'pico_player.html' }}
   <div id="picosakura-player">
+    
     <div id="app-title">
       <div id="app-title-bar">
         <div class="app-title-bar-l"></div>
@@ -23,6 +28,13 @@
         <p><button id="splash-window-ok">OK</button></p>
       </div>
     </div>
+
+    <!-- #app-loader-->
+    <div id="app-loader">
+      <div><img src="{{$baseUrl}}/resource/loader.gif"></div>
+      <div id="app-loader-msg"> Now Loading ... </div>
+    </div>
+
     <div id="player-outer" class="front-panel">
       <div id="player" style="display:none;">
         <div>

@@ -11,13 +11,16 @@ const SF_info = {
     context: null,
     node: null,
 }
+
 async function loadBinary(url) {
     const resp = await fetch(url);
     return await resp.arrayBuffer();
 }
 async function SF_loadSoundFont(urlSoundFont) {
+    window._picosakura.sfLoaded = false
     SF_info.font = null
     SF_info.font = await loadBinary(urlSoundFont)
+    window._picosakura.sfLoaded = true
 }
 function SF_isReady() {
     return SF_info.font !== null

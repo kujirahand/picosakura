@@ -1,19 +1,8 @@
 
-  <!-- parts_header_pico_player -->
-  <!-- for picosakura -->
-  <script src="{{e:echo pico_template_url('lang.js')}}"></script>
-  <script src="{{e:echo pico_template_url('picosakura_editor.js')}}"></script>
+<!-- parts_header_pico_player -->
 
-  <!-- for player -->
-  <!-- | js-synthesizer -->
-  <script src="{{$baseUrl}}/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
-  <script src="{{$baseUrl}}/synth/js-synthesizer.js"></script>
-  <script src="{{$baseUrl}}/synth/soundfont_player.js"></script>
-  <!-- | picoaudio player -->
-  <script src="{{$baseUrl}}/synth/picoaudio1.1.2_PicoAudio.min.js"></script>
-  <!-- /parts_header_pico_player -->
-
-  <!-- picosakura player -->
-  <script type="module" src="{{e:echo pico_template_url('picosakura_player.js')}}"></script>
-
-
+<!-- + -- for picosakura player -->
+<!-- | --><script src="{{e:echo pico_template_url('lang.js')}}"></script>
+<!-- | --><script src="{{e:echo pico_template_url('soundfont_player.js')}}"></script>
+<!-- | --><script src="{{e:echo pico_template_url('picosakura.js')}}"></script>
+<!-- | --><script type="module" src="{{e:echo pico_template_url('picosakura_module.js')}}"></script>

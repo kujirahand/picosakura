@@ -5,6 +5,14 @@ body {
   background-color: #f9f9f9;
 }
 
+#app-loader {
+  background-color: white;
+  text-align: center;
+  padding: 0.5em;
+  font-size: 0.7em;
+  color: gray;
+}
+
 #app-title-bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -139,7 +147,7 @@ body {
 #msg {
   color: gray;
   font-size: 0.8em;
-  margin: 0.2em;
+  margin: 0.8em 0.5em 0.8em 0.5em;
   background-color: #fff0f0;
 }
 

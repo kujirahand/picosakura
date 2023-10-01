@@ -1,42 +1,7 @@
 // ----------------------------------------------------
 // Player & Editor for Sakura MML
 // ----------------------------------------------------
-window.player_sf = null
-window.player_pico = null
-// set log
-function sakura_log(s) {
-    console.log('[sakura_log]', s)
-    const msg = document.getElementById('msg');
-    msg.innerHTML = tohtmlError(s);
-    msg.style.display = 'block';
-}
-window.sakura_log = sakura_log;
-
-// tohtml
-function tohtml(s) {
-    s = s.replace(/&/g, '&amp;')
-    s = s.replace(/</g, '&lt;')
-    s = s.replace(/>/g, '&gt;')
-    s = s.replace(/\n/g, '<br>\n')
-    return s
-}
-
-function tohtmlError(s) {
-    const lines = s.split('\n')
-    let html = ''
-    for (const line of lines) {
-        const m = line.match(/^\[ERROR\]\((\d+)\)(.+$)/)
-        if (m) {
-            const lineNo = m[1]
-            const info = tohtml(m[2])
-            html += `<span class="error" onclick="gotoLine(${lineNo})">[ERROR](${lineNo})</span>${info}<br>\n`
-        } else {
-            html += tohtml(line) + '<br>\n'
-        }
-    }
-    return html
-}
-
+// compile & play
 function playMMLDirect(mml) {
     // 既に再生中なら停止する
     stopMML()
@@ -56,6 +21,10 @@ function playMMLDirect(mml) {
     }
     try {
         // compiler
+        if (!window._picosakura.SakuraCompiler) {
+            alert('[System Error] Sorry could not load SakuraCompiler.'); // system error
+            return;
+        }
         const SakuraCompiler = window._picosakura.SakuraCompiler
         const com = SakuraCompiler.new()
         com.set_language(window._picosakura.lang)
@@ -73,7 +42,8 @@ function playMMLDirect(mml) {
         } else {
             // play soundfont player
             if (!SF_isReady()) {
-                alert('Sorry, SoundFont is not ready. Please try again later.')
+                const m = window.__picosakura.getLang('Sorry, SoundFont is not ready. Please try again later.');
+                alert(m)
                 return
             }
             SF_play(smfData)
@@ -84,7 +54,6 @@ function playMMLDirect(mml) {
         document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString());
     }
 }
-
 
 // play MML
 function playMML() {
@@ -106,6 +75,7 @@ function stopMML() {
     }
 }
 
+// set events
 document.getElementById('btnPlay').onclick = () => {
     playMML()
 }
@@ -320,6 +290,45 @@ async function fetchText(url) {
     } catch (error) {
         console.error('JSONデータの取得に失敗しました:', error);
     }
+}
+
+// set log
+function sakura_log(s) {
+    console.log('[sakura_log]', s)
+    const msg = document.getElementById('msg');
+    let msg_memo = '';
+    if (s === '') {
+        s = 'ok.';
+    }
+    if (s.indexOf('[ERROR]') >= 0) { msg_memo += '<br><span class="memo">※' + window._picosakura.getLang('Click on [ERROR] to jump.') + '</span>'; }
+    msg.innerHTML = tohtmlError(s) + msg_memo;
+    msg.style.display = 'block';
+}
+window.sakura_log = sakura_log;
+
+// tohtml
+function tohtml(s) {
+    s = s.replace(/&/g, '&amp;')
+    s = s.replace(/</g, '&lt;')
+    s = s.replace(/>/g, '&gt;')
+    s = s.replace(/\n/g, '<br>\n')
+    return s
+}
+
+function tohtmlError(s) {
+    const lines = s.split('\n')
+    let html = ''
+    for (const line of lines) {
+        const m = line.match(/^\[ERROR\]\((\d+)\)(.+$)/)
+        if (m) {
+            const lineNo = m[1]
+            const info = tohtml(m[2])
+            html += `<span class="error" onclick="gotoLine(${lineNo})">[ERROR](${lineNo})</span>${info}<br>\n`
+        } else {
+            html += tohtml(line) + '<br>\n'
+        }
+    }
+    return html
 }
 
 // export window
