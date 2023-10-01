@@ -4,7 +4,7 @@ function action_tpl_default() {
   global $DIR_TEMPLATE;
   // check filename and filetype
   $f = empty($_GET['f']) ? '' : $_GET['f'];
-  if (!preg_match('#^[a-z_\-\.]+\.(css|js|map|txt|sf2|mml)$#', $f)) {
+  if (!preg_match('#^[a-z_\-\.]+\.(css|json|js|html|map|txt|sf2|mml)$#', $f)) {
     echo "invalid filename";
     return;
   }
@@ -20,6 +20,5 @@ function action_tpl_default() {
   elseif (preg_match('#\.js$#', $f)) { $mime = 'text/javascript'; }
   header('Content-Type: ' . $mime);
   echo file_get_contents($fullpath);
-  echo "\n/* $mime */";
 }
 

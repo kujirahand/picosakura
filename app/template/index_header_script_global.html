@@ -1,0 +1,18 @@
+<script type="module">
+    import { getLang } from "{{e:echo pico_template_url('pico_messages.js')}}";
+    // -----------------------------------------------
+    // global object
+    // -----------------------------------------------
+    if (typeof(window._picosakura) === 'undefined') {
+        window._picosakura = {
+            version: '?.?.?',
+            SakuraCompiler: null,
+            getLang: getLang, // from pico_messages.js
+            baseUrl: '{{$baseUrl}}',
+            lang: '{{$picosakuraLang}}',
+            mmlChanged: false,
+            windowList: {}, // pico_utils.js
+        };
+        console.log('global object', window._picosakura);
+    }
+</script>

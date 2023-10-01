@@ -1,21 +1,12 @@
 
-<!-- parts_header_pico_player -->
-
-<!-- MIDI PLAYER -->
-<!-- + js-synthesizer -->
-<!-- | --><script src="{{$baseUrl}}/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
-<!-- | --><script src="{{$baseUrl}}/synth/js-synthesizer.js"></script>
-<!-- + picoaudio player -->
-<!-- | --><script src="{{$baseUrl}}/synth/picoaudio1.1.2_PicoAudio.min.js"></script>
-<!-- END OF MIDI PLAYER -->
-
 <script type="module">
+    
     // Load WebAssembly
     import init,
-        {
-            get_version,
-            SakuraCompiler
-        }
+    {
+        get_version,
+        SakuraCompiler
+    }
         from 'https://cdn.jsdelivr.net/npm/sakuramml@{{$picosakuraVersion}}/sakuramml.js';
 
     // sakura version
@@ -30,7 +21,7 @@
         console.log(`loaded: sakuramml v.${sakuraVession}`)
         document.getElementById('player').style.display = 'block'
         document.getElementById('sakura_version').innerHTML = 'ver.' + sakuraVession
-        if (typeof(window._picosakura) === 'undefined') { window._picosakura = {}; }
+        if (typeof (window._picosakura) === 'undefined') { window._picosakura = {}; }
         window._picosakura.get_version = get_version
         window._picosakura.SakuraCompiler = SakuraCompiler
         window._picosakura.lang = '{{$picosakuraLang}}'
@@ -38,6 +29,5 @@
         console.error(err);
         document.getElementById('msg').innerHTML = '[LOAD_ERROR]' + tohtml(err.toString())
     });
-</script>
 
-<!-- /parts_header_pico_player -->
+</script>

@@ -1,6 +1,26 @@
 // ----------------------------------------------------
 // Player & Editor for Sakura MML
 // ----------------------------------------------------
+// play MML
+export function playMML() {
+    // get data
+    const txt = document.getElementById('txt')
+    checkSynthType()
+    saveToStorage()
+    //
+    playMMLDirect(txt.value)
+}
+
+export function stopMML() {
+    if (window.player_sf) {
+        SF_stop()
+        window.player_sf = null
+    }
+    else if (window.player_pico) {
+        window.player_pico.stop();
+    }
+}
+
 // compile & play
 function playMMLDirect(mml) {
     // 既に再生中なら停止する
@@ -53,34 +73,6 @@ function playMMLDirect(mml) {
         document.getElementById('msg').style.display = 'block';
         document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString());
     }
-}
-
-// play MML
-function playMML() {
-    // get data
-    const txt = document.getElementById('txt')
-    checkSynthType()
-    saveToStorage()
-    //
-    playMMLDirect(txt.value)
-}
-
-function stopMML() {
-    if (window.player_sf) {
-        SF_stop()
-        window.player_sf = null
-    }
-    else if (window.player_pico) {
-        window.player_pico.stop();
-    }
-}
-
-// set events
-document.getElementById('btnPlay').onclick = () => {
-    playMML()
-}
-document.getElementById('btnStop').onclick = () => {
-    stopMML()
 }
 
 // ----------------------------------------------------
@@ -159,34 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // mobile
         txt.setAttribute('rows', '10')
     }
-    // voice list
-    const voiceList = document.getElementById('voice-list')
-    fetchJson(window.picosakura_base_url + '/resource/voicelist.json').then((data) => {
-        voiceList.innerHTML = ''
-        let html = '<select id="voice-select">'
-        for (const voice of data.inst) {
-            const name = voice['voice']
-            const no = voice['no']
-            html += `<option value="${no}">${no}:${name}</option>`
-        }
-        html += '</select>'
-        voiceList.innerHTML = html
-    })
-    // command list
-    const commandList = document.getElementById('command-list')
-    fetchText(window.picosakura_base_url + '/resource/commandlist.txt').then((data) => {
-        commandList.innerHTML = ''
-        let tsv_list = data.split('\n')
-        let html = '<select id="command-select">'
-        for (const cmd of tsv_list) {
-            if (cmd == '') { continue }
-            let [tpl, desc] = cmd.split('\t')
-            tpl = tpl.replace('"', '\"')
-            html += `<option value="${tpl}">${tpl} … ${desc}</option>`
-        }
-        html += '</select>'
-        commandList.innerHTML = html
-    })
     updateSaveList()
 })
 
@@ -273,7 +237,7 @@ function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-async function fetchJson(url) {
+export async function fetchJson(url) {
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -282,7 +246,8 @@ async function fetchJson(url) {
         console.error('JSONデータの取得に失敗しました:', error);
     }
 }
-async function fetchText(url) {
+
+export async function fetchText(url) {
     try {
         const response = await fetch(url);
         const data = await response.text();
