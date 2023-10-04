@@ -2,18 +2,20 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MML to WAV</title>
+        <title>Picosakura WAV Converter</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 <body>
 <script type="module">
     // worker
-    const worker = new Worker('./picosakura-worker.js', { type: "module" });
+    const worker = new Worker('./wav_converter-worker.js', { type: "module" });
+    // const worker = {addEventListener: () => {}};
     worker.addEventListener('message', (event) => {
         console.log("Data from worker received: ", event);
         const btnSave = document.getElementById('btnSave');
         const msg = document.getElementById('msg');
         const downloadLink = document.getElementById('download');
+        const selectFormat = document.getElementById('selectFormat').value;
         if (event.data.type === 'loaded') {
             console.log('worker loaded');
             btnSave.disabled = false;
@@ -21,12 +23,19 @@
             return;
         }
         if (event.data.type === 'error') {
-            msg.innerHTML = '[WORKER_ERROR]' + tohtml(event.data);
+            const errMsg = '' + event.data.data;
+            msg.innerHTML = '[WORKER_ERROR]' + tohtml(errMsg);
+            btnSave.disabled = false;
         }
         if (event.data.type === 'makeWav:ok') {
             const {wav, log} = event.data.data;
             const dataview = new DataView(wav.buffer);
-            const audioBlob = new Blob([dataview], { type: 'audio/wav' });
+            let output_name = 'audio.wav';
+            let audioBlob = new Blob([dataview], { type: 'audio/wav' });
+            if (selectFormat == 'ogg') {
+                audioBlob = new Blob([dataview], { type: 'audio/ogg' });
+                output_name = 'audio.oga';
+            }
             let url = window.URL.createObjectURL(audioBlob);
             if (url === null) {
                 downloadLink.href = '#';
@@ -36,7 +45,7 @@
             msg.innerHTML = '';
             // make download link
             downloadLink.href = url;
-            downloadLink.download = 'audio.wav';
+            downloadLink.download = output_name;
             downloadLink.click();
         }
     }, false);
@@ -49,9 +58,9 @@
         return s
     }
 
-    function makeWav(mml) {
+    function makeWav(mml, out_format) {
         try {
-            worker.postMessage({type: 'makeWav', mml: mml});
+            worker.postMessage({type: 'makeWav', mml: mml, out_format: out_format});
         } catch (err) {
             console.error(err);
             document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString())
@@ -66,13 +75,14 @@
     const downloadLink = document.getElementById('download');
     btnSave.onclick = async () => {
         const btnSave = document.getElementById('btnSave');
+        const selectFormat = document.getElementById('selectFormat');
         const msg = document.getElementById('msg');
         btnSave.disabled = true;
         // save mml
         const mml = document.getElementById('mml').value;
         localStorage.setItem('picosakura_txt', mml); // save
         msg.innerHTML = 'Now converting...<img src="./loader.gif">';
-        makeWav(mml);
+        makeWav(mml, selectFormat.value);
     };
     // load
     window.addEventListener('load', () => {
@@ -85,17 +95,22 @@
     });
     </script>
     <div>
-        <h1>Picosakura to WAV</h1>
+        <h1>Picosakura WAV Converter (MML to WAV)</h1>
         <div>MML:<br><textarea id="mml" rows="10" cols="80">o4v120 cdefgfed</textarea></div>
-        <div><button id="btnSave" disabled="disabled">Download to WAV</button></div>
+        <div>Format: <select id="selectFormat">
+            <!-- <option value="ogg">Ogg-Orpus</option> -->
+            <option value="wav16">WAV 16bit</option>
+            <option value="wav" selected>WAV 32bit</option>
+        </select></div>
+        <div><button id="btnSave" disabled="disabled">Download Audio</button></div>
         <div id="msg">Now loading...</div>
         <a id="download"></a>
     </div>
     <div>&nbsp;</div>
     <div style="padding: 12px; border: 1px solid silver; background-color: #f0f0f0;">
         <div style="font-size: 0.8em;">
-            テキストボックスにMMLを記入し、上記の「Download to WAV」ボタンを押すと、WAVファイルをダウンロードできます。<br>
-            ブラウザ上でWAVのレンダリングするので書き出しには時間がかかります。
+            テキストボックスにMMLを記入し、上記の「Download Audio」ボタンを押すとダウンロードできます。<br>
+            ブラウザ上でオーディオのレンダリングするので書き出しには時間がかかります。
         </div>
     </div>
 </body>

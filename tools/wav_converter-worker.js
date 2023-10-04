@@ -1,9 +1,10 @@
 //
 // picosakura-worker.js
 //
-const URL_SOUNDFONT = './synth/TimGM6mb.sf2';
 
-import init, { PicoResult, make_wav } from 'https://unpkg.com/picosakura@0.1.25/picosakura.js';
+const URL_SOUNDFONT = '../synth/TimGM6mb.sf2';
+
+import init, { PicoResult, make_wav, make_wav_custom } from './pkg/picosakura.js';
 init().then(() => {
     console.log('@loaded')
     self.postMessage({ type: 'loaded' });
@@ -11,6 +12,7 @@ init().then(() => {
     console.error(err);
     self.postMessage({ type: 'error', data: err.toString() });
 });
+
 //
 // worker event
 //
@@ -20,7 +22,8 @@ self.addEventListener("message", (e) => {
     // makeWav
     if (e.data.type === 'makeWav') {
         const mml = e.data.mml;
-        makeWav(mml).then((obj) => {
+        const out_format = e.data.out_format;
+        makeWav(mml, out_format).then((obj) => {
             self.postMessage({ type: 'makeWav:ok', data: obj });
         }).catch(err => {
             console.error(err);
@@ -30,12 +33,29 @@ self.addEventListener("message", (e) => {
 });
 
 /// makeWav
-async function makeWav(mml) {
+async function makeWav(mml, out_format) {
     console.log('try to load soundfont')
     const soundfont = await loadBinary(URL_SOUNDFONT);
     console.log('soundfont.size=', soundfont.byteLength);
     // console.log('@mml=', mml);
-    const result = make_wav(mml, new Uint8Array(soundfont));
+    // (ex) make_wav_custom(mml_source, soundfont, SAMPLE_RATE, 32, "wav")
+    let sample_rate = 44100;
+    let bit_depth = 32;
+    let format = 'wav'
+    if (out_format === 'wav') {
+        // default
+        format = 'wav'
+    }
+    if (out_format === 'wav16') {
+        bit_depth = 16;
+        format = 'wav'
+    }
+    if (out_format === 'ogg') {
+        format = 'ogg'
+    }
+    console.log('make_wav_custom(mml soundfont', sample_rate, bit_depth, format, ');');
+    // const result = make_wav(mml, new Uint8Array(soundfont));
+    const result = make_wav_custom(mml, new Uint8Array(soundfont), sample_rate, bit_depth, format);
     if (!result.result) {
         const log = result.get_log()
         throw new Error(`[ERROR] soundfont error: ${log}`)
