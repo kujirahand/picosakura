@@ -1,6 +1,6 @@
 
-import { fetchJson, fetchText } from './index.php?a=tpl&f=pico_module.js';
-import { showWindow, closeWindow } from './index.php?a=tpl&f=pico_utils.js';
+import { fetchJson, fetchText } from './resource.php?a=tpl&f=pico_module.js';
+import { showWindow, closeWindow } from './resource.php?a=tpl&f=pico_utils.js';
 
 let toolVoiceWindow = false;
 export async function btnToolVoicelClick() {
@@ -9,7 +9,7 @@ export async function btnToolVoicelClick() {
         closeWindow(toolWindowId)
         return;
     }
-    const contentHtml = await fetchText("./index.php?a=tpl&f=pico_tool_voicelist_window.html");
+    const contentHtml = await fetchText("./resource.php?a=tpl&f=pico_tool_voicelist_window.html");
     const win = showWindow(toolWindowId, {
         title: 'Voice List',
         content: contentHtml,
@@ -29,7 +29,7 @@ export async function btnToolCommandClick() {
         closeWindow(toolWindowId)
         return;
     }
-    const contentHtml = await fetchText("./index.php?a=tpl&f=pico_tool_commandlist_window.html");
+    const contentHtml = await fetchText("./resource.php?a=tpl&f=pico_tool_commandlist_window.html");
     const win = showWindow(toolWindowId, {
         title: 'Command List',
         content: contentHtml,
