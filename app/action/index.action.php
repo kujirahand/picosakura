@@ -3,6 +3,7 @@ function action_index_default() {
   global $picosakuraLang;
   // get parametes
   $pico_ver = empty($_GET['pico_ver']) ? '' : $_GET['pico_ver'];
+  $utf8_mml = empty($_GET['utf8_mml']) ? '' : $_GET['utf8_mml'];
   // -----------------------------------------------------------------
   // CHECK mode
   // -----------------------------------------------------------------
@@ -17,7 +18,7 @@ function action_index_default() {
     $textareaRows = 23;
   } else {
     // include from mmlbbs6
-    $baseUrl = './picosakura';
+    $baseUrl = '/picosakura';
     $initScript = 'window.checkSynthType(); closeDescript();';
     $textareaRows = 9;
   }
