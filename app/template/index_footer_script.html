@@ -377,11 +377,15 @@
     window._picosakura.saveToStorageNo = saveToStorageNo
     function loadFromStorageNo(no) {
         const txt = document.getElementById('txt')
-        let mml = localStorage.getItem(`picosakura-${no}`)
-        mml = mml.replace('--', '')
-        mml = mml.replace('==', '')
-        mml = mml.replace(/\s+/g, '')
-        const mmlSub = mml ? (mml.substr(0, 20) + '...') : ''
+        const mml = localStorage.getItem(`picosakura-${no}`)
+        let mmlSub = mml ? mml : ''
+        mmlSub = mmlSub
+            .replace(/\-{2,}/g, '')
+            .replace(/\={2,}/g, '')
+            .replace(/\s{2,}/g, '')
+        if (mmlSub.length > 30) {
+            mmlSub = mmlSub.substr(0, 30) + '...'
+        }
         if (txt.value != '') {
             const msg = getLang('Can I read the following data?')
             const c = confirm(`${msg} [${no}]\n>>> ${mmlSub}`)
