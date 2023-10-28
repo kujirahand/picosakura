@@ -4,11 +4,12 @@ function action_index_default() {
   // get parametes
   $pico_ver = empty($_GET['pico_ver']) ? '' : $_GET['pico_ver'];
   $utf8_mml = empty($_GET['utf8_mml']) ? '' : $_GET['utf8_mml'];
+  $sampleMML = '';
   // -----------------------------------------------------------------
   // CHECK mode
   // -----------------------------------------------------------------
   // Normal mode || include from mmlbbs6
-  if (!isset($utf8_mml)) {
+  if (empty($utf8_mml)) {
     // normal mode
     $sampleFile = __DIR__ . "/sample/hello-{$picosakuraLang}.mml";
     $sampleMML = @file_get_contents($sampleFile);
