@@ -17,6 +17,6 @@ function pico_template_url($fname) {
   if (file_exists($fullpath)) {
     $mtime = filemtime($fullpath) % 1000;
   }
-  return "./index.php?f=$fname&a=tpl&m=$mtime";
+  return "./resource.php?f=$fname&a=tpl&m=$mtime";
 }
 

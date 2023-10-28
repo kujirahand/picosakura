@@ -14,4 +14,7 @@
         console.error(err);
         document.getElementById('msg').innerHTML = '[LOAD_ERROR]' + tohtml(err.toString())
     });
+    function tohtml(s) {
+        return (''+s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
 </script>
