@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pico Sakura - ピコサクラ - テキスト音楽「サクラ」</title>
+  <title>PicoSakura - ピコサクラ - テキスト音楽「サクラ」</title>
 
   <!-- css -->
   <link rel="stylesheet" href="{{$baseUrl}}/resource/skin.css?m={{e:echo pico_get_resource_mtime('skin.css')}}">
@@ -19,7 +19,7 @@
     <div id="app-title">
       <div id="app-title-bar">
         <div id="app-title-bar-home" class="app-title-bar-l"><a href="https://sakuramml.com/">&lt; 🏠</a></div>
-        <div class="app-title-bar-c"><h1 id="app-title-h1">Pico Sakura</h1></div>
+        <div class="app-title-bar-c"><h1 id="app-title-h1">PicoSakura</h1></div>
         <div class="app-title-bar-r"><button id="app-title-bar-help">?</button></div>
       </div>
     </div>
@@ -34,10 +34,25 @@
       <div id="player" style="display:none;">
         <div>
           <button id="btnPlay" class="play-button">▶ PLAY</button>
-          <button id="btnStop" class="stop-button">⏸</button>
-          <button id="btnPiano" class="piano-button">🎹</button>
-          <button id="btnToolVoice" class="piano-button">🎻</button>
-          <button id="btnToolCommand" class="piano-button">📝</button>
+          <button id="btnStop" class="stop-button"> ⏸ </button>
+          <!-- menu -->
+          <label for="player-tools-toggleMenu" id="player-tools-toggle">🔧 Tools</label>
+          <label for="player-files-toggleMenu" id="player-files-toggle">📁 Files</label>
+          <!-- tools -->
+          <input type="checkbox" id="player-tools-toggleMenu">
+          <div id="player-tools" class="player-tools">
+            <button id="btnPiano" class="piano-button-x3">🎹 Piano</button>
+            <button id="btnToolVoice" class="piano-button-x3">🎻 Voice</button>
+            <button id="btnToolCommand" class="piano-button-x3">📝 Command</button>
+          </div>
+          <!-- /tools -->
+          <!-- files -->
+          <input type="checkbox" id="player-files-toggleMenu">
+          <div id="player-files" class="player-files">
+            <p>Save: <span id="save-list"></span></p>
+            <p>Load: <span id="load-list"></span></p>
+          </div>
+          <!-- /files -->
         </div>
       </div><!-- /#player -->
       <div id="txt-outer">
@@ -51,6 +66,9 @@
             </label>
             <label for="chkPianoPlay">
               &nbsp;<input type="checkbox" id="chkPianoPlay" checked="checked">&nbsp;<span class="lang">Sound</span>
+            </label>&nbsp;
+            <label for="chkPianoSutoton">
+              &nbsp;<input type="checkbox" id="chkPianoSutoton" checked="checked">&nbsp;<span class="lang">cde</span>
             </label>&nbsp;
             <button id="btnPiano_h">ー</button>&nbsp;
             <button id="btnPiano_bs">BS</button>&nbsp;
@@ -92,7 +110,7 @@
             <p>「音階5」とか「音階4」と書くとオクターブが変わります。「↑」や「↓」と書くと相対的にオクターブを変更します。『「ドミソ」』と書くと和音が鳴ります。</p>
             <p>トラックを切り替えるには「トラック2」「トラック3」と書きます。「トラック10」が打楽器専用です。</p>
             <p>音色を変えるには「音色(GrandPiano)」のように書きます。Voice Listから挿入できます。</p>
-            <p>Save Listはブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
+            <p>画面上部の[📁Files]はブラウザの一時領域に保存するだけなので、保存した後<a href="https://sakuramml.com/mmlbbs6/post.php?action=edit" target="_new">🔗曲掲示板6...</a>に投稿してください。</p>
             <p>ショートカットキー: [F9]で再生、[F10]で停止</p>
             <p>
               <a target="_blank" href="https://sakuramml.com/go.php?16">🔗文法例...</a> /
@@ -114,12 +132,6 @@
               <a target="_new" href="https://github.com/kujirahand/sakuramml-rust/blob/main/src/command.md">🔗Command list...</a>
             </p>
           </div>
-        </div><!-- /.tool -->
-
-        <div class="tool">
-          <h3>Save List</h3>
-          <p>Save: <span id="save-list"></span></p>
-          <p>Load: <span id="load-list"></span></p>
         </div><!-- /.tool -->
 
         <div class="tool">

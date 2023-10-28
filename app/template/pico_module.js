@@ -161,10 +161,12 @@ function updateSaveList() {
     saveList.innerHTML = '';
     loadList.innerHTML = '';
     for (let no = 0; no < 10; no++) {
-        const btn = document.createElement('button');
-        btn.textContent = ` ${no} `;
-        btn.addEventListener('click', () => { window._picosakura.saveToStorageNo(no); });
-        saveList.appendChild(btn);
+        if (no < 5) {
+            const btn = document.createElement('button');
+            btn.textContent = ` ${no} `;
+            btn.addEventListener('click', () => { window._picosakura.saveToStorageNo(no); });
+            saveList.appendChild(btn);
+        }
         if (localStorage.getItem(`picosakura-${no}`)) {
             const b = document.createElement('button');
             b.textContent = ` ${no} `;

@@ -5,6 +5,8 @@ const PICO_LANG = {
         'Test': 'テスト',
         'Can I read the following data?': '以下のデータを読み込んでも良いですか？',
         'Sound': '発音',
+        'Sutoton': 'ストトン',
+        'cde': 'ドレミ',
         'splash-window:title': '「ピコサクラ」について',
         'splash-window:body': '<p>「ピコサクラ」はブラウザ上で「ドレミ」とテキスト入力することで音楽を作成するツールです。</p><p>テキストボックスに、音楽データを記述して[PLAY]ボタンを押すと音楽を再生します。</p><p>音楽データの記述方法は、<a href="https://sakuramml.com/go.php?16" target="_new">マニュアル</a>をご覧ください。</p>',
         'Click on [ERROR] to jump.': '[ERROR]をクリックするとカーソルが自動的に移動します。',
@@ -13,6 +15,7 @@ const PICO_LANG = {
     'en': {
         'Insert': 'Insert',
         'Test': 'Test',
+        'cde': 'ドレミ', // Japanese-Sutoton
         'Can I read the following data?': 'Can I read the following data?',
         'Sound': 'Sound',
         'splash-window:title': 'About Picosakura',

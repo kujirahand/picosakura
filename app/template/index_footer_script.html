@@ -20,6 +20,7 @@
     let pianoCanvas = null
     let chkPiano = null
     let chkPianoPlay = null
+    let chkPianoSutoton = null
     // const
     const LS_SPLASH_WINDOW = 'picosakura-splash-window'; // localStorage key
     // events
@@ -58,6 +59,7 @@
         pianoCanvas = document.getElementById('piano-canvas');
         chkPiano = document.getElementById('chkPiano');
         chkPianoPlay = document.getElementById('chkPianoPlay');
+        chkPianoSutoton = document.getElementById('chkPianoSutoton');
         // event
         document.getElementById('descript-close').onclick = closeDescript;
         document.getElementById('descript-open').onclick = openDescript;
@@ -161,7 +163,8 @@
         const y = e.offsetY;
         for (let i = pianoRect.length - 1; i >= 0; i--) {
             const rect = pianoRect[i];
-            const [x1, y1, x2, y2, key, oct] = rect;
+            const [x1, y1, x2, y2, keyS, oct, keyMML] = rect;
+            let key = chkPianoSutoton.checked ? keyS : keyMML
             if (x1 <= x && x <= x2 && y1 <= y && y <= y2) {
                 e.preventDefault();
                 const octave = 4 + oct;
@@ -218,6 +221,8 @@
         const blackColor = "#000000";
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const whiteNames = ['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ']
+        const whiteNamesMML = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
+        
         // 白鍵を描画
         pianoRect.splice(0, pianoRect.length);
         for (let i = 0; i < numKeys; i++) {
@@ -227,12 +232,14 @@
             ctx.fillRect(x, y, whiteKeyWidth, whiteKeyHeight);
             ctx.strokeRect(x, y, whiteKeyWidth, whiteKeyHeight);
             const key = whiteNames[i % 7]
+            const keyMML = whiteNamesMML[i % 7]
             pianoRect.push([
-                x, y, (x + whiteKeyWidth), (y + whiteKeyHeight), key, Math.floor(i / 7)
+                x, y, (x + whiteKeyWidth), (y + whiteKeyHeight), key, Math.floor(i / 7), keyMML
             ])
         }
         // 黒鍵を描画
         const blackNames = ['ド#', 'レ#', 'ファ#', 'ソ#', 'ラ#']
+        const blackNamesMML = ['c#', 'd#', 'f#', 'g#', 'a#']
         const blackKeys = [1, 2, 4, 5, 6, 8, 9, 11, 12, 13];
         for (const i in blackKeys) {
             const index = blackKeys[i];
@@ -241,8 +248,9 @@
             ctx.fillStyle = 'black';
             ctx.fillRect(x, y, blackKeyWidth, blackKeyHeight);
             const key = blackNames[i % 5];
+            const keyMML = blackNamesMML[i % 5];
             pianoRect.push([
-                x, y, x + blackKeyWidth, y + blackKeyHeight, key, Math.floor(i / 5)
+                x, y, x + blackKeyWidth, y + blackKeyHeight, key, Math.floor(i / 5), keyMML
             ])
         }
     }
@@ -369,8 +377,11 @@
     window._picosakura.saveToStorageNo = saveToStorageNo
     function loadFromStorageNo(no) {
         const txt = document.getElementById('txt')
-        const mml = localStorage.getItem(`picosakura-${no}`)
-        const mmlSub = mml ? mml.substr(0, 20) + '...' : ''
+        let mml = localStorage.getItem(`picosakura-${no}`)
+        mml = mml.replace('--', '')
+        mml = mml.replace('==', '')
+        mml = mml.replace(/\s+/g, '')
+        const mmlSub = mml ? (mml.substr(0, 20) + '...') : ''
         if (txt.value != '') {
             const msg = getLang('Can I read the following data?')
             const c = confirm(`${msg} [${no}]\n>>> ${mmlSub}`)
