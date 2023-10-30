@@ -19,7 +19,7 @@ function action_index_default() {
     $textareaRows = 23;
   } else {
     // include from mmlbbs6
-    $baseUrl = '/picosakura';
+    $baseUrl = dirname(dirname($_SERVER['PHP_SELF'])).'/picosakura';
     $initScript = 'window.checkSynthType(); closeDescript();';
     $textareaRows = 9;
   }
