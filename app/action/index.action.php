@@ -30,15 +30,12 @@ function action_index_default() {
   // -----------------------------------------------------------------
   global $VERSION_PICO;
   $picosakuraVersion = $VERSION_PICO;
-  $stableVerList = [
-    '0.1.22' => TRUE,
-    '0.1.23' => TRUE,
-    '0.1.25' => TRUE,
-  ];
   // Allow change version?
   if ($pico_ver !== '') {
     $pico_ver = $_GET['pico_ver'];
-    if (isset($stableVerList[$pico_ver])) {
+    if (!preg_match('/^[0-9\.]+$/', $pico_ver)) {
+      $pico_ver = '';
+    } else {
       $picosakuraVersion = $pico_ver;
     }
   }
