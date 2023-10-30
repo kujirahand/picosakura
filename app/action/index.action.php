@@ -20,6 +20,7 @@ function action_index_default() {
   } else {
     // include from mmlbbs6
     $baseUrl = dirname(dirname($_SERVER['PHP_SELF'])).'/picosakura';
+    $baseUrl = preg_replace('#^\/\/pico#', '/pico', $baseUrl); // replace //pico -> /pico
     $initScript = 'window.checkSynthType(); closeDescript();';
     $textareaRows = 9;
   }
