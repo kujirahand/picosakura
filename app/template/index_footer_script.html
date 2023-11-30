@@ -115,7 +115,6 @@
         const skinSelect = document.getElementById('skin-select');
         skinSelect.value = designType;
         skinSelect.onchange = function () {
-            console.log(skinSelect.value);
             changeSkinType(skinSelect.value);
         };
         changeSkinType(designType);
@@ -123,8 +122,9 @@
     function changeSkinType(skinName) {
         const body = document.getElementById('picosakura-body');
         body.classList.remove(...body.classList);
-        body.classList.add(skinName)
+        body.classList.add(skinName);
         localStorage['picosakura-skin-type'] = skinName;
+        console.log('picosakura-skin-type:', skinName);
     }
 
     //---------------------------------------------------------
@@ -289,10 +289,10 @@
         document.getElementById('descript-ja').style.display = isJa ? 'block' : 'none';
         document.getElementById('descript-en').style.display = isJa ? 'none' : 'block';
         // buttons
-        const buttons = document.getElementsByClassName('lang');
-        if (buttons) {
-            for (const btn of buttons) {
-                btn.innerHTML = getLang(btn.innerHTML, btn.innerHTML);
+        const lang_doms = document.getElementsByClassName('lang');
+        if (lang_doms) {
+            for (const dom of lang_doms) {
+                dom.innerHTML = getLang(dom.innerHTML, dom.innerHTML);
             }
         }
     }

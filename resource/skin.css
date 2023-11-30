@@ -4,14 +4,15 @@
     background-color: #f9f9f9;
 }
 
-.skin-sakura {
-    background-image: url(back.jpg?v=2);
+.skin-sakura1 {
+    background-image: url(sakura1.jpg);
     background-repeat: repeat;
 }
 
 .skin-sakura2 {
     background-image: url(sakura2.jpg);
-    background-repeat: repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .skin-sakura3 {
@@ -31,9 +32,24 @@
 
 .skin-wood {
     background-image: url(wood.jpg);
-    background-repeat: repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .skin-wood-tile {
     background-image: url(wood-tile.jpg);
     background-repeat: repeat;
+}
+.skin-wood2 {
+    background-image: url(wood2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.skin-wood3 {
+    background-image: url(wood3.jpg);
+    background-repeat: repeat;
+}
+.skin-wood4 {
+    background-image: url(wood4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
