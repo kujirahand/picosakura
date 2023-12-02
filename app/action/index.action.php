@@ -39,6 +39,9 @@ function action_index_default() {
       $picosakuraVersion = $pico_ver;
     }
   }
+  if ($picosakuraVersion === '0.0.0') { // ピコサクラに対応しない場合
+    $picosakuraVersion = $VERSION_PICO;
+  }
   // -----------------------------------------------------------------
   // render
   // -----------------------------------------------------------------
