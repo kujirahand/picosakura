@@ -47,7 +47,7 @@ function initVoiceList(picoGlobal) {
     const voiceList = document.getElementById('voice-list')
     fetchJson(picoGlobal.baseUrl + '/resource/voicelist.json').then((data) => {
         voiceList.innerHTML = ''
-        let html = '<select id="voice-select">'
+        let html = '<select id="voice-select" onchange="window._picosakura.voiceOnChange()">'
         for (const voice of data.inst) {
             const name = voice['voice']
             const no = voice['no']
@@ -63,7 +63,7 @@ function initCommandList(picoGlobal) {
     fetchText(picoGlobal.baseUrl + '/resource/commandlist.txt').then((data) => {
         commandList.innerHTML = ''
         let tsv_list = data.split('\n')
-        let html = '<select id="command-select">'
+        let html = '<select id="command-select" onchange="window._picosakura.commandOnChange()">'
         for (const cmd of tsv_list) {
             if (cmd == '') { continue }
             let [tpl, desc] = cmd.split('\t')

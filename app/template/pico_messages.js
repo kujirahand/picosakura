@@ -12,6 +12,7 @@ const PICO_LANG = {
         'Click on [ERROR] to jump.': '[ERROR]をクリックするとカーソルが自動的に移動します。',
         'Sorry, SoundFont is not ready. Please try again later.': 'すみません。SoundFontを読み込み中です。少し待ってから改めて再生してください。',
         'export to WAV': 'WAVファイルに出力',
+        'Copy': 'コピー',
     },
     'en': {
         'Insert': 'Insert',
@@ -23,7 +24,8 @@ const PICO_LANG = {
         'splash-window:body': '`Picosakura` is a user-friendly music production tool that allows music creation directly in the browser. It converts text into music and plays it back.',
         'Click on [ERROR] to jump.': 'Click on [ERROR] to jump.',
         'Sorry, SoundFont is not ready. Please try again later.': 'Sorry, SoundFont is not ready. Please try again later.',
-        'export to WAV': 'export to WAV'
+        'export to WAV': 'export to WAV',
+        'Copy': 'Copy',
     }
 }
 // easy function
