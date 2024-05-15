@@ -18,12 +18,12 @@ Picosakura use SoundFont to play MML files.
 
 ## How to use
 
-Visit [Picosakura(Web)](https://sakuramml.com/picosakura/index.php), 
+Visit [Picosakura(Web)](https://sakuramml.com/picosakura/index.php),
 Or execute with PHP.
 
 Download and execute:
 
-```
+```sh
 # download picosakura
 git clone https://github.com/kujirahand/picosakura.git
 cd picosakura
@@ -34,4 +34,3 @@ php -S localhost:8888
 # visit with browser
 # http://localhost:8888
 ```
-
