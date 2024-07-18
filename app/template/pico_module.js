@@ -3,12 +3,16 @@
 // ----------------------------------------------------
 // play MML
 export function playMML() {
-    // get data
-    const txt = document.getElementById('txt')
     checkSynthType()
     saveToStorage()
-    //
-    playMMLDirect(txt.value)
+    // get data
+    const txtElem = document.getElementById('txt')
+    const txt = txtElem.value
+    if (txt) {
+        playMMLDirect(txt)
+    } else {
+        console.error('MML is empty.')
+    }
 }
 
 export function stopMML() {
@@ -46,11 +50,22 @@ function playMMLDirect(mml) {
             return;
         }
         const SakuraCompiler = window._picosakura.SakuraCompiler
-        const com = SakuraCompiler.new()
-        com.set_language(window._picosakura.lang)
-        const a = com.compile(mml)
-        const log = com.get_log()
-        const smfData = new Uint8Array(a);
+        const compiler = SakuraCompiler.new()
+        let binMidiRaw = null // compiled data
+        try {
+            // compile
+            compiler.set_language(window._picosakura.lang)
+            let mmlsrc = "" + mml
+            binMidiRaw = compiler.compile(mmlsrc)
+        } catch (err) {
+            console.error('[ERROR] compile error', err)
+            document.getElementById('msg').style.display = 'block';
+            document.getElementById('msg').innerHTML = '[SYSTEM_ERROR] ' + tohtml(err.toString());
+            return
+        }
+        // console.log('[compile.completed]', binMidiRaw)
+        const log = compiler.get_log()
+        const smfData = new Uint8Array(binMidiRaw);
         // show log
         sakura_log(log)
 
@@ -71,7 +86,7 @@ function playMMLDirect(mml) {
     } catch (err) {
         console.error(err);
         document.getElementById('msg').style.display = 'block';
-        document.getElementById('msg').innerHTML = '[SYSTEM_ERROR]' + tohtml(err.toString());
+        document.getElementById('msg').innerHTML = '[SYSTEM_ERROR] ' + tohtml(err.toString());
     }
 }
 
