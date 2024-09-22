@@ -40,7 +40,7 @@ function playMMLDirect(mml) {
     } else {
         if (!window.player_sf) {
             // load SoundFont
-            window.player_sf = { info: SF_info };
+            window.player_sf = { info: sfInfo };
         }
     }
     try {

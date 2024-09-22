@@ -1,9 +1,11 @@
-const CACHE_NAME = "picosakura-cache-v1";
+const CACHE_NAME = "picosakura-cache-v2";
 const urlsToCache = [
   "./synth/js-synthesizer.js",
   "./synth/libfluidsynth-2.3.0-with-libsndfile.js",
   "./synth/picoaudio1.1.2_PicoAudio.min.js",
   "./synth/TimGM6mb.sf2",
+  "./synth/sakuramml_bg.wasm",
+  "./synth/sakuramml.js",
 ];
 
 self.addEventListener("install", (event) => {
