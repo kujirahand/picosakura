@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Player - ピコサクラ - テキスト音楽「サクラ」</title>
+    <title>Picosakura player(simple)</title>
     <script>
+        /*
         // ----------------------------------------
         // Service Worker (if you need)
         // ----------------------------------------
@@ -18,6 +19,7 @@
                 })
             })
         }
+        */
         // ----------------------------------------
         // player
         // ----------------------------------------
@@ -25,18 +27,16 @@
             const mml = document.getElementById('mml').value
             window.postMessage({type: 'play', mml: mml})
         }
-        function testStop() {
-            stopMML()
-        }
     </script>
     <!-- sakuramml script loader -->
     <script type="module" src="synth/sakuramml_loader.mjs"></script>
 </head>
 
 <body id="picosakura-body">
+    <h1>picosakura mml player - simple</h1>
     <textarea id="mml" rows="10" cols="60">@81l8o5[4 cdeg]</textarea><br>
     <button onclick="testPlay()">Play</button>
-    <button onclick="testStop()">Stop</button>
+    <button onclick="stopMML()">Stop</button>
 </body>
 
 </html>

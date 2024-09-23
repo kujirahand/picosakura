@@ -16,78 +16,12 @@ export function playMML() {
 }
 
 export function stopMML() {
-    if (window.player_sf) {
-        SF_stop()
-        window.player_sf = null
-    }
-    else if (window.player_pico) {
-        window.player_pico.stop();
-    }
+    window.postMessage({type: 'stop'})
 }
 
 // compile & play
 function playMMLDirect(mml) {
-    // 既に再生中なら停止する
-    stopMML()
-    // init player
-    const pico = document.getElementById('pico')
-    if (pico.checked) {
-        if (!window.player_pico) {
-            // load Pico
-            window.player_pico = new PicoAudio();
-            window.player_pico.init();
-        }
-    } else {
-        if (!window.player_sf) {
-            // load SoundFont
-            window.player_sf = { info: sfInfo };
-        }
-    }
-    try {
-        // compiler
-        if (!window._picosakura.SakuraCompiler) {
-            alert('[System Error] Sorry could not load SakuraCompiler.'); // system error
-            return;
-        }
-        const SakuraCompiler = window._picosakura.SakuraCompiler
-        const compiler = SakuraCompiler.new()
-        let binMidiRaw = null // compiled data
-        try {
-            // compile
-            compiler.set_language(window._picosakura.lang)
-            let mmlsrc = "" + mml
-            binMidiRaw = compiler.compile(mmlsrc)
-        } catch (err) {
-            console.error('[ERROR] compile error', err)
-            document.getElementById('msg').style.display = 'block';
-            document.getElementById('msg').innerHTML = '[SYSTEM_ERROR] ' + tohtml(err.toString());
-            return
-        }
-        // console.log('[compile.completed]', binMidiRaw)
-        const log = compiler.get_log()
-        const smfData = new Uint8Array(binMidiRaw);
-        // show log
-        sakura_log(log)
-
-        if (pico.checked) {
-            // play pico player
-            const parsedData = player_pico.parseSMF(smfData);
-            window.player_pico.setData(parsedData);
-            window.player_pico.play();
-        } else {
-            // play soundfont player
-            if (!SF_isReady()) {
-                const m = window.__picosakura.getLang('Sorry, SoundFont is not ready. Please try again later.');
-                alert(m)
-                return
-            }
-            SF_play(smfData)
-        }
-    } catch (err) {
-        console.error(err);
-        document.getElementById('msg').style.display = 'block';
-        document.getElementById('msg').innerHTML = '[SYSTEM_ERROR] ' + tohtml(err.toString());
-    }
+    window.postMessage({ type: 'play', mml: mml })
 }
 
 // ----------------------------------------------------

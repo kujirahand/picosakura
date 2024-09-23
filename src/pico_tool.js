@@ -1,6 +1,6 @@
 
-import { fetchJson, fetchText } from './resource.php?a=tpl&f=pico_module.js';
-import { showWindow, closeWindow } from './resource.php?a=tpl&f=pico_utils.js';
+import { fetchJson, fetchText } from './pico_module.js';
+import { showWindow, closeWindow } from './pico_utils.js';
 
 let toolVoiceWindow = false;
 export async function btnToolVoicelClick() {
@@ -45,7 +45,7 @@ export async function btnToolCommandClick() {
 function initVoiceList(picoGlobal) {
     // voice list
     const voiceList = document.getElementById('voice-list')
-    fetchJson(picoGlobal.baseUrl + '/resource/voicelist.json').then((data) => {
+    fetchJson(picoGlobal.rootUrl + '/resource/voicelist.json').then((data) => {
         voiceList.innerHTML = ''
         let html = '<select id="voice-select" onchange="window._picosakura.voiceOnChange()">'
         for (const voice of data.inst) {
@@ -60,7 +60,7 @@ function initVoiceList(picoGlobal) {
 function initCommandList(picoGlobal) {
     // command list
     const commandList = document.getElementById('command-list')
-    fetchText(picoGlobal.baseUrl + '/resource/commandlist.txt').then((data) => {
+    fetchText(picoGlobal.rootUrl + '/resource/commandlist.txt').then((data) => {
         commandList.innerHTML = ''
         let tsv_list = data.split('\n')
         let html = '<select id="command-select" onchange="window._picosakura.commandOnChange()">'

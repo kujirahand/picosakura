@@ -1,10 +1,14 @@
-// sound font player
-/*
-<script src="synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
-<script src="synth/js-synthesizer.js"></script>
-<script src="synth/soundfont_player.js"></script>
-*/
+// -------------------------------------------------------
+// picosakura soundfont player
+// -------------------------------------------------------
+// depends:
+// - libfluidsynth-2.3.0-with-libsndfile.js
+// - js-synthesizer.js
+// - picoaudio1.1.2_PicoAudio.min.js
+// - sakuramml.mjs
+
 console.log('[soundfont_player.js] loaded')
+
 const sfInfo = {
     font: null,
     synth: null,
@@ -120,27 +124,76 @@ async function SF_loadSoundFont(urlSoundFont) {
 function SF_isReady() {
     return sfInfo.font !== null
 }
+
+let sfPlayLoading = false
+function waitForPlayLoading() {
+    return new Promise((resolve, _reject) => {
+        const timerId = setInterval(() => {
+            if (!sfPlayLoading) {
+                clearInterval(timerId)
+                resolve()
+            }
+        }, 100)
+    })
+}
+
+function waitFor(ms) {
+    return new Promise((resolve, _reject) => {
+        setTimeout(() => {
+            resolve()
+        }, ms)
+    })
+}
+
 async function SF_play(midi) {
+    if (sfPlayLoading) {
+        await waitForPlayLoading()
+    }
+    sfPlayLoading = true
+    await _SF_play(midi)
+    sfPlayLoading = false
+}
+
+async function _SF_play(midi) {
     if (JSSynth === undefined) {
         throw new Error('[System Error] JSSynth is not loaded, please load js-synthesizer.js first.')
     }
     if (!sfInfo.context) {
+        // Initiazlize AudioContext
         sfInfo.context = new AudioContext()
         sfInfo.synth = new JSSynth.Synthesizer()
+        sfInfo.synth.init(sfInfo.context.sampleRate);
+        // Create AudioNode (ScriptProcessorNode) to output audio data
+        const node = sfInfo.synth.createAudioNode(sfInfo.context, 8192) // 8192 is the frame count of buffer
+        node.connect(sfInfo.context.destination)
+        sfInfo.node = node;
     }
     const synth = sfInfo.synth;
     const context = sfInfo.context;
-    synth.init(context.sampleRate);
+    try {
 
-    // Create AudioNode (ScriptProcessorNode) to output audio data
-    const node = synth.createAudioNode(context, 8192) // 8192 is the frame count of buffer
-    node.connect(context.destination)
-    sfInfo.node = node;
-
+        await synth.loadSFont(sfInfo.font);
+        await synth.addSMFDataToPlayer(midi);
+        await synth.playPlayer();
+        if (sfInfo.context = null) { return } // already closed
+        await synth.waitForPlayerStopped();
+        await synth.waitForVoicesStopped();
+        if (sfInfo.context = null) { return } // already closed
+        await waitFor(1000)
+        await synth.close()
+        if (context.state === 'running') {
+            await context.close()
+        }
+    } catch (err) {
+        console.error('[soundfont_player] Failed:', err)
+        // Releases the synthesizer
+        await synth.close();
+    }
+    /*
     // Load your SoundFont data (sfontBuffer: ArrayBuffer)
-    synth.loadSFont(sfInfo.font).then(function () {
+    await synth.loadSFont(sfInfo.font).then(function () {
         // Load your SMF file data (smfBuffer: ArrayBuffer)
-        console.log('[soundfont] loaded')
+        // console.log('[soundfont] loaded')
         return synth.addSMFDataToPlayer(midi);
     }).then(function () {
         console.log('[soundfont] play')
@@ -154,18 +207,21 @@ async function SF_play(midi) {
         return synth.waitForVoicesStopped();
     }).then(function () {
         // Releases the synthesizer
-        setTimeout(() => { // 余韻を残すために1秒待つ
-            synth.close();
-            if (context.state === 'running') {
-                context.close()
-            }
-        }, 1000);
+        // 余韻を残すために1秒待つ
+        await waitFor(1000)
+        synth.close();
+        if (context.state === 'running') {
+            context.close()
+        }
+        return
     }, function (err) {
         console.error('[soundfont_player] Failed:', err);
         // Releases the synthesizer
         synth.close();
     });
+    */
 }
+
 async function SF_stop() {
     if (sfInfo.synth) {
         try {
@@ -184,6 +240,7 @@ async function SF_stop() {
             console.log('[audiocontext.close]', err)
         }
         sfInfo.context = null
+        sfPlayLoading = false
     }
 }
 

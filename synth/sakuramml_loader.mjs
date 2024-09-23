@@ -3,6 +3,7 @@
 // global object
 // ----------------------------------------
 const baseUrl = import.meta.url.split('/').slice(0, -1).join('/')
+const rootUrl = baseUrl.split('/').slice(0, -1).join('/')
 console.log('[sakuramml_init::url]', import.meta.url)
 console.log('[sakuramml_init::baseUrl]', baseUrl)
 window._picosakura = {
@@ -12,6 +13,8 @@ window._picosakura = {
     errorStr: '', // error message
     playerType: 'soundfount', // pico or soundfount
     soundfontUrl: baseUrl + '/fonts/TimGM6mb.sf2',
+    lang: 'en', // language
+    rootUrl: rootUrl,
 }
 
 // ----------------------------------------

@@ -9,16 +9,6 @@ export function checkLoading() {
         checkLater = true;
         msg = 'MML Compiler';
     }
-    // check soundfont
-    if (typeof (window._picosakura.sfLoaded) === 'undefined') {
-        checkLater = true;
-        msg = 'SoundFont';
-    }
-    if (window._picosakura.sfLoaded === false) {
-        checkLater = true;
-        msg = 'SoundFont';
-    }
-
     if (!checkLater) {
         console.log('completed to load compiler & soundfont')
         loader.style.display = 'none';
