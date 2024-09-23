@@ -170,7 +170,7 @@
     <div style="padding: 12px; border: 1px solid silver; background-color: #f0f0f0;">
         <div style="font-size: 0.8em;">
             テキストボックスにMMLを記入し、上記の「Download Audio」ボタンを押すとダウンロードできます。<br>
-            ブラウザ上でオーディオのレンダリングするので書き出しには時間がかかります。
+            ブラウザ上でオーディオの生成処理を行うので書き出しには時間がかかります。
         </div>
     </div>
 </body>
