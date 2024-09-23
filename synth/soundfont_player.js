@@ -4,10 +4,7 @@
 <script src="synth/js-synthesizer.js"></script>
 <script src="synth/soundfont_player.js"></script>
 */
-// --- system requirements ---
-if (JSSynth === undefined) {
-    throw new Error('[System Error] JSSynth is not loaded, please load js-synthesizer.js first.')
-}
+console.log('[soundfont_player.js] loaded')
 const sfInfo = {
     font: null,
     synth: null,
@@ -18,8 +15,8 @@ const sfInfo = {
 /**
  * compile & play
  * @param {string} mml
- * @param {string} playerType
- * @param {string} soundfontUrl
+ * @param {string|undefined} playerType
+ * @param {string|undefined} soundfontUrl
  * @return {Promise<boolean>}
  */
 async function playMML(mml, playerType, soundfontUrl) {
@@ -124,6 +121,9 @@ function SF_isReady() {
     return sfInfo.font !== null
 }
 async function SF_play(midi) {
+    if (JSSynth === undefined) {
+        throw new Error('[System Error] JSSynth is not loaded, please load js-synthesizer.js first.')
+    }
     if (!sfInfo.context) {
         sfInfo.context = new AudioContext()
         sfInfo.synth = new JSSynth.Synthesizer()

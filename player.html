@@ -4,24 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Player - ピコサクラ - テキスト音楽「サクラ」</title>
-    
-    <!-- script_for_sakumml::begin -->
-    <script type="module" src="synth/sakuramml_init.mjs"></script>
-    <script src="synth/picoaudio1.1.2_PicoAudio.min.js"></script>
-    <script src="synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
-    <script src="synth/js-synthesizer.js"></script>
-    <script src="synth/soundfont_player.js"></script>
-    <!-- script_for_sakumml::end -->
-    
     <script>
+        // ----------------------------------------
+        // Service Worker (if you need)
+        // ----------------------------------------
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js?v=102')
+                .then(registration => {
+                    console.log('[ServiceWorker]', registration.scope)
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err)
+                })
+            })
+        }
+        // ----------------------------------------
+        // player
+        // ----------------------------------------
         async function testPlay() {
             const mml = document.getElementById('mml').value
-            await playMML(mml, 'auto', window._picosakura.soundfontUrl)
+            window.postMessage({type: 'play', mml: mml})
         }
         function testStop() {
             stopMML()
         }
     </script>
+    <!-- sakuramml script loader -->
+    <script type="module" src="synth/sakuramml_loader.mjs"></script>
 </head>
 
 <body id="picosakura-body">
@@ -29,4 +38,5 @@
     <button onclick="testPlay()">Play</button>
     <button onclick="testStop()">Stop</button>
 </body>
+
 </html>

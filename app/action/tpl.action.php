@@ -11,7 +11,8 @@ function action_tpl_default() {
   // check file exists
   $fullpath = $DIR_TEMPLATE . '/' . $f;
   if (!file_exists($fullpath)) {
-    echo "file not found";
+    header("HTTP/1.1 404 Not Found");
+    echo "404 file not found";
     return;
   }
   // check file type

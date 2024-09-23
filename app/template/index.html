@@ -5,47 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PicoSakura - ピコサクラ - テキスト音楽「サクラ」</title>
   <!-- baseUrl: {{$baseUrl}} -->
+  
   <!-- css -->
   <link rel="stylesheet" href="{{$baseUrl}}/resource/skin.css?m={{e:echo pico_get_resource_mtime('skin.css')}}">
   <link rel="stylesheet" href="{{e:echo pico_template_url('pico_common.css')}}">
-  <!-- script -->
-  <script type="module">
-    import { getLang } from "{{e:echo pico_template_url('pico_messages.js')}}";
-    // -----------------------------------------------
-    // global object
-    // -----------------------------------------------
-    if (typeof (window._picosakura) === 'undefined') {
-      window._picosakura = {
-        version: '?.?.?',
-        SakuraCompiler: null,
-        getLang: getLang, // from pico_messages.js
-        baseUrl: '{{$baseUrl}}',
-        lang: '{{$picosakuraLang}}',
-        mmlChanged: false,
-        windowList: {}, // pico_utils.js
-      };
-      console.log('global object', window._picosakura);
-    }
-    // ----------------------------------------
-    // Load sakuramml's WebAssembly (compiler)
-    // ----------------------------------------
-    import init, { get_version, SakuraCompiler }
-      from 'https://cdn.jsdelivr.net/npm/sakuramml@{{$picosakuraVersion}}/sakuramml.js';
-      // from 'http://localhost:7450/repos/sakuramml-rust/pkg/sakuramml.js';
-    // Init sakuramml
-    init().then(() => {
-      const sakuraVession = get_version()
-      console.log(`loaded: sakuramml v.${sakuraVession}`)
-      window._picosakura.version = sakuraVession
-      window._picosakura.SakuraCompiler = SakuraCompiler
-    }).catch(err => {
-      console.error(err);
-      document.getElementById('msg').innerHTML = '[LOAD_ERROR]' + tohtml(err.toString())
-    });
-    function tohtml(s) {
-      return ('' + s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    }
-  </script>
+
+  <!-- script_for_sakumml::begin -->
+  <script type="module" src="{{$baseUrl}}/synth/sakuramml_init.mjs"></script>
+  <!-- script_for_sakumml::end -->
 </head>
 
 <body id="picosakura-body">
@@ -223,22 +190,16 @@
     });
   }
   </script>
-  <!-- js-synthesizer -->
-  <script src="{{$baseUrl}}/synth/libfluidsynth-2.3.0-with-libsndfile.js"></script>
-  <script src="{{$baseUrl}}/synth/js-synthesizer.js"></script>
-  <!-- picoaudio player -->
-  <script src="{{$baseUrl}}/synth/picoaudio1.1.2_PicoAudio.min.js"></script>
-  <script src="{{e:echo pico_template_url('soundfont_player.js')}}"></script>
   <!-- module -->
   <script type="module">
     import { checkLoading } from "{{e:echo pico_template_url('pico_loader.js')}}";
     import { btnToolVoicelClick, btnToolCommandClick } from "{{e:echo pico_template_url('pico_tool.js')}}";
     import { showWindow, closeWindow } from "{{e:echo pico_template_url('pico_utils.js')}}";
+    import { getLang } from "{{e:echo pico_template_url('pico_message.js')}}"
     import { playMML, stopMML } from "{{e:echo pico_template_url('pico_module.js')}}"
 
     // global variables
     const pianoRect = [];
-    const getLang = window._picosakura.getLang;
     window._picosakura.closeWindow = closeWindow;
     let pianoOctave = 0;
     // global dom

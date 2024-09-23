@@ -1,11 +1,18 @@
-const CACHE_NAME = "picosakura-cache-v2";
+/**
+ * Service Worker for picosakura
+ */
+const CACHE_NAME = "picosakura-cache-v3";
 const urlsToCache = [
+  // --- 以下はよく更新するのでキャッシュしない ---
+  // "./synth/sakuramml_loader.mjs",
+  // "./synth/soundfont_player.js",
+  // --- ほとんど更新しないのでキャッシュする ---
   "./synth/js-synthesizer.js",
   "./synth/libfluidsynth-2.3.0-with-libsndfile.js",
   "./synth/picoaudio1.1.2_PicoAudio.min.js",
-  "./synth/TimGM6mb.sf2",
   "./synth/sakuramml_bg.wasm",
   "./synth/sakuramml.js",
+  "./synth/fonts/TimGM6mb.sf2",
 ];
 
 self.addEventListener("install", (event) => {
@@ -17,14 +24,19 @@ self.addEventListener("install", (event) => {
   );
 });
 
+self.addEventListener('activate', function (event) {
+  console.log('Service Worker activated:', event);
+})
+
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
-        console.log('Using cache for:', event.request.url)
-        return response;
+        console.log("[service-worker] cache:", event.request.url);
+        return response
       }
-      return fetch(event.request);
-    }),
+      console.log('[service-worker] fetch:', event.request.url)
+      return fetch(event.request)
+    })
   );
 });

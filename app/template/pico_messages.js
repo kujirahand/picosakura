@@ -42,3 +42,4 @@ export function getLang(key, def) {
     }
     return msg
 }
+window._picosakura.getLang = getLang
