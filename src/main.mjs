@@ -429,3 +429,6 @@ function loadFromStorageNo(no) {
 // export
 window._picosakura.loadFromStorageNo = loadFromStorageNo
 window.gotoLine = gotoLine
+window.closeDescript = closeDescript
+window.openDescript = openDescript
+window.updateLang = updateLang
