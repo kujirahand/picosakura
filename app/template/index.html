@@ -175,23 +175,24 @@
   
   <!-- script -->
   <script>
-  /*
   // Register Service Worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js?v=101').then(registration => {
+      navigator.serviceWorker.register('./service-worker.js?v=102').then(registration => {
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
       }, err => {
         console.log('ServiceWorker registration failed: ', err);
       });
     });
   }
-  */
   </script>
 
   <!-- script_for_sakumml::begin -->
   <script type="module" src="{{$baseUrl}}/synth/sakuramml_loader.mjs"></script>
   <script type="module" src="{{$baseUrl}}/src/main.mjs"></script>
+  <script type="module">
+    {{ $init_script }}
+  </script>
   <!-- script_for_sakumml::end -->
 </body>
 </html>

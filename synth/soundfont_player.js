@@ -73,6 +73,7 @@ async function playMML(mml, playerType, soundfontUrl) {
         }
         // console.log('[compile.completed]', binMidiRaw)
         const log = compiler.get_log()
+        window.postMessage({ type: 'error', message: log })
         const smfData = new Uint8Array(binMidiRaw)
         console.log('[sakuramml]' + log)
 
@@ -189,37 +190,6 @@ async function _SF_play(midi) {
         // Releases the synthesizer
         await synth.close();
     }
-    /*
-    // Load your SoundFont data (sfontBuffer: ArrayBuffer)
-    await synth.loadSFont(sfInfo.font).then(function () {
-        // Load your SMF file data (smfBuffer: ArrayBuffer)
-        // console.log('[soundfont] loaded')
-        return synth.addSMFDataToPlayer(midi);
-    }).then(function () {
-        console.log('[soundfont] play')
-        // Play the loaded SMF data
-        return synth.playPlayer();
-    }).then(function () {
-        // Wait for finishing playing
-        return synth.waitForPlayerStopped();
-    }).then(function () {
-        // Wait for all voices stopped
-        return synth.waitForVoicesStopped();
-    }).then(function () {
-        // Releases the synthesizer
-        // 余韻を残すために1秒待つ
-        await waitFor(1000)
-        synth.close();
-        if (context.state === 'running') {
-            context.close()
-        }
-        return
-    }, function (err) {
-        console.error('[soundfont_player] Failed:', err);
-        // Releases the synthesizer
-        synth.close();
-    });
-    */
 }
 
 async function SF_stop() {

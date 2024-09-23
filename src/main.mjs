@@ -35,6 +35,20 @@ window.addEventListener('beforeunload', function (e) {
         e.returnValue = '' // この行の具体的な内容はブラウザによって異なります
     }
 })
+
+//---------------------------------------------------------
+// message
+//---------------------------------------------------------
+window.addEventListener('message', (event) => {
+    if (!event.data) { return }
+    if (event.data.type === 'error') {
+        const msgStr = event.data.message
+        // console.error(msgStr)
+        window.sakura_log(msgStr);
+    }
+})
+
+
 //---------------------------------------------------------
 // dom events
 //---------------------------------------------------------
@@ -412,4 +426,6 @@ function loadFromStorageNo(no) {
         alert('no mml')
     }
 }
+// export
 window._picosakura.loadFromStorageNo = loadFromStorageNo
+window.gotoLine = gotoLine

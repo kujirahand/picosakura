@@ -242,7 +242,7 @@ function tohtmlError(s) {
         if (m) {
             const lineNo = m[1]
             const info = tohtml(m[2])
-            html += `<span class="error" onclick="gotoLine(${lineNo})">[ERROR](${lineNo})</span>${info}<br>\n`
+            html += `<span class="error" onclick="window.gotoLine(${lineNo})">[ERROR](${lineNo})</span>${info}<br>\n`
         } else {
             html += tohtml(line) + '<br>\n'
         }
