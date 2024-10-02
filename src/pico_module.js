@@ -16,7 +16,7 @@ export function playMML() {
 }
 
 export function stopMML() {
-    window.postMessage({type: 'stop'})
+    window._picosakura.stopMML()
 }
 
 // compile & play
