@@ -21,7 +21,26 @@ export function stopMML() {
 
 // compile & play
 function playMMLDirect(mml) {
-    window.postMessage({ type: 'play', mml: mml })
+    const btnPlay = document.getElementById('btnPlay') || document.createElement('button')
+    const btnStop = document.getElementById('btnStop') || document.createElement('button')
+    const soundfontUrl = window._picosakura.soundfontUrl
+    window._picosakura.playMML(
+        mml,
+        'auto',
+        soundfontUrl,
+        () => {
+            sakura_log('now loading ... soundfont')
+            console.log('[pico_module.js] try to load:', soundfontUrl)
+            btnPlay.disabled = true
+            btnStop.disabled = true
+        },
+        () => {
+            sakura_log('playing')
+            console.log('[pico_module.js] loaded:', soundfontUrl)
+            btnPlay.disabled = false
+            btnStop.disabled = false
+        }
+    )
 }
 
 // ----------------------------------------------------

@@ -21,9 +21,11 @@ const sfInfo = {
  * @param {string} mml
  * @param {string|undefined} playerType
  * @param {string|undefined} soundfontUrl
+ * @param {Function} onStartLoad
+ * @param {Function} onEndLoad
  * @return {Promise<boolean>}
  */
-async function playMML(mml, playerType, soundfontUrl) {
+async function playMML(mml, playerType, soundfontUrl, onStartLoad, onEndLoad) {
     stopMML()
     // init player
     const g = window._picosakura
@@ -85,7 +87,9 @@ async function playMML(mml, playerType, soundfontUrl) {
         } else {
             // play soundfont player
             if (!SF_isReady()) {
+                if (onStartLoad) { onStartLoad() }
                 await SF_loadSoundFont(soundfontUrl)
+                if (onEndLoad) { onEndLoad() }
             }
             await SF_play(smfData)
         }
@@ -117,6 +121,7 @@ async function loadBinary(url) {
 
 // load soundfont from url
 async function SF_loadSoundFont(urlSoundFont) {
+    await waitFor(1000)
     window._picosakura.sfLoaded = false
     sfInfo.font = null
     sfInfo.font = await loadBinary(urlSoundFont)
@@ -214,3 +219,6 @@ async function SF_stop() {
     }
 }
 
+// register to window object
+window._picosakura.playMML = playMML
+window._picosakura.stopMML = stopMML
