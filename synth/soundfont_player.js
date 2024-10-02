@@ -182,7 +182,9 @@ async function _SF_play(midi) {
         await synth.addSMFDataToPlayer(midi);
         await synth.playPlayer();
         if (sfInfo.context = null) { return } // already closed
+        // console.log('waitForPlayerStopped')
         await synth.waitForPlayerStopped();
+        // console.log('waitForVoicesStopped')
         await synth.waitForVoicesStopped();
         if (sfInfo.context = null) { return } // already closed
         await waitFor(1000)
@@ -198,11 +200,13 @@ async function _SF_play(midi) {
 }
 
 async function SF_stop() {
+    console.log('[soundfont_player] try to stop')
     if (sfInfo.synth) {
         try {
-            sfInfo.synth.close()
+            sfInfo.synth.stopPlayer()
+            await sfInfo.synth.waitForPlayerStopped()
         } catch (err) {
-            console.log('[synth.close]', err)
+            console.log('[synth.stop.error]', err)
         }
         sfInfo.synth = null
         try {
@@ -216,6 +220,7 @@ async function SF_stop() {
         }
         sfInfo.context = null
         sfPlayLoading = false
+        console.log('[soundfont_player] stopped...')
     }
 }
 
