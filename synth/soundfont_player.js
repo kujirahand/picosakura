@@ -5,7 +5,7 @@
 // - libfluidsynth-2.3.0-with-libsndfile.js
 // - js-synthesizer.js
 // - picoaudio1.1.2_PicoAudio.min.js
-// - sakuramml.mjs
+// - sakuramml.js
 
 console.log('[soundfont_player.js] loaded')
 

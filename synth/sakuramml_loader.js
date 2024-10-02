@@ -1,4 +1,4 @@
-// file: synth/sakuramml_init.mjs
+// file: synth/sakuramml_init.js
 // ----------------------------------------
 // global object
 // ----------------------------------------
