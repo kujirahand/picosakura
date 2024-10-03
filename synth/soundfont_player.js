@@ -88,6 +88,7 @@ async function playMML(mml, playerType, soundfontUrl, onStartLoad, onEndLoad) {
             // play soundfont player
             if (!SF_isReady()) {
                 if (onStartLoad) { onStartLoad() }
+                await waitFor(10)
                 await SF_loadSoundFont(soundfontUrl)
                 if (onEndLoad) { onEndLoad() }
             }
@@ -177,7 +178,6 @@ async function _SF_play(midi) {
     const synth = sfInfo.synth;
     const context = sfInfo.context;
     try {
-
         await synth.loadSFont(sfInfo.font);
         await synth.addSMFDataToPlayer(midi);
         await synth.playPlayer();

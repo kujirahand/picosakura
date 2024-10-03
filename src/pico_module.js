@@ -33,12 +33,14 @@ function playMMLDirect(mml) {
             console.log('[pico_module.js] try to load:', soundfontUrl)
             btnPlay.disabled = true
             btnStop.disabled = true
+            btnPlay.style.backgroundColor = 'gray'
         },
         () => {
             sakura_log('playing')
             console.log('[pico_module.js] loaded:', soundfontUrl)
             btnPlay.disabled = false
             btnStop.disabled = false
+            btnPlay.style.backgroundColor = '#4090f0'
         }
     )
 }
