@@ -105,7 +105,11 @@ function showSplash(visible) {
 function checkSplash() {
     const lsv = localStorage.getItem(LS_SPLASH_WINDOW)
     const isFirstTime = (lsv === null)
-    showSplash(isFirstTime)
+    if (isFirstTime) {
+        localStorage.setItem(LS_SPLASH_WINDOW, '1') 
+        // todo: first time
+        console.log('はじめまして。ようこそ、ピコサクラへ！')
+    }
 }
 
 //---------------------------------------------------------
