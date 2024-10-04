@@ -13,7 +13,7 @@
     // Service Workerの登録
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            navigator.serviceWorker.register('/service-worker-pico.js').then(registration => {
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 window.location.href = './app.php';
             }, err => {

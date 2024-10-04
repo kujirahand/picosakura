@@ -19,24 +19,30 @@ export function stopMML() {
     window._picosakura.stopMML()
 }
 
+function showStatusMsg(htmlMsg) {
+    const msgElem = document.getElementById('status-msg')
+    msgElem.innerHTML = htmlMsg
+}
+
 // compile & play
 function playMMLDirect(mml) {
     const btnPlay = document.getElementById('btnPlay') || document.createElement('button')
     const btnStop = document.getElementById('btnStop') || document.createElement('button')
     const soundfontUrl = window._picosakura.soundfontUrl
+    showStatusMsg('*')
     window._picosakura.playMML(
         mml,
         'auto',
         soundfontUrl,
         () => {
-            sakura_log('now loading ... soundfont')
+            showStatusMsg('[Now loading] soundfont <img src="resource/loader.gif" style="width:0.8em">')
             console.log('[pico_module.js] try to load:', soundfontUrl)
             btnPlay.disabled = true
             btnStop.disabled = true
             btnPlay.style.backgroundColor = 'gray'
         },
         () => {
-            sakura_log('playing')
+            showStatusMsg('playing')
             console.log('[pico_module.js] loaded:', soundfontUrl)
             btnPlay.disabled = false
             btnStop.disabled = false

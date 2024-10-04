@@ -88,7 +88,7 @@ async function playMML(mml, playerType, soundfontUrl, onStartLoad, onEndLoad) {
             // play soundfont player
             if (!SF_isReady()) {
                 if (onStartLoad) { onStartLoad() }
-                await waitFor(10)
+                await waitFor(100)
                 await SF_loadSoundFont(soundfontUrl)
                 if (onEndLoad) { onEndLoad() }
             }
@@ -122,7 +122,6 @@ async function loadBinary(url) {
 
 // load soundfont from url
 async function SF_loadSoundFont(urlSoundFont) {
-    await waitFor(1000)
     window._picosakura.sfLoaded = false
     sfInfo.font = null
     sfInfo.font = await loadBinary(urlSoundFont)

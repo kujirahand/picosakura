@@ -11,7 +11,7 @@
         // ----------------------------------------
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js?v=102')
+                navigator.serviceWorker.register('./service-worker-pico.js?v=102')
                 .then(registration => {
                     console.log('[ServiceWorker]', registration.scope)
                 }, err => {
