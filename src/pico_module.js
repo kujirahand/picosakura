@@ -250,7 +250,6 @@ function sakura_log(s) {
     msg.innerHTML = tohtmlError(s) + msg_memo;
     msg.style.display = 'block';
 }
-window.sakura_log = sakura_log;
 
 // tohtml
 function tohtml(s) {
@@ -278,6 +277,7 @@ function tohtmlError(s) {
 }
 
 // export window
+window.sakura_log = sakura_log;
 window.loadLastMMLFromLS = loadLastMMLFromLS
 window.checkSynthType = checkSynthType
 window.playMMLDirect = playMMLDirect

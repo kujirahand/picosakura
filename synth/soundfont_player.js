@@ -70,7 +70,8 @@ async function playMML(mml, playerType, soundfontUrl, onStartLoad, onEndLoad) {
             binMidiRaw = compiler.compile(mmlsrc)
         } catch (err) {
             console.error('[MMLERROR] compile error', err)
-            g.errorStr += err.toString() + '\n'
+            g.errorStr += '[Compile Error] ' + err.toString() + '\n'
+            window.postMessage({ type: 'error', message: g.errorStr })
             return false
         }
         // console.log('[compile.completed]', binMidiRaw)
