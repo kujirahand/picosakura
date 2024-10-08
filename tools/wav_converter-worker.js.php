@@ -6,8 +6,7 @@ if (file_exists($inifile)) {
     require_once $inifile;
 } else {
     $soundfont = '../synth/fonts/TimGM6mb.sf2';
-    # $pkg_url = '../pkg';
-    $pkg_url = "https://cdn.jsdelivr.net/npm/picosakura@0.1.33";
+    $pkg_url = "https://cdn.jsdelivr.net/npm/picosakura@0.1.37";
 }
 # output
 header('Content-Type: application/x-javascript; charset=utf-8');

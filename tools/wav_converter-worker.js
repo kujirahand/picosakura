@@ -6,7 +6,7 @@
 const URL_SOUNDFONT = '../synth/fonts/TimGM6mb.sf2';
 // wasm path
 import init, { get_pico_version, get_sakura_version, PicoResult, make_wav, make_wav_custom 
-} from 'ttps://cdn.jsdelivr.net/npm/picosakura@0.1.33/picosakura.js';
+} from 'https://cdn.jsdelivr.net/npm/picosakura@0.1.37/picosakura.js';
 
 // load
 init().then(() => {
