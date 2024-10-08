@@ -26,6 +26,5 @@ export function checkLoading() {
 
 function showPlayerBar() {
     document.getElementById('player').style.display = 'block'
-    document.getElementById('sakura_version').innerHTML = 'ver.' + window._picosakura.version
 }
 

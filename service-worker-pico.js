@@ -10,9 +10,10 @@ const urlsToCache = [
   "./synth/js-synthesizer.js",
   "./synth/libfluidsynth-2.3.0-with-libsndfile.js",
   "./synth/picoaudio1.1.2_PicoAudio.min.js",
-  "./synth/sakuramml_bg.wasm",
-  "./synth/sakuramml.js",
   "./synth/fonts/TimGM6mb.sf2",
+  // CDNから読み込むためスキップ
+  // "./synth/sakuramml_bg.wasm",
+  // "./synth/sakuramml.js",
 ];
 
 self.addEventListener("install", (event) => {

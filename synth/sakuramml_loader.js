@@ -45,13 +45,18 @@ sakuramml_init_loadScript()
 // ----------------------------------------
 // sakuramml
 // ----------------------------------------
-import init, { get_version, SakuraCompiler } from './sakuramml.js'
+import init, { get_version, SakuraCompiler } from 'https://cdn.jsdelivr.net/npm/sakuramml@0.1.37/sakuramml.js';
 // Init sakuramml
 init().then(() => {
     const sakuraVession = get_version()
     console.log(`[sakuramml_init.mjs] loaded: sakuramml v.${sakuraVession}`)
     window._picosakura.version = sakuraVession
     window._picosakura.SakuraCompiler = SakuraCompiler
+    // updated version
+    const dom_ver = document.getElementById('sakura_version')
+    if (dom_ver) {
+        dom_ver.innerHTML = 'ver.' + sakuraVession
+    }
 }).catch(err => {
     console.error(err)
     document.getElementById('msg').innerHTML = '[LOAD_ERROR]' + tohtml(err.toString())
