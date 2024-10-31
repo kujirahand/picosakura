@@ -28,6 +28,7 @@ function showStatusMsg(htmlMsg) {
 function playMMLDirect(mml) {
     const btnPlay = document.getElementById('btnPlay') || document.createElement('button')
     const btnStop = document.getElementById('btnStop') || document.createElement('button')
+    const playRange = document.getElementById('playRange') || document.createElement('input')
     const soundfontUrl = window._picosakura.soundfontUrl
     showStatusMsg('*')
     window._picosakura.playMML(
@@ -47,8 +48,19 @@ function playMMLDirect(mml) {
             btnPlay.disabled = false
             btnStop.disabled = false
             btnPlay.style.backgroundColor = '#4090f0'
+        },
+        (pos, totalTicks) => {
+            showStatusMsg(`playing: ${pos}/${totalTicks}`)
+            playRange.max = totalTicks
+            playRange.value = pos
         }
     )
+    playRange.onmousedown = async () => {
+        await window._picosakura.stopMML()
+    }
+    playRange.onmouseup = async () => {
+        await window._picosakura.seekPlayer(playRange.value)
+    }
 }
 
 // ----------------------------------------------------
