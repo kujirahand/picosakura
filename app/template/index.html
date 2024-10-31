@@ -30,15 +30,14 @@
     <div id="player-outer" class="front-panel">
       <div id="player" style="display:none;">
         <div>
-          <button id="btnPlay" class="play-button">▶ PLAY</button>
-          <button id="btnStop" class="stop-button"> ⏸ </button>
-          <input id="playRange" type="range" style="width: 10em;">
           <!-- menu -->
-          <label for="player-tools-toggleMenu" id="player-tools-toggle">🔧 Tools</label>
-          <label for="player-files-toggleMenu" id="player-files-toggle">📁 Files</label>
+          <div style="text-align: right;">
+            <label for="player-tools-toggleMenu" id="player-tools-toggle">🔧 Tools</label>
+            <label for="player-files-toggleMenu" id="player-files-toggle">📁 Files</label><br>
+          </div>
           <!-- tools -->
           <input type="checkbox" id="player-tools-toggleMenu">
-          <div id="player-tools" class="player-tools">
+          <div id="player-tools" class="player-tools" style="text-align: right;">
             <button id="btnPiano" class="piano-button-x3">🎹 Piano</button>
             <button id="btnToolVoice" class="piano-button-x3">🎻 Voice</button>
             <button id="btnToolCommand" class="piano-button-x3">📝 Cmd</button>
@@ -55,10 +54,14 @@
             </p>
           </div>
           <!-- /files -->
+          <!-- player -->
+          <button id="btnPlay" class="play-button">▶ PLAY</button>
+          <button id="btnStop" class="stop-button"> ⏸ </button>
+          <input id="playRange" type="range" style="width: 15em;" value="0" max="1000">
         </div>
       </div><!-- /#player -->
       <div id="txt-outer">
-        <div id="piano-outer" style="display:none;">
+        <div id="piano-outer" style="display:none; text-align: right;">
           <div>
             <canvas id="piano-canvas"></canvas>
           </div>
