@@ -58,8 +58,16 @@ async function playMML(mml, playerType, soundfontUrl, onStartLoad, onEndLoad, on
     if (playerType && playerType === 'pico') {
         g.playerType = 'pico'
         // load Pico
-        window.player_pico = new PicoAudio()
-        window.player_pico.init()
+        const pico = window.player_pico = new PicoAudio()
+        pico.init()
+        pico.addEventListener('stop', () => {
+            console.log('[pico] stop')
+            clearInterval(pico.timerId)
+        })
+        pico.addEventListener('songEnd', () => {
+            console.log('[pico] songEnd')
+            clearInterval(pico.timerId)
+        })
     } else {
         if (!window.player_sf) {
             // load SoundFont
@@ -96,7 +104,15 @@ async function playMML(mml, playerType, soundfontUrl, onStartLoad, onEndLoad, on
             // play pico player
             const parsedData = player_pico.parseSMF(smfData)
             window.player_pico.setData(parsedData)
-            window.player_pico.play()
+            window.player_pico.lastEventTime = parsedData.lastEventTime
+            const pico = window.player_pico
+            pico.timerId = setInterval(() => {
+                if (!pico.context) { return }
+                const cur = pico.context.currentTime
+                const total = pico.lastEventTime ? pico.lastEventTime : 1000
+                onSetPosition(Math.floor(cur * 1000), Math.floor(total * 1000))
+            }, 300)
+            pico.play()
         } else {
             // play soundfont player
             if (!SF_isReady()) {
@@ -131,6 +147,7 @@ async function seekPlayer(position) {
     const g = window._picosakura
     if (g.playerType === 'pico') {
         window.player_pico.stop()
+        // TODO: picoでseekする
     } else {
         await SF_play()
     }
@@ -216,6 +233,7 @@ async function _SF_play(midi) {
         }
         await synth.playPlayer();
         if (sfInfo.context = null) { return } // already closed
+        sfInfo.totalTicks = 0 // reset
         sfInfo.timerId = setInterval(async () => {
             if (!synth) { return }
             if (sfInfo.totalTicks === 0) {
