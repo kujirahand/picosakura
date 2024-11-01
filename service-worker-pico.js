@@ -1,7 +1,7 @@
 /**
  * Service Worker for picosakura
  */
-const CACHE_NAME = "picosakura-cache-sakuramml0_1_37";
+const CACHE_NAME = "picosakura-cache-sakuramml0_1_37__20241101";
 const urlsToCache = [
   // --- 以下はよく更新するのでキャッシュしない ---
   // "./synth/sakuramml_loader.mjs",
