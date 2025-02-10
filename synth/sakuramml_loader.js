@@ -45,7 +45,8 @@ sakuramml_init_loadScript()
 // ----------------------------------------
 // sakuramml
 // ----------------------------------------
-import init, { get_version, SakuraCompiler } from 'https://cdn.jsdelivr.net/npm/sakuramml@0.1.37/sakuramml.js';
+import init, { get_version, SakuraCompiler }
+    from 'https://cdn.jsdelivr.net/npm/sakuramml@0.1.39/sakuramml.js' // 自動的にバージョンが置換されて読み込まれる(by sakuramml_load_js.php)
 // Init sakuramml
 init().then(() => {
     const sakuraVession = get_version()
