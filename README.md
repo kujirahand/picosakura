@@ -1,4 +1,4 @@
-# Picosakura
+# Picosakura for Web Browser
 
 Picosakura is an MML player for Sakuramml.
 MML stands for Music Macro Language.
