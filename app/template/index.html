@@ -49,8 +49,9 @@
             <p>Save: <span id="save-list"></span></p>
             <p>Load: <span id="load-list"></span></p>
             <p style="text-align: left; background-color: rgba(255, 255, 255, 0.8);">
-              - <a target="_blank" id="export_wav" class="lang" href="<?php echo $baseUrl ?>/tools/wav_converter.html">export to
-                WAV</a>
+              - <a target="_blank" id="export_wav" class="lang" href="<?php echo $baseUrl ?>/tools/wav_converter.html">
+                Export to WAV</a><br>
+              - <a id="export_midi" class="lang" href="#" onclick="window._picosakura.exportMIDI()">Export to MIDI</a>
             </p>
           </div>
           <!-- /files -->

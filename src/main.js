@@ -430,9 +430,51 @@ function loadFromStorageNo(no) {
         alert('no mml')
     }
 }
+
+function exportMIDI() {
+    const txt = document.getElementById('txt')
+    const mml = txt.value
+    if (mml === '') {
+        alert('MML is empty.')
+        return
+    }
+    // SakuraCompiler
+    const g = window._picosakura
+    const SakuraCompiler = g.SakuraCompiler
+    if (!SakuraCompiler) {
+        alert('SakuraCompiler is not loaded.')
+        return
+    }
+    const compiler = SakuraCompiler.new()
+    let binMidiRaw = null // compiled data
+    try {
+        // compile
+        binMidiRaw = compiler.compile(mml)
+    } catch (err) {
+        console.error('[MMLERROR] compile error', err)
+        g.errorStr += '[Compile Error] ' + err.toString() + '\n'
+        window.postMessage({ type: 'error', message: g.errorStr })
+        return false
+    }
+    // console.log('[compile.completed]', binMidiRaw)
+    const log = compiler.get_log()
+    window.postMessage({ type: 'error', message: log })
+    // make download link
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(new Blob([binMidiRaw], { type: 'application/octet-stream' }))
+    a.download = 'picosakura.mid'
+    a.style.display = 'none'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    console.log('[sakuramml]' + log)
+    alert('MIDI file exported as "picosakura.mid".')
+}
+
 // export
 window._picosakura.loadFromStorageNo = loadFromStorageNo
 window.gotoLine = gotoLine
 window.closeDescript = closeDescript
 window.openDescript = openDescript
 window.updateLang = updateLang
+window._picosakura.exportMIDI = exportMIDI
