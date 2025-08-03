@@ -461,14 +461,16 @@ function exportMIDI() {
     window.postMessage({ type: 'error', message: log })
     // make download link
     const a = document.createElement('a')
+    const t = new Date().toLocaleString()
+    a.innerHTML = `… [↓] Download MIDI (${t})]`
     a.href = URL.createObjectURL(new Blob([binMidiRaw], { type: 'application/octet-stream' }))
     a.download = 'picosakura.mid'
-    a.style.display = 'none'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
+    // a.style.display = 'none'
+    const link = document.getElementById('export_midi_link')
+    link.innerHTML = '' // clear previous link
+    link.appendChild(a)
+    a.click()  
     console.log('[sakuramml]' + log)
-    alert('MIDI file exported as "picosakura.mid".')
 }
 
 // export
