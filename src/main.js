@@ -118,7 +118,7 @@ function checkSplash() {
 function updateDesignSkin() {
     // get skin type
     let designType = localStorage.getItem('picosakura-skin-type')
-    if (designType === null) { designType = 'skin-sakura' }
+    if (designType === null) { designType = 'skin-wood' }
     // selected
     const skinSelect = document.getElementById('skin-select')
     skinSelect.value = designType
